@@ -9,19 +9,66 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<style>
+  .terminal{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 20px 50px -25px rgba(0,0,0,0.6);}
+  .terminal-bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--card-2);}
+  .dot{width:10px;height:10px;border-radius:50%;background:#5C6674;}
+  .terminal-title{margin-left:6px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);}
+  .terminal-body{padding:26px 28px 30px;}
+  .prompt{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--muted);}
+  .prompt .p1{color:var(--signal);}
+  .caret{display:inline-block;width:8px;height:16px;background:var(--signal);margin-left:2px;vertical-align:-3px;animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  .hero h1{font-size:clamp(30px,5vw,42px);margin-top:14px;color:var(--paper);}
+  .hero .role{font-family:'JetBrains Mono',monospace;color:var(--signal);font-size:16px;margin-top:8px;}
+  .hero p.lede{color:var(--muted);margin-top:18px;max-width:60ch;font-size:15.5px;}
+  .contact-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;border:1px solid var(--line);color:var(--muted);padding:8px 13px;border-radius:8px;background:var(--card-2);cursor:pointer;}
+  .chip:hover{border-color:var(--signal);color:var(--paper);}
+  .chip svg{width:14px;height:14px;stroke:currentColor;}
+  .hero-actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;}
+  .commit-log{position:relative;padding-left:26px;}
+  .commit-log::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .commit{position:relative;padding-bottom:34px;}
+  .commit:last-child{padding-bottom:0;}
+  .commit::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--signal);}
+  .commit-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;}
+  .commit-hash{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);background:var(--signal-dim);padding:2px 8px;border-radius:5px;}
+  .commit-role{font-size:17px;font-weight:600;color:var(--paper);font-family:'Space Grotesk',sans-serif;}
+  .commit-meta{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted-2);margin-top:5px;}
+  .commit-body{margin-top:12px;color:var(--muted);font-size:14.5px;}
+  .commit-body ul{margin:0;padding-left:18px;}
+  .commit-body li{margin-bottom:4px;}
+  .skill-groups{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  @media (max-width:640px){.skill-groups{grid-template-columns:1fr;}}
+  .skill-group-title{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+  .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:640px){.project-grid{grid-template-columns:1fr;}}
+  .project-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s ease;}
+  .project-card:hover{border-color:var(--signal);}
+  .project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .project-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;color:var(--paper);}
+  .live-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--signal);border:1px solid var(--signal);padding:2px 7px;border-radius:20px;white-space:nowrap;}
+  .project-desc{color:var(--muted);font-size:13.8px;flex:1;}
+  .project-link{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  @media (max-width:640px){.two-col{grid-template-columns:1fr;gap:36px;}}
+  .edu-degree{font-weight:600;font-family:'Space Grotesk',sans-serif;color:var(--paper);font-size:15.5px;}
+  .edu-school{color:var(--muted);font-size:14px;margin-top:2px;}
+  .edu-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);margin-top:4px;}
+</style>
 </head>
 <body>
 
 <header class="nav">
   <div class="nav-inner">
-    <div class="nav-brand"><b>Ahmed</b> Ali Shah</div>
+    <div class="nav-brand"><b>ahmed</b>@resume<span style="color:var(--signal)">:~$</span></div>
     <nav class="nav-links">
-      <a href="#about">about</a>
-      <a href="#skills">skills</a>
-      <a href="#experience">experience</a>
-      <a href="#projects">projects</a>
-      <a href="#blog">blog</a>
-      <a href="#contact">contact</a>
+      <a href="index.html" class="active">home</a>
+      <a href="about.html">about</a>
+      <a href="projects.html">projects</a>
+      <a href="blog.html">blog</a>
+      <a href="contact.html">contact</a>
     </nav>
     <a class="nav-cta" href="Ahmed_Ali_Shah_Resume.pdf" download>↓ resume.pdf</a>
   </div>
@@ -29,79 +76,59 @@
 
 <div class="wrap">
 
-  <section class="hero-center" style="padding:72px 0 56px;">
-    <div class="avatar">AS</div>
-    <h1>Syed Ahmed Ali Shah</h1>
-    <div class="role" style="font-family:'JetBrains Mono',monospace;color:var(--signal);font-size:15px;margin-top:8px;">Software Developer — full-stack, blockchain &amp; AI</div>
-    <p class="lede" style="color:var(--muted);margin-top:16px;font-size:15.5px;">5+ years building web, mobile, and database-driven applications. Currently freelancing across React, Node.js, Python and Solidity — shipping deployed, working products rather than mockups.</p>
+  <section class="hero" style="padding:72px 0 56px;">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="terminal-title">ahmed@sukkur — zsh — 80×6</span>
+      </div>
+      <div class="terminal-body">
+        <div class="prompt"><span class="p1">ahmed@sukkur</span> ~ % whoami<span class="caret"></span></div>
+        <h1>Syed Ahmed Ali Shah</h1>
+        <div class="role">Software Developer — full-stack, blockchain &amp; AI</div>
+        <p class="lede">5+ years building web, mobile, and database-driven applications. Currently freelancing across React, Node.js, Python and Solidity — shipping deployed, working products rather than mockups.</p>
 
-    <div class="contact-row">
-      <span class="chip" onclick="copyText('ahmedalishah96@gmail.com', this)">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
-        <span class="chip-label">ahmedalishah96@gmail.com</span>
-      </span>
-      <a class="chip" href="https://github.com/Ahmeds168" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.7 2.8 5.6 3.1 5.6 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.2 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-        github.com/Ahmeds168
-      </a>
-      <a class="chip" href="https://linkedin.com/in/syed-ahmed-ali-shah-477936b4" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9h4v2s1-2 4-2 4.5 2 4.5 6v7h-4v-6.5c0-1.5-.5-2.5-2-2.5s-2.3 1-2.3 2.5V21h-4z"/></svg>
-        LinkedIn
-      </a>
-    </div>
+        <div class="contact-row">
+          <span class="chip" onclick="copyText('ahmedalishah96@gmail.com', this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 6 8 7 8-7"/></svg>
+            <span class="chip-label">ahmedalishah96@gmail.com</span>
+          </span>
+          <a class="chip" href="https://github.com/Ahmeds168" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.7 2.8 5.6 3.1 5.6 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4.2 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+            github.com/Ahmeds168
+          </a>
+          <a class="chip" href="https://linkedin.com/in/syed-ahmed-ali-shah-477936b4" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/><path d="M10 9h4v2s1-2 4-2 4.5 2 4.5 6v7h-4v-6.5c0-1.5-.5-2.5-2-2.5s-2.3 1-2.3 2.5V21h-4z"/></svg>
+            LinkedIn
+          </a>
+        </div>
 
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="Ahmed_Ali_Shah_Resume.pdf" download>↓ Download Resume</a>
-      <a class="btn btn-ghost" href="#contact">Say hello →</a>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="Ahmed_Ali_Shah_Resume.pdf" download>↓ Download PDF</a>
+          <a class="btn btn-ghost" href="contact.html">Say hello →</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section id="about" class="alt-bg">
-    <div class="section-title">About</div>
+  <section id="about">
+    <div class="eyebrow">about</div>
     <div class="about-card">
       <p>Most recently a <span class="tag">Development Fellow</span> at Sukkur IBA University's Department of Electrical Engineering, where he administered OJS journal systems, departmental web infrastructure, and office automation. Before that, three years remote at <span class="tag">Clear Edge Technology (Canada)</span> building Django/Flask and PostgreSQL solutions.</p>
-      <p>Holds a BS in Computer Science from Sukkur IBA University, capped off with a blockchain-based voting system as his final-year project. Now building a freelance practice around full-stack development, smart contracts, and applied AI — with a growing shelf of shipped, deployed side projects to back it up.</p>
-      <p>Outside of work: reading, podcasts, and games. Comfortable in English, Urdu, and Sindhi.</p>
+      <p>Now building a freelance practice around full-stack development, smart contracts, and applied AI. <a href="about.html" style="color:var(--signal);">Read the full story →</a></p>
     </div>
   </section>
 
-  <section id="skills">
-    <div class="section-title">Skills</div>
-    <div class="section-sub">Core stack plus a growing set of applied AI and blockchain tools.</div>
-    <div class="skill-groups">
-      <div class="skill-card">
-        <div class="skill-card-title">Languages &amp; Frameworks</div>
-        <div class="pill-row">
-          <span class="pill">Python</span><span class="pill">JavaScript</span><span class="pill">Java</span>
-          <span class="pill">PHP</span><span class="pill">Django</span><span class="pill">Flask</span><span class="pill">Solidity</span>
+  <section id="experience">
+    <div class="eyebrow">experience — git log --oneline</div>
+    <div class="commit-log">
+      <div class="commit">
+        <div class="commit-head">
+          <span class="commit-hash">fe11ow</span>
+          <span class="commit-role">Development Fellow · Dept. of Electrical Engineering, Sukkur IBA University</span>
         </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title">Data &amp; Platforms</div>
-        <div class="pill-row">
-          <span class="pill">PostgreSQL Admin</span><span class="pill">Oracle DB Admin</span>
-          <span class="pill">Web Development</span><span class="pill">Android Development</span><span class="pill">Desktop Apps</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title">Emerging &amp; Applied</div>
-        <div class="pill-row"><span class="pill">Blockchain</span><span class="pill">Prompt Engineering</span><span class="pill">Machine Learning</span></div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-card-title">Working style</div>
-        <div class="pill-row"><span class="pill">Communication</span><span class="pill">Management</span></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="experience" class="alt-bg">
-    <div class="section-title">Experience</div>
-    <div class="section-sub">Five-plus years across remote product work and in-house systems administration.</div>
-    <div class="timeline-pro">
-      <div class="tl-item">
-        <div class="tl-role">Development Fellow · Dept. of Electrical Engineering, Sukkur IBA University</div>
-        <div class="tl-meta">Jun 2024 – Jul 2026 · Sukkur, Sindh, Pakistan</div>
-        <div class="tl-body">
+        <div class="commit-meta">Jun 2024 – Jul 2026 · Sukkur, Sindh, Pakistan</div>
+        <div class="commit-body">
           <ul>
             <li>Administered and upgraded the department's Open Journal Systems (OJS) installation</li>
             <li>Owned department website administration end-to-end</li>
@@ -109,27 +136,60 @@
           </ul>
         </div>
       </div>
-      <div class="tl-item">
-        <div class="tl-role">Software Developer · Clear Edge Technology</div>
-        <div class="tl-meta">May 2021 – May 2024 · Canada (Remote)</div>
-        <div class="tl-body">
+      <div class="commit">
+        <div class="commit-head">
+          <span class="commit-hash">c1eadge</span>
+          <span class="commit-role">Software Developer · Clear Edge Technology</span>
+        </div>
+        <div class="commit-meta">May 2021 – May 2024 · Canada (Remote)</div>
+        <div class="commit-body">
           <ul>
             <li>Built and maintained Django/Flask applications backed by PostgreSQL</li>
             <li>Developed interactive canvas features with Konva.js</li>
           </ul>
         </div>
       </div>
-      <div class="tl-item">
-        <div class="tl-role">Web Application Developer Intern · Vasona Systems International</div>
-        <div class="tl-meta">Aug 2019 – Dec 2019 · Sukkur, Sindh, Pakistan</div>
-        <div class="tl-body"><ul><li>Built features in .NET; handled website and email troubleshooting</li></ul></div>
+      <div class="commit">
+        <div class="commit-head">
+          <span class="commit-hash">vas0na</span>
+          <span class="commit-role">Web Application Developer Intern · Vasona Systems International</span>
+        </div>
+        <div class="commit-meta">Aug 2019 – Dec 2019 · Sukkur, Sindh, Pakistan</div>
+        <div class="commit-body"><ul><li>Built features in .NET; handled website and email troubleshooting</li></ul></div>
       </div>
     </div>
   </section>
 
-  <section id="projects">
-    <div class="section-title">Projects</div>
-    <div class="section-sub">Shipped and deployed — not just prototypes.</div>
+  <section id="skills">
+    <div class="eyebrow">skills</div>
+    <div class="skill-groups">
+      <div>
+        <div class="skill-group-title">Languages &amp; Frameworks</div>
+        <div class="pill-row">
+          <span class="pill">Python</span><span class="pill">JavaScript</span><span class="pill">Java</span>
+          <span class="pill">PHP</span><span class="pill">Django</span><span class="pill">Flask</span><span class="pill">Solidity</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Data &amp; Platforms</div>
+        <div class="pill-row">
+          <span class="pill">PostgreSQL Admin</span><span class="pill">Oracle DB Admin</span>
+          <span class="pill">Web Development</span><span class="pill">Android Development</span><span class="pill">Desktop Apps</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-group-title">Emerging &amp; Applied</div>
+        <div class="pill-row"><span class="pill">Blockchain</span><span class="pill">Prompt Engineering</span><span class="pill">Machine Learning</span></div>
+      </div>
+      <div>
+        <div class="skill-group-title">Working style</div>
+        <div class="pill-row"><span class="pill">Communication</span><span class="pill">Management</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects-preview">
+    <div class="eyebrow">projects — shipped &amp; deployed</div>
     <div class="project-grid">
       <div class="project-card">
         <div class="project-top"><span class="project-name">Decentralized Document Notary</span><span class="live-tag">live</span></div>
@@ -141,38 +201,22 @@
         <div class="project-desc">Solidity + Hardhat voting contract, styled like an official paper ballot.</div>
         <a class="project-link" href="projects.html">Read the write-up →</a>
       </div>
-      <div class="project-card">
-        <div class="project-top"><span class="project-name">Groq Chat App</span><span class="live-tag">live</span></div>
-        <div class="project-desc">Full-stack chat app — Node.js/Express backend calling the Groq API.</div>
-        <a class="project-link" href="projects.html">Read the write-up →</a>
-      </div>
-      <div class="project-card">
-        <div class="project-top"><span class="project-name">Election System Using Blockchain (SISC)</span></div>
-        <div class="project-desc">Final-year project — permissioned blockchain voting on Hyperledger Fabric.</div>
-        <a class="project-link" href="projects.html">Read the write-up →</a>
-      </div>
     </div>
-    <div class="section-cta"><a class="btn btn-ghost" href="projects.html">See all projects →</a></div>
+    <div style="margin-top:16px;"><a class="btn btn-ghost" href="projects.html">See all projects →</a></div>
   </section>
 
-  <section id="blog" class="alt-bg">
-    <div class="section-title">From the blog</div>
-    <div class="section-sub">Short write-ups on the decisions behind the projects.</div>
+  <section id="blog-preview">
+    <div class="eyebrow">from the blog</div>
     <a class="post-card" href="blog-blockchain-notary.html">
       <div class="post-date">Latest</div>
       <div class="post-title">Why I built a blockchain notary instead of another CRUD app</div>
       <div class="post-excerpt">On choosing Solidity over a database when the whole point is that nobody — including me — should be able to quietly edit the record.</div>
     </a>
-    <a class="post-card" href="blog-ojs-automation.html">
-      <div class="post-date">Notes</div>
-      <div class="post-title">Modernizing a university's journal system</div>
-      <div class="post-excerpt">What two years of administering Open Journal Systems for a real department actually looks like day to day.</div>
-    </a>
-    <div class="section-cta"><a class="btn btn-ghost" href="blog.html">Read more posts →</a></div>
+    <div style="margin-top:8px;"><a class="btn btn-ghost" href="blog.html">Read more posts →</a></div>
   </section>
 
   <section id="education">
-    <div class="section-title">Education &amp; Certificates</div>
+    <div class="eyebrow">education &amp; certificates</div>
     <div class="two-col">
       <div>
         <div class="skill-group-title">Education</div>
@@ -198,34 +242,10 @@
     </div>
   </section>
 
-  <section id="contact" class="alt-bg">
-    <div class="section-title">Get in touch</div>
-    <div class="section-sub">Freelance work, full-time roles, or just a question about one of the projects — all welcome.</div>
-    <div style="max-width:520px;margin:0 auto;">
-      <!-- Formspree form — delivers to ahmedalishah96@gmail.com -->
-      <form class="contact-form" action="https://formspree.io/f/mzebpedg" method="POST">
-        <div>
-          <label for="name">Name</label><br/>
-          <input type="text" id="name" name="name" required style="width:100%;margin-top:6px;">
-        </div>
-        <div>
-          <label for="email">Email</label><br/>
-          <input type="email" id="email" name="email" required style="width:100%;margin-top:6px;">
-        </div>
-        <div>
-          <label for="message">Message</label><br/>
-          <textarea id="message" name="message" required style="width:100%;margin-top:6px;"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:fit-content;">Send message →</button>
-        <div class="form-note">Goes straight to ahmedalishah96@gmail.com. No spam, no newsletter.</div>
-      </form>
-    </div>
-  </section>
-
 </div>
 
 <footer>
-  <div class="foot-line">built &amp; deployed by Ahmed · <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener">github.com/Ahmeds168</a></div>
+  <div class="foot-line">built &amp; deployed by Ahmed · <a href="contact.html">get in touch</a> · <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener">github.com/Ahmeds168</a></div>
 </footer>
 
 <script>
