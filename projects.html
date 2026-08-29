@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Projects — Syed Ahmed Ali Shah</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><b>ahmed</b>@resume<span style="color:var(--signal)">:~$</span></div>
+    <nav class="nav-links">
+      <a href="index.html">home</a>
+      <a href="about.html">about</a>
+      <a href="projects.html" class="active">projects</a>
+      <a href="blog.html">blog</a>
+      <a href="contact.html">contact</a>
+    </nav>
+    <a class="nav-cta" href="Ahmed_Ali_Shah_Resume.pdf" download>↓ resume.pdf</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="page-hero">
+    <div class="eyebrow">projects</div>
+    <h1>Shipped, deployed, and still running.</h1>
+    <p class="lede">A closer look at the projects that took real design decisions — not just the one-liners from the resume.</p>
+  </section>
+
+  <section>
+    <div class="project-deep">
+      <h3>Decentralized Document Notary</h3>
+      <div class="meta">Solidity · React · Node.js · Supabase · Cloudflare R2 · Sepolia testnet</div>
+      <p>The problem: proving a document existed in a specific state at a specific time, without trusting a single company's database to not quietly change it later. Traditional notarization solves this with a person and a stamp; this project solves it by hashing the document client-side and writing that hash to a smart contract on Sepolia — so the proof of existence lives on a public, append-only ledger instead of in someone's private table.</p>
+      <p>The interesting engineering problem wasn't the smart contract itself (that part is genuinely simple) — it was everything around it. Files themselves are too large and too sensitive to put on-chain, so the actual documents live in Cloudflare R2, with Supabase handling user accounts, metadata, and the mapping between a file and its on-chain hash. The contract only ever sees a hash, never the document.</p>
+      <p>Deployed across three different platforms doing three different jobs — Vercel for the frontend, Render for a small backend service, Sepolia for the actual notarization — which turned out to be a good, if accidental, lesson in keeping deploy responsibilities cleanly separated.</p>
+      <a class="link" href="https://doc-notary.vercel.app" target="_blank" rel="noopener">→ doc-notary.vercel.app</a>
+    </div>
+
+    <div class="project-deep">
+      <h3>On-Chain Voting dApp</h3>
+      <div class="meta">Solidity · Hardhat · React (Vite) · ethers.js</div>
+      <p>A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before — same visual language as a polling booth, with the wallet connection and transaction confirmation handled quietly in the background.</p>
+      <p>Hardhat handled local contract testing and deployment scripting; ethers.js bridged the contract calls to the UI. It's a small project, but it's the direct descendant of my final-year university project — same core idea (votes as immutable on-chain records), much cleaner execution.</p>
+      <a class="link" href="https://onchain-voting-dapp-ahmed-ali-shahs-projects-c142f759.vercel.app/" target="_blank" rel="noopener">→ view live demo</a>
+    </div>
+
+    <div class="project-deep">
+      <h3>Groq Chat App</h3>
+      <div class="meta">Node.js · Express · React (Vite) · Groq API</div>
+      <p>A full-stack chat interface built to get hands-on with fast LLM inference — Groq's API serves responses fast enough that the usual "typing indicator" UX patterns barely matter. The Express backend handles the API calls and keeps the key server-side; the Vite/React frontend is deliberately simple, just a textbox and a response stream, so the focus stays on the model interaction rather than UI chrome.</p>
+      <p>This project doubled as a testbed for prompt engineering technique — testing how system prompts, temperature, and message history structure change response quality in a low-latency setting.</p>
+      <a class="link" href="https://groq-chat-frontend-ahmed-ali-shahs-projects-c142f759.vercel.app/" target="_blank" rel="noopener">→ view live demo</a>
+    </div>
+
+    <div class="project-deep">
+      <h3>Election System Using Blockchain (final-year project, SISC)</h3>
+      <div class="meta">Hyperledger Fabric · IBM Blockchain VS Code Extension</div>
+      <p>My university final-year project, and the one that got me into blockchain in the first place. Unlike the public, permissionless setup of the two projects above, this uses Hyperledger Fabric — a permissioned blockchain, meaning only known, vetted participants (in this case, representing election authorities) can validate transactions. That's a deliberate choice: for something like an election, you often want accountability and known identities behind each validating node, not full anonymity.</p>
+      <p>Built and deployed through the IBM Blockchain VS Code extension, which handles a lot of the Fabric network scaffolding that would otherwise be painful to configure by hand.</p>
+    </div>
+
+    <div class="project-deep">
+      <h3>Analyzing Students' Mental Health</h3>
+      <div class="meta">PostgreSQL · Data analysis</div>
+      <p>A data-driven look at whether studying abroad measurably affects student mental health, using PostgreSQL to structure and query the underlying survey data. Less flashy than the blockchain work, but it's the project that keeps my data-analysis and SQL skills honest.</p>
+      <a class="link" href="https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb" target="_blank" rel="noopener">→ notebook on GitHub</a>
+    </div>
+
+    <div class="project-deep">
+      <h3>Campus Management Solution</h3>
+      <div class="meta">Java · Oracle SQL</div>
+      <p>A Java application backed by an Oracle database for storing student, teacher, and course records — the kind of project that's less about novelty and more about getting the fundamentals of relational schema design and Java application architecture right.</p>
+      <a class="link" href="https://github.com/Ahmeds168/Campus-Management-Solution-Using-Oracle-Database-in-Java" target="_blank" rel="noopener">→ source on GitHub</a>
+    </div>
+
+  </section>
+
+</div>
+
+<footer>
+  <div class="foot-line">built &amp; deployed by Ahmed · <a href="contact.html">get in touch</a> · <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener">github.com/Ahmeds168</a></div>
+</footer>
+
+</body>
+</html>
