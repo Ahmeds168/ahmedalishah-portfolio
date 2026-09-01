@@ -34,16 +34,13 @@ a{color:inherit;text-decoration:none;}
 section{padding:64px 0;border-bottom:1px solid var(--line);}
 section:last-of-type{border-bottom:none;}
 .eyebrow{
-  font-family:'JetBrains Mono',monospace;
-  font-size:12.5px;
-  color:var(--signal);
-  letter-spacing:0.06em;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(24px,3.2vw,30px);
+  font-weight:700;
+  color:var(--paper);
+  margin-bottom:22px;
 }
-.eyebrow::before{content:"//";opacity:0.55;}
+.eyebrow::after{content:"";display:block;width:44px;height:3px;background:var(--signal);border-radius:2px;margin-top:10px;}
 
 header.nav{
   position:sticky;top:0;z-index:50;
