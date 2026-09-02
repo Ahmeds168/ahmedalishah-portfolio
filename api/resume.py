@@ -79,14 +79,14 @@ RESUME = {
         ("Intermediate", "Islamia Science College, Sukkur (2012 – 2014)"),
     ],
     "certificates": [
-        "AI Agents and Agentic AI with Python &amp; Generative AI — Vanderbilt University, Coursera (Aug 2026)",
-        "Blockchain Basics — Cyfrin (Mar 2026)",
-        "Solidity Smart Contract Development — Cyfrin (Aug 2026)",
-        "Prompt Engineering with the OpenAI API — DataCamp (Jul 2026)",
-        "Intermediate SQL — DataCamp (Aug 2026)",
-        "Joining Data in SQL — DataCamp (Aug 2026)",
-        "Working with Hugging Face — DataCamp (Aug 2026)",
-        "Vasona Systems International — Internship Certificate (2019)",
+        ("AI Agents and Agentic AI with Python &amp; Generative AI — Vanderbilt University, Coursera (Aug 2026)", "https://coursera.org/verify/QYURRCUBHM69"),
+        ("Blockchain Basics — Cyfrin (Mar 2026)", "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics"),
+        ("Solidity Smart Contract Development — Cyfrin (Aug 2026)", "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity"),
+        ("Prompt Engineering with the OpenAI API — DataCamp (Jul 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1"),
+        ("Intermediate SQL — DataCamp (Aug 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951"),
+        ("Joining Data in SQL — DataCamp (Aug 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f"),
+        ("Working with Hugging Face — DataCamp (Aug 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597"),
+        ("Vasona Systems International — Internship Certificate (2019)", None),
     ],
     "achievements": "Won Aptech Web Development Challenge (Nov 2017 – Feb 2018)",
     "languages": "English (Full Professional), Urdu (Native), Sindhi (Native)",
@@ -148,8 +148,11 @@ def build_pdf() -> bytes:
         flow.append(Paragraph(f"<b>{degree}</b> — {meta}", styles["bullet"]))
 
     flow.append(Paragraph("CERTIFICATES", styles["h2"]))
-    for c in RESUME["certificates"]:
-        flow.append(Paragraph("• " + c, styles["bullet"]))
+    for text, url in RESUME["certificates"]:
+        if url:
+            flow.append(Paragraph(f'• <link href="{url}" color="#7C3AED">{text}</link>', styles["bullet"]))
+        else:
+            flow.append(Paragraph("• " + text, styles["bullet"]))
 
     flow.append(Paragraph("ACHIEVEMENTS &amp; LANGUAGES", styles["h2"]))
     flow.append(Paragraph(RESUME["achievements"], styles["bullet"]))
