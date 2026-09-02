@@ -79,6 +79,7 @@ RESUME = {
         ("Intermediate", "Islamia Science College, Sukkur (2012 – 2014)"),
     ],
     "certificates": [
+        "AI Agents and Agentic AI with Python &amp; Generative AI — Vanderbilt University, Coursera (Aug 2026)",
         "Blockchain Basics — Cyfrin (Mar 2026)",
         "Solidity Smart Contract Development — Cyfrin (Aug 2026)",
         "Prompt Engineering with the OpenAI API — DataCamp (Jul 2026)",
