@@ -28,7 +28,7 @@ RESUME = {
     ),
     "summary": (
         "Software developer with 5+ years spanning web, mobile, and database-driven applications. "
-        "Most recently a Development Fellow at Sukkur IBA University's Department of Electrical "
+        "Most recently a Software Development Intern at Sukkur IBA University's Department of Electrical "
         "Engineering, managing OJS journal administration, departmental web systems, and office "
         "automation. Previously built Django/Flask and PostgreSQL solutions remotely for Clear Edge "
         "Technology (Canada). Holds a BS in Computer Science from Sukkur IBA University, with a "
@@ -43,7 +43,7 @@ RESUME = {
     ),
     "experience": [
         {
-            "title": "Development Fellow — Dept. of Electrical Engineering, Sukkur IBA University",
+            "title": "Software Development Intern — Dept. of Electrical Engineering, Sukkur IBA University",
             "meta": "Jun 2024 – Jul 2026 · Sukkur, Sindh, Pakistan",
             "bullets": [
                 "Administered and upgraded the department's Open Journal Systems (OJS) installation",
