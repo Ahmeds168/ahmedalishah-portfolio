@@ -83,6 +83,7 @@ RESUME = {
         ("Blockchain Basics — Cyfrin (Mar 2026)", "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics"),
         ("Solidity Smart Contract Development — Cyfrin (Aug 2026)", "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity"),
         ("Prompt Engineering with the OpenAI API — DataCamp (Jul 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1"),
+        ("Introduction to SQL — DataCamp (Jul 2026)", None),
         ("Intermediate SQL — DataCamp (Aug 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951"),
         ("Joining Data in SQL — DataCamp (Aug 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f"),
         ("Working with Hugging Face — DataCamp (Aug 2026)", "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597"),
