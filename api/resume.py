@@ -94,7 +94,7 @@ RESUME = {
 }
 
 NAVY = colors.HexColor("#12161C")
-ACCENT = colors.HexColor("#7C3AED")  # purple, matches the site's accent
+ACCENT = colors.HexColor("#1F3A5F")  # dark navy — classic, recruiter-safe for print
 GREY = colors.HexColor("#555555")
 
 
@@ -151,7 +151,7 @@ def build_pdf() -> bytes:
     flow.append(Paragraph("CERTIFICATES", styles["h2"]))
     for text, url in RESUME["certificates"]:
         if url:
-            flow.append(Paragraph(f'• <link href="{url}" color="#7C3AED">{text}</link>', styles["bullet"]))
+            flow.append(Paragraph(f'• <link href="{url}" color="#1F3A5F">{text}</link>', styles["bullet"]))
         else:
             flow.append(Paragraph("• " + text, styles["bullet"]))
 
