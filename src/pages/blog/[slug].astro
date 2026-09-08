@@ -35,9 +35,12 @@ const catColorStyle = post.data.categoryColor === 'signal' ? 'var(--color-signal
         <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
         {post.data.categoryLabel}
       </span>
-      <span class="font-mono text-[11px] text-muted2">{rt} min read</span>
+      <span class="flex items-center gap-1 font-mono text-[11px] text-muted2">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        {rt} min read
+      </span>
     </div>
-    <h1 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4 leading-tight">{post.data.title}</h1>
+    <h1 class="font-serif text-4xl md:text-5xl tracking-tight mt-4 leading-[1.1]">{post.data.title}</h1>
     <p class="font-mono text-[12px] text-muted2 mt-3">{post.data.metaLine}</p>
   </section>
 

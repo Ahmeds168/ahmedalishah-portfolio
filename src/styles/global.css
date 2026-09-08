@@ -12,6 +12,7 @@
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: 'Newsreader', serif;
 }
 
 :root{
@@ -153,7 +154,7 @@ header.nav{
 .article .post-date{margin-top:10px;display:block;}
 .article-body{margin-top:28px;color:var(--muted);font-size:15.5px;max-width:760px;}
 .article-body p{margin:0 0 16px;}
-.article-body h2{color:var(--paper);font-size:19px;margin:28px 0 12px;}
+.article-body h2{color:var(--paper);font-size:22px;font-family:'Newsreader',serif;margin:28px 0 12px;}
 .article-body strong{color:var(--paper);}
 .back-link{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);display:inline-block;margin-bottom:8px;}
 
