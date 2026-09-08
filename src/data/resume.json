@@ -53,50 +53,50 @@
       "shortDesc": "Blockchain-based document notarization — Solidity, React, Supabase, Cloudflare R2.",
       "longDesc": "The problem: proving a document existed in a specific state at a specific time, without trusting a single company's database to not quietly change it later. Traditional notarization solves this with a person and a stamp; this project solves it by hashing the document client-side and writing that hash to a smart contract on Sepolia — so the proof of existence lives on a public, append-only ledger instead of in someone's private table.",
       "extra": "The interesting engineering problem wasn't the smart contract itself (that part is genuinely simple) — it was everything around it. Files themselves are too large and too sensitive to put on-chain, so the actual documents live in Cloudflare R2, with Supabase handling user accounts, metadata, and the mapping between a file and its on-chain hash. The contract only ever sees a hash, never the document. Deployed across three different platforms doing three different jobs — Vercel for the frontend, Render for a small backend service, Sepolia for the actual notarization — which turned out to be a good, if accidental, lesson in keeping deploy responsibilities cleanly separated.",
-      "stack": ["Solidity", "React", "Supabase"],
+      "stack": ["Solidity", "React", "Node.js", "Supabase", "Cloudflare R2", "Sepolia testnet"],
       "url": "https://doc-notary.vercel.app"
     },
     {
       "name": "On-Chain Voting dApp",
       "tag": "live",
       "shortDesc": "Solidity + Hardhat voting contract with a React + ethers.js frontend styled like an official paper ballot.",
-      "longDesc": "A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before.",
+      "longDesc": "A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before — same visual language as a polling booth, with the wallet connection and transaction confirmation handled quietly in the background.",
       "extra": "Hardhat handled local contract testing and deployment scripting; ethers.js bridged the contract calls to the UI. It's a small project, but it's the direct descendant of my final-year university project — same core idea (votes as immutable on-chain records), much cleaner execution.",
-      "stack": ["Solidity", "Hardhat", "ethers.js"],
+      "stack": ["Solidity", "Hardhat", "React (Vite)", "ethers.js"],
       "url": "https://onchain-voting-dapp-ahmed-ali-shahs-projects-c142f759.vercel.app/"
     },
     {
       "name": "Groq Chat App",
       "tag": "live",
       "shortDesc": "Full-stack chat app — Node.js/Express backend calling the Groq API, React (Vite) frontend.",
-      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference — Groq's API serves responses fast enough that the usual 'typing indicator' UX patterns barely matter.",
+      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference — Groq's API serves responses fast enough that the usual 'typing indicator' UX patterns barely matter. The Express backend handles the API calls and keeps the key server-side; the Vite/React frontend is deliberately simple, just a textbox and a response stream, so the focus stays on the model interaction rather than UI chrome.",
       "extra": "This project doubled as a testbed for prompt engineering technique — testing how system prompts, temperature, and message history structure change response quality in a low-latency setting.",
-      "stack": ["Node.js", "Express", "Groq API"],
+      "stack": ["Node.js", "Express", "React (Vite)", "Groq API"],
       "url": "https://groq-chat-frontend-ahmed-ali-shahs-projects-c142f759.vercel.app/"
     },
     {
       "name": "Election System Using Blockchain (SISC)",
       "tag": null,
       "shortDesc": "Final-year project — permissioned blockchain voting system on Hyperledger Fabric.",
-      "longDesc": "My university final-year project, and the one that got me into blockchain in the first place. Unlike public, permissionless blockchains, this uses Hyperledger Fabric — a permissioned blockchain, meaning only known, vetted participants can validate transactions.",
+      "longDesc": "My university final-year project, and the one that got me into blockchain in the first place. Unlike public, permissionless blockchains, this uses Hyperledger Fabric — a permissioned blockchain, meaning only known, vetted participants can validate transactions. That's a deliberate choice: for something like an election, you often want accountability and known identities behind each validating node, not full anonymity.",
       "extra": "Built and deployed through the IBM Blockchain VS Code extension, which handles a lot of the Fabric network scaffolding that would otherwise be painful to configure by hand.",
-      "stack": ["Hyperledger Fabric", "IBM Blockchain"],
+      "stack": ["Hyperledger Fabric", "IBM Blockchain VS Code Extension"],
       "url": null
     },
     {
       "name": "Analyzing Students' Mental Health",
       "tag": null,
       "shortDesc": "PostgreSQL-driven analysis of whether studying abroad affects student mental health.",
-      "longDesc": "A data-driven look at whether studying abroad measurably affects student mental health, using PostgreSQL to structure and query the underlying survey data.",
+      "longDesc": "A data-driven look at whether studying abroad measurably affects student mental health, using PostgreSQL to structure and query the underlying survey data. Less flashy than the blockchain work, but it's the project that keeps my data-analysis and SQL skills honest.",
       "extra": null,
-      "stack": ["PostgreSQL"],
+      "stack": ["PostgreSQL", "Data analysis"],
       "url": "https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb"
     },
     {
       "name": "Campus Management Solution",
       "tag": null,
       "shortDesc": "Java + Oracle SQL system for storing student, teacher and course records.",
-      "longDesc": "A Java application backed by an Oracle database for storing student, teacher, and course records — the kind of project that's less about novelty and more about getting the fundamentals of relational schema design right.",
+      "longDesc": "A Java application backed by an Oracle database for storing student, teacher, and course records — the kind of project that's less about novelty and more about getting the fundamentals of relational schema design and Java application architecture right.",
       "extra": null,
       "stack": ["Java", "Oracle SQL"],
       "url": "https://github.com/Ahmeds168/Campus-Management-Solution-Using-Oracle-Database-in-Java"
