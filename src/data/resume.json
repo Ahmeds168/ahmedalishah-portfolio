@@ -50,7 +50,7 @@
     {
       "name": "Decentralized Document Notary",
       "tag": "live",
-      "shortDesc": "Blockchain-based document notarization — Solidity, React, Supabase, Cloudflare R2.",
+      "shortDesc": "Blockchain-based document notarization app (Solidity, React, Node.js, Supabase, Cloudflare R2) — deployed on Sepolia, Render & Vercel.",
       "longDesc": "The problem: proving a document existed in a specific state at a specific time, without trusting a single company's database to not quietly change it later. Traditional notarization solves this with a person and a stamp; this project solves it by hashing the document client-side and writing that hash to a smart contract on Sepolia — so the proof of existence lives on a public, append-only ledger instead of in someone's private table.",
       "extra": "The interesting engineering problem wasn't the smart contract itself (that part is genuinely simple) — it was everything around it. Files themselves are too large and too sensitive to put on-chain, so the actual documents live in Cloudflare R2, with Supabase handling user accounts, metadata, and the mapping between a file and its on-chain hash. The contract only ever sees a hash, never the document. Deployed across three different platforms doing three different jobs — Vercel for the frontend, Render for a small backend service, Sepolia for the actual notarization — which turned out to be a good, if accidental, lesson in keeping deploy responsibilities cleanly separated.",
       "stack": ["Solidity", "React", "Node.js", "Supabase", "Cloudflare R2", "Sepolia testnet"],
@@ -59,7 +59,7 @@
     {
       "name": "On-Chain Voting dApp",
       "tag": "live",
-      "shortDesc": "Solidity + Hardhat voting contract with a React + ethers.js frontend styled like an official paper ballot.",
+      "shortDesc": "Solidity (Hardhat) voting contract with a React + ethers.js frontend styled like an official paper ballot.",
       "longDesc": "A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before — same visual language as a polling booth, with the wallet connection and transaction confirmation handled quietly in the background.",
       "extra": "Hardhat handled local contract testing and deployment scripting; ethers.js bridged the contract calls to the UI. It's a small project, but it's the direct descendant of my final-year university project — same core idea (votes as immutable on-chain records), much cleaner execution.",
       "stack": ["Solidity", "Hardhat", "React (Vite)", "ethers.js"],
@@ -77,7 +77,7 @@
     {
       "name": "Election System Using Blockchain (SISC)",
       "tag": null,
-      "shortDesc": "Final-year project — permissioned blockchain voting system on Hyperledger Fabric.",
+      "shortDesc": "Final-year project — permissioned blockchain voting system on Hyperledger Fabric via IBM Blockchain VS Code extension.",
       "longDesc": "My university final-year project, and the one that got me into blockchain in the first place. Unlike public, permissionless blockchains, this uses Hyperledger Fabric — a permissioned blockchain, meaning only known, vetted participants can validate transactions. That's a deliberate choice: for something like an election, you often want accountability and known identities behind each validating node, not full anonymity.",
       "extra": "Built and deployed through the IBM Blockchain VS Code extension, which handles a lot of the Fabric network scaffolding that would otherwise be painful to configure by hand.",
       "stack": ["Hyperledger Fabric", "IBM Blockchain VS Code Extension"],
@@ -91,6 +91,15 @@
       "extra": null,
       "stack": ["PostgreSQL", "Data analysis"],
       "url": "https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb"
+    },
+    {
+      "name": "Pet Recognition (CNN)",
+      "tag": null,
+      "shortDesc": "Convolutional neural network classifying cats vs. dogs at ~90% accuracy.",
+      "longDesc": "Convolutional neural network classifying cats vs. dogs at ~90% accuracy.",
+      "extra": null,
+      "stack": ["CNN", "Machine Learning"],
+      "url": null
     },
     {
       "name": "Campus Management Solution",
@@ -115,7 +124,7 @@
     { "title": "Introduction to SQL", "issuer": "DataCamp", "date": "Jul 2026", "url": null, "image": "/certs/intro-to-sql.jpg" },
     { "title": "Blockchain Basics", "issuer": "Cyfrin", "date": "Mar 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics", "image": "/certs/cyfrin-blockchain-basics.jpg" },
     { "title": "Solidity Smart Contract Development", "issuer": "Cyfrin", "date": "Aug 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity", "image": null },
-    { "title": "Vasona Systems International — Internship Certificate", "issuer": "Vasona Systems International", "date": "2019", "url": null, "image": null }
+    { "title": "Internship Certificate", "issuer": "Vasona Systems International", "date": "2019", "url": null, "image": null }
   ],
   "achievements": "Won Aptech Web Development Challenge (Nov 2017 – Feb 2018)",
   "languages": "English (Full Professional), Urdu (Native), Sindhi (Native)"
