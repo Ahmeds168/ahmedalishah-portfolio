@@ -82,16 +82,14 @@ import resume from '../data/resume.json';
   </section>
 
   <section id="projects-preview">
-    <div class="eyebrow" style="display:flex;align-items:center;justify-content:space-between;">
-      <span>Projects — shipped &amp; deployed</span>
-      <span style="display:flex;gap:8px;">
-        <button id="projPrev" class="marquee-nav-btn" aria-label="Previous project">&larr;</button>
-        <button id="projNext" class="marquee-nav-btn" aria-label="Next project">&rarr;</button>
-      </span>
-    </div>
+    <div class="eyebrow">Projects — shipped &amp; deployed</div>
   </section>
 
   <section class="marquee-section" style="padding-top:0;">
+    <div class="marquee-nav-row">
+      <button id="projPrev" class="marquee-nav-btn" aria-label="Previous project">&larr;</button>
+      <button id="projNext" class="marquee-nav-btn" aria-label="Next project">&rarr;</button>
+    </div>
     <div class="marquee-wrap" id="marqueeWrap">
       <div class="marquee-track" id="marqueeTrack">
         {[...resume.projects, ...resume.projects].map(p => (
@@ -198,6 +196,7 @@ import resume from '../data/resume.json';
   .marquee-wrap::-webkit-scrollbar{display:none;}
   .marquee-track{display:flex;gap:16px;width:max-content;}
   .marquee-card{flex:0 0 300px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;}
+  .marquee-nav-row{display:flex;gap:8px;justify-content:flex-end;margin-bottom:10px;}
   .marquee-nav-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--paper);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:border-color .2s ease;}
   .marquee-nav-btn:hover{border-color:var(--signal);color:var(--signal);}
 </style>
