@@ -8,12 +8,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { ink:'#0B0A10', card:'#161420', card2:'#121019', paper:'#F5F3F8', muted:'#A79FB5', muted2:'#726B82', signal:'#A259FF', line:'#2A2635' },
+        fontFamily: { display:['Space Grotesk','sans-serif'], body:['Inter','sans-serif'], mono:['JetBrains Mono','monospace'] },
+      },
+    },
+  };
+</script>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body>
+<body class="bg-ink text-paper font-body antialiased">
 
 <header class="nav">
   <div class="nav-inner">
@@ -29,15 +40,22 @@
   </div>
 </header>
 
-<div class="wrap">
-  <section class="page-hero article">
-    <a class="back-link" href="blog.html">← back to blog</a>
-    <h1>Why I built a blockchain notary instead of another CRUD app</h1>
-    <span class="post-date">Notes · Decentralized Document Notary</span>
+<div class="max-w-[800px] mx-auto px-5 lg:px-8">
+  <section class="pt-10 pb-2">
+    <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="blog.html">← back to blog</a>
+    <div class="flex flex-wrap items-center gap-3 mt-5">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-signal/10 text-signal font-mono text-[11px]">
+        <span class="w-1.5 h-1.5 rounded-full bg-signal"></span>
+        Blockchain &amp; Cryptography
+      </span>
+      <span class="font-mono text-[11px] text-muted2">2 min read</span>
+    </div>
+    <h1 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4 leading-tight">Why I built a blockchain notary instead of another CRUD app</h1>
+    <p class="font-mono text-[12px] text-muted2 mt-3">Notes · Decentralized Document Notary</p>
   </section>
 
-  <section style="padding-top:0;padding-bottom:0;border-bottom:none;">
-    <img src="images/banner-notary.svg" alt="Illustration of a document with a lock, chain links, and a hash grid" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);">
+  <section class="pt-6">
+    <img src="images/banner-notary.svg" alt="Illustration of a document with a lock, chain links, and a hash grid" class="w-full rounded-xl border border-line">
   </section>
 
   <section>
@@ -58,7 +76,23 @@
       <p>This isn't free. Gas costs money, even on testnets that money is fake but the friction is real, and a public chain means the hash (though not the document) is technically visible to anyone. For a huge number of use cases, a signed database record with an audit log is genuinely fine. This project exists for the narrower slice of cases where "genuinely fine" isn't good enough — and it was a good excuse to actually feel that trade-off rather than just read about it.</p>
     </div>
   </section>
+
+  <section class="pt-4 pb-16">
+    <div class="bg-card p-6 rounded-xl border border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-signal flex items-center justify-center font-display font-bold text-ink shrink-0">AS</div>
+        <div>
+          <div class="font-display font-semibold text-paper text-sm">Ahmed Ali Shah</div>
+          <div class="font-mono text-[11px] text-muted2">Software Developer — full-stack, blockchain &amp; AI</div>
+        </div>
+      </div>
+      <a href="contact.html" class="inline-flex items-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap">
+        Get in touch →
+      </a>
+    </div>
+  </section>
 </div>
+
 
 <footer>
   <div class="foot-line">built &amp; deployed by Ahmed · <a href="contact.html">get in touch</a> · <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener">github.com/Ahmeds168</a></div>

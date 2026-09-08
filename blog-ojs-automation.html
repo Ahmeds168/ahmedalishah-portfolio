@@ -8,12 +8,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: { ink:'#0B0A10', card:'#161420', card2:'#121019', paper:'#F5F3F8', muted:'#A79FB5', muted2:'#726B82', signal:'#A259FF', line:'#2A2635' },
+        fontFamily: { display:['Space Grotesk','sans-serif'], body:['Inter','sans-serif'], mono:['JetBrains Mono','monospace'] },
+      },
+    },
+  };
+</script>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
-<body>
+<body class="bg-ink text-paper font-body antialiased">
 
 <header class="nav">
   <div class="nav-inner">
@@ -29,15 +40,22 @@
   </div>
 </header>
 
-<div class="wrap">
-  <section class="page-hero article">
-    <a class="back-link" href="blog.html">← back to blog</a>
-    <h1>Modernizing a university's journal system: lessons from running OJS in production</h1>
-    <span class="post-date">Notes · Software Development Intern, Sukkur IBA University</span>
+<div class="max-w-[800px] mx-auto px-5 lg:px-8">
+  <section class="pt-10 pb-2">
+    <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="blog.html">← back to blog</a>
+    <div class="flex flex-wrap items-center gap-3 mt-5">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#5B8CFF]/10 text-[#5B8CFF] font-mono text-[11px]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#5B8CFF]"></span>
+        Systems &amp; Infrastructure
+      </span>
+      <span class="font-mono text-[11px] text-muted2">2 min read</span>
+    </div>
+    <h1 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4 leading-tight">Modernizing a university's journal system: lessons from running OJS in production</h1>
+    <p class="font-mono text-[12px] text-muted2 mt-3">Notes · Software Development Intern, Sukkur IBA University</p>
   </section>
 
-  <section style="padding-top:0;padding-bottom:0;border-bottom:none;">
-    <img src="images/banner-ojs.svg" alt="Illustration of an open book beside gear icons representing automation" style="width:100%;border-radius:var(--radius);border:1px solid var(--line);">
+  <section class="pt-6">
+    <img src="images/banner-ojs.svg" alt="Illustration of an open book beside gear icons representing automation" class="w-full rounded-xl border border-line">
   </section>
 
   <section>
@@ -52,6 +70,21 @@
 
       <h2>Owning the whole website, not just a feature</h2>
       <p>Being responsible for the entire department website administration — not just "the frontend" or "the CMS" — meant genuinely owning uptime, content updates, and whatever broke on a given day, regardless of whether it was originally "my" code. That end-to-end ownership is a different muscle than shipping a scoped feature in a sprint, and it's one I think more developers should build early, even if it's less exciting than greenfield work.</p>
+    </div>
+  </section>
+
+  <section class="pt-4 pb-16">
+    <div class="bg-card p-6 rounded-xl border border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-signal flex items-center justify-center font-display font-bold text-ink shrink-0">AS</div>
+        <div>
+          <div class="font-display font-semibold text-paper text-sm">Ahmed Ali Shah</div>
+          <div class="font-mono text-[11px] text-muted2">Software Developer — full-stack, blockchain &amp; AI</div>
+        </div>
+      </div>
+      <a href="contact.html" class="inline-flex items-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap">
+        Get in touch →
+      </a>
     </div>
   </section>
 </div>
