@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import resume from '../data/resume.json';
 
-const featuredProjects = resume.projects.slice(0, 2);
 ---
 <Layout title="Syed Ahmed Ali Shah — Software Developer" activePage="home">
 
@@ -84,19 +83,24 @@ const featuredProjects = resume.projects.slice(0, 2);
 
   <section id="projects-preview">
     <div class="eyebrow">Projects — shipped &amp; deployed</div>
-    <div class="project-grid">
-      {featuredProjects.map(p => (
-        <div class="project-card">
-          <div class="project-top">
-            <span class="project-name">{p.name}</span>
-            {p.tag && <span class="live-tag">{p.tag}</span>}
-          </div>
-          <div class="project-desc">{p.shortDesc}</div>
-          <a class="project-link" href="/projects">Read the write-up →</a>
-        </div>
-      ))}
+  </section>
+
+  <section class="marquee-section" style="padding-top:0;">
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        {[...resume.projects, ...resume.projects].map(p => (
+          <a class="project-card marquee-card" href={p.url || '/projects'} target={p.url ? '_blank' : undefined} rel={p.url ? 'noopener' : undefined}>
+            <div class="project-top">
+              <span class="project-name">{p.name}</span>
+              {p.tag && <span class="live-tag">{p.tag}</span>}
+            </div>
+            <div class="project-desc">{p.shortDesc}</div>
+            <span class="project-link">Read the write-up →</span>
+          </a>
+        ))}
+      </div>
     </div>
-    <div style="margin-top:16px;"><a class="btn btn-ghost" href="/projects">See all projects →</a></div>
+    <div style="margin-top:16px;text-align:center;"><a class="btn btn-ghost" href="/projects">See all projects →</a></div>
   </section>
 
   <section id="blog-preview">
@@ -183,6 +187,19 @@ const featuredProjects = resume.projects.slice(0, 2);
   .project-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   @media (max-width:640px){.project-grid{grid-template-columns:1fr;}}
   @media (min-width:1000px){.project-grid{grid-template-columns:repeat(3,1fr);}}
+
+  .marquee-wrap{overflow:hidden;-webkit-mask-image:linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);mask-image:linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent);}
+  .marquee-track{display:flex;gap:16px;width:max-content;animation:marquee-scroll 42s linear infinite;}
+  .marquee-wrap:hover .marquee-track{animation-play-state:paused;}
+  .marquee-card{flex:0 0 300px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;}
+  @keyframes marquee-scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none;}
+    .marquee-wrap{overflow-x:auto;}
+  }
 </style>
 
 <script>
