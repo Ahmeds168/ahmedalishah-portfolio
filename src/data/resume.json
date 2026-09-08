@@ -1,0 +1,122 @@
+{
+  "name": "Syed Ahmed Ali Shah",
+  "role": "Software Developer — full-stack, blockchain & AI",
+  "contact": {
+    "email": "ahmedalishah96@gmail.com",
+    "phone": "+92 301 2278148",
+    "location": "Sukkur, Pakistan",
+    "github": "https://github.com/Ahmeds168",
+    "githubLabel": "github.com/Ahmeds168",
+    "linkedin": "https://linkedin.com/in/syed-ahmed-ali-shah-477936b4",
+    "linkedinLabel": "linkedin.com/in/syed-ahmed-ali-shah-477936b4"
+  },
+  "summary": "Software developer with 5+ years spanning web, mobile, and database-driven applications. Most recently a Software Development Intern at Sukkur IBA University's Department of Electrical Engineering, managing OJS journal administration, departmental web systems, and office automation. Previously built Django/Flask and PostgreSQL solutions remotely for Clear Edge Technology (Canada). Holds a BS in Computer Science from Sukkur IBA University, with a blockchain-based voting system as a final-year project. Skilled in Python, JavaScript, Java, PHP, and Oracle/PostgreSQL administration, with growing expertise in prompt engineering, machine learning, and smart contract development.",
+  "skills": {
+    "Languages & Frameworks": ["Python", "JavaScript", "Java", "PHP", "Django", "Flask", "Solidity"],
+    "Data & Platforms": ["PostgreSQL Admin", "Oracle DB Admin", "Web Development", "Android Development", "Desktop Apps"],
+    "Emerging & Applied": ["Blockchain", "Prompt Engineering", "Machine Learning"],
+    "Working style": ["Communication", "Management"]
+  },
+  "experience": [
+    {
+      "title": "Software Development Intern",
+      "org": "Dept. of Electrical Engineering, Sukkur IBA University",
+      "meta": "Jun 2024 – Jul 2026 · Sukkur, Sindh, Pakistan",
+      "bullets": [
+        "Administered and upgraded the department's Open Journal Systems (OJS) installation",
+        "Owned department website administration end-to-end",
+        "Automated recurring office workflows and documentation"
+      ]
+    },
+    {
+      "title": "Software Developer",
+      "org": "Clear Edge Technology",
+      "meta": "May 2021 – May 2024 · Canada (Remote)",
+      "bullets": [
+        "Built and maintained Django/Flask applications backed by PostgreSQL",
+        "Developed interactive canvas features with Konva.js"
+      ]
+    },
+    {
+      "title": "Web Application Developer Intern",
+      "org": "Vasona Systems International",
+      "meta": "Aug 2019 – Dec 2019 · Sukkur, Sindh, Pakistan",
+      "bullets": [
+        "Built features in .NET; handled website and email troubleshooting"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Decentralized Document Notary",
+      "tag": "live",
+      "shortDesc": "Blockchain-based document notarization — Solidity, React, Supabase, Cloudflare R2.",
+      "longDesc": "The problem: proving a document existed in a specific state at a specific time, without trusting a single company's database to not quietly change it later. Traditional notarization solves this with a person and a stamp; this project solves it by hashing the document client-side and writing that hash to a smart contract on Sepolia — so the proof of existence lives on a public, append-only ledger instead of in someone's private table.",
+      "extra": "The interesting engineering problem wasn't the smart contract itself (that part is genuinely simple) — it was everything around it. Files themselves are too large and too sensitive to put on-chain, so the actual documents live in Cloudflare R2, with Supabase handling user accounts, metadata, and the mapping between a file and its on-chain hash. The contract only ever sees a hash, never the document. Deployed across three different platforms doing three different jobs — Vercel for the frontend, Render for a small backend service, Sepolia for the actual notarization — which turned out to be a good, if accidental, lesson in keeping deploy responsibilities cleanly separated.",
+      "stack": ["Solidity", "React", "Supabase"],
+      "url": "https://doc-notary.vercel.app"
+    },
+    {
+      "name": "On-Chain Voting dApp",
+      "tag": "live",
+      "shortDesc": "Solidity + Hardhat voting contract with a React + ethers.js frontend styled like an official paper ballot.",
+      "longDesc": "A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before.",
+      "extra": "Hardhat handled local contract testing and deployment scripting; ethers.js bridged the contract calls to the UI. It's a small project, but it's the direct descendant of my final-year university project — same core idea (votes as immutable on-chain records), much cleaner execution.",
+      "stack": ["Solidity", "Hardhat", "ethers.js"],
+      "url": "https://onchain-voting-dapp-ahmed-ali-shahs-projects-c142f759.vercel.app/"
+    },
+    {
+      "name": "Groq Chat App",
+      "tag": "live",
+      "shortDesc": "Full-stack chat app — Node.js/Express backend calling the Groq API, React (Vite) frontend.",
+      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference — Groq's API serves responses fast enough that the usual 'typing indicator' UX patterns barely matter.",
+      "extra": "This project doubled as a testbed for prompt engineering technique — testing how system prompts, temperature, and message history structure change response quality in a low-latency setting.",
+      "stack": ["Node.js", "Express", "Groq API"],
+      "url": "https://groq-chat-frontend-ahmed-ali-shahs-projects-c142f759.vercel.app/"
+    },
+    {
+      "name": "Election System Using Blockchain (SISC)",
+      "tag": null,
+      "shortDesc": "Final-year project — permissioned blockchain voting system on Hyperledger Fabric.",
+      "longDesc": "My university final-year project, and the one that got me into blockchain in the first place. Unlike public, permissionless blockchains, this uses Hyperledger Fabric — a permissioned blockchain, meaning only known, vetted participants can validate transactions.",
+      "extra": "Built and deployed through the IBM Blockchain VS Code extension, which handles a lot of the Fabric network scaffolding that would otherwise be painful to configure by hand.",
+      "stack": ["Hyperledger Fabric", "IBM Blockchain"],
+      "url": null
+    },
+    {
+      "name": "Analyzing Students' Mental Health",
+      "tag": null,
+      "shortDesc": "PostgreSQL-driven analysis of whether studying abroad affects student mental health.",
+      "longDesc": "A data-driven look at whether studying abroad measurably affects student mental health, using PostgreSQL to structure and query the underlying survey data.",
+      "extra": null,
+      "stack": ["PostgreSQL"],
+      "url": "https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb"
+    },
+    {
+      "name": "Campus Management Solution",
+      "tag": null,
+      "shortDesc": "Java + Oracle SQL system for storing student, teacher and course records.",
+      "longDesc": "A Java application backed by an Oracle database for storing student, teacher, and course records — the kind of project that's less about novelty and more about getting the fundamentals of relational schema design right.",
+      "extra": null,
+      "stack": ["Java", "Oracle SQL"],
+      "url": "https://github.com/Ahmeds168/Campus-Management-Solution-Using-Oracle-Database-in-Java"
+    }
+  ],
+  "education": [
+    { "degree": "BS, Computer Science", "school": "Sukkur IBA University, Sukkur", "date": "Aug 2016 – Aug 2021", "logo": "/logos/sukkur-iba-logo.png" },
+    { "degree": "Intermediate", "school": "Islamia Science College, Sukkur", "date": "2012 – 2014", "logo": "/logos/islamia-college-logo.png" }
+  ],
+  "certificates": [
+    { "title": "AI Agents and Agentic AI with Python & Generative AI", "issuer": "Vanderbilt University, Coursera", "date": "Aug 2026", "url": "https://coursera.org/verify/QYURRCUBHM69", "image": "/certs/ai-agents-coursera.jpg" },
+    { "title": "Blockchain Basics", "issuer": "Cyfrin", "date": "Mar 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics", "image": "/certs/cyfrin-blockchain-basics.jpg" },
+    { "title": "Solidity Smart Contract Development", "issuer": "Cyfrin", "date": "Aug 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity", "image": null },
+    { "title": "Prompt Engineering with the OpenAI API", "issuer": "DataCamp", "date": "Jul 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1", "image": "/certs/prompt-engineering-openai.jpg" },
+    { "title": "Introduction to SQL", "issuer": "DataCamp", "date": "Jul 2026", "url": null, "image": "/certs/intro-to-sql.jpg" },
+    { "title": "Intermediate SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951", "image": "/certs/intermediate-sql.jpg" },
+    { "title": "Joining Data in SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f", "image": "/certs/joining-data-sql.jpg" },
+    { "title": "Working with Hugging Face", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597", "image": "/certs/hugging-face.jpg" },
+    { "title": "Vasona Systems International — Internship Certificate", "issuer": "Vasona Systems International", "date": "2019", "url": null, "image": null }
+  ],
+  "achievements": "Won Aptech Web Development Challenge (Nov 2017 – Feb 2018)",
+  "languages": "English (Full Professional), Urdu (Native), Sindhi (Native)"
+}

@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import resume from '../data/resume.json';
+---
+<Layout title="Projects — Syed Ahmed Ali Shah" activePage="projects">
+
+<div class="wrap">
+
+  <section class="page-hero">
+    <div class="eyebrow">Projects</div>
+    <h1>Shipped, deployed, and still running.</h1>
+    <p class="lede">A closer look at the projects that took real design decisions — not just the one-liners from the resume.</p>
+  </section>
+
+  <section>
+    {resume.projects.map(p => (
+      <div class="project-deep">
+        <h3>{p.name}</h3>
+        <div class="meta">{p.stack.join(' · ')}</div>
+        <p>{p.longDesc}</p>
+        {p.extra && <p>{p.extra}</p>}
+        {p.url && (
+          <a class="link" href={p.url} target="_blank" rel="noopener">
+            → {p.url.includes('github.com') ? (p.url.includes('blob') ? 'notebook on GitHub' : 'source on GitHub') : (p.tag === 'live' ? 'view live demo' : p.url)}
+          </a>
+        )}
+      </div>
+    ))}
+  </section>
+
+</div>
+
+</Layout>

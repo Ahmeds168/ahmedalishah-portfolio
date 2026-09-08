@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import resume from '../data/resume.json';
+---
+<Layout title="Contact — Syed Ahmed Ali Shah" activePage="contact">
+
+<div class="wrap">
+
+  <section class="page-hero">
+    <div class="eyebrow">Contact</div>
+    <h1>Say hello.</h1>
+    <p class="lede">Freelance work, full-time roles, or just a question about one of the projects — all welcome.</p>
+  </section>
+
+  <section>
+    <form class="contact-form" action="https://formspree.io/f/mzebpedg" method="POST">
+      <div>
+        <label for="name">Name</label><br/>
+        <input type="text" id="name" name="name" required style="width:100%;margin-top:6px;">
+      </div>
+      <div>
+        <label for="email">Email</label><br/>
+        <input type="email" id="email" name="email" required style="width:100%;margin-top:6px;">
+      </div>
+      <div>
+        <label for="message">Message</label><br/>
+        <textarea id="message" name="message" required style="width:100%;margin-top:6px;"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:fit-content;">Send message →</button>
+      <div class="form-note">Goes straight to {resume.contact.email}. No spam, no newsletter.</div>
+    </form>
+  </section>
+
+  <section>
+    <div class="eyebrow">Other Ways to Reach Me</div>
+    <div class="about-card">
+      <p>Email: <span class="tag">{resume.contact.email}</span></p>
+      <p>Phone: <span class="tag">{resume.contact.phone}</span></p>
+      <p>LinkedIn: <a href={resume.contact.linkedin} target="_blank" rel="noopener" style="color:var(--signal);">{resume.contact.linkedinLabel}</a></p>
+      <p>GitHub: <a href={resume.contact.github} target="_blank" rel="noopener" style="color:var(--signal);">{resume.contact.githubLabel}</a></p>
+    </div>
+  </section>
+
+</div>
+
+</Layout>

@@ -1,8 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0B0A10;
+  --color-card: #161420;
+  --color-card2: #121019;
+  --color-paper: #F5F3F8;
+  --color-muted: #A79FB5;
+  --color-muted2: #726B82;
+  --color-signal: #A259FF;
+  --color-line: #2A2635;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
 :root{
   --ink:#0B0A10;
   --card:#161420;
   --card-2:#121019;
   --paper:#F5F3F8;
+
   --muted:#A79FB5;
   --muted-2:#726B82;
   --signal:#A259FF;
@@ -164,3 +181,38 @@ form.contact-form textarea{resize:vertical;min-height:120px;}
 footer{padding:40px 0 60px;text-align:center;}
 footer .foot-line{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);}
 footer .foot-line a{color:var(--signal);}
+
+/* shared across multiple pages */
+.commit-log{position:relative;padding-left:26px;}
+.commit-log::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:var(--line);}
+.commit{position:relative;padding-bottom:34px;}
+.commit:last-child{padding-bottom:0;}
+.commit::before{content:"";position:absolute;left:-26px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--ink);border:2px solid var(--signal);}
+.commit-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;}
+.commit-hash{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);background:var(--signal-dim);padding:2px 8px;border-radius:5px;}
+.commit-role{font-size:17px;font-weight:600;color:var(--paper);font-family:'Space Grotesk',sans-serif;}
+.commit-meta{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted-2);margin-top:5px;}
+.commit-body{margin-top:12px;color:var(--muted);font-size:14.5px;}
+.commit-body ul{margin:0;padding-left:18px;}
+.commit-body li{margin-bottom:4px;}
+.skill-group-title{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px;}
+.project-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px 18px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s ease;}
+.project-card:hover{border-color:var(--signal);}
+.project-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.project-name{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;color:var(--paper);}
+.live-tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--signal);border:1px solid var(--signal);padding:2px 7px;border-radius:20px;white-space:nowrap;}
+.project-desc{color:var(--muted);font-size:13.8px;flex:1;}
+.project-link{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--signal);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+@media (max-width:640px){.two-col{grid-template-columns:1fr;gap:36px;}}
+.edu-degree{font-weight:600;font-family:'Space Grotesk',sans-serif;color:var(--paper);font-size:15.5px;}
+.edu-school{color:var(--muted);font-size:14px;margin-top:2px;}
+.edu-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted-2);margin-top:4px;}
+.edu-logo{width:56px;height:56px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.edu-logo img{max-width:100%;max-height:100%;object-fit:contain;}
+.edu-logo-badge{background:#FFFFFF;border-radius:10px;padding:5px;}
+.contact-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:13px;border:1px solid var(--line);color:var(--muted);padding:8px 13px;border-radius:8px;background:var(--card-2);cursor:pointer;}
+.chip:hover{border-color:var(--signal);color:var(--paper);}
+.chip svg{width:14px;height:14px;stroke:currentColor;}
+.hero-actions{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap;}

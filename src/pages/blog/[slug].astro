@@ -1,0 +1,70 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function readTime(body: string) {
+  const words = body.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
+const rt = readTime(post.body || '');
+const catColorStyle = post.data.categoryColor === 'signal' ? 'var(--color-signal)' : post.data.categoryColor;
+---
+<Layout title={`${post.data.title} — Ahmed Ali Shah`} description={post.data.excerpt} activePage="blog">
+
+<main class="max-w-[800px] mx-auto px-5 lg:px-8 bg-ink text-paper font-body">
+
+  <section class="pt-10 pb-2">
+    <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
+    <div class="flex flex-wrap items-center gap-3 mt-5">
+      <span
+        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]"
+        style={`background:${catColorStyle}1A;color:${catColorStyle};`}
+      >
+        <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
+        {post.data.categoryLabel}
+      </span>
+      <span class="font-mono text-[11px] text-muted2">{rt} min read</span>
+    </div>
+    <h1 class="font-display text-3xl md:text-4xl font-bold tracking-tight mt-4 leading-tight">{post.data.title}</h1>
+    <p class="font-mono text-[12px] text-muted2 mt-3">{post.data.metaLine}</p>
+  </section>
+
+  <section class="pt-6">
+    <img src={post.data.banner} alt="" class="w-full rounded-xl border border-line" />
+  </section>
+
+  <section>
+    <div class="article-body">
+      <Content />
+    </div>
+  </section>
+
+  <section class="pt-4 pb-16">
+    <div class="bg-card p-6 rounded-xl border border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-signal flex items-center justify-center font-display font-bold text-ink shrink-0">AS</div>
+        <div>
+          <div class="font-display font-semibold text-paper text-sm">Ahmed Ali Shah</div>
+          <div class="font-mono text-[11px] text-muted2">Software Developer — full-stack, blockchain &amp; AI</div>
+        </div>
+      </div>
+      <a href="/contact" class="inline-flex items-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap">
+        Get in touch →
+      </a>
+    </div>
+  </section>
+</main>
+
+</Layout>
