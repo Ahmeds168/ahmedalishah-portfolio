@@ -1,9 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import BlogFilters from '../../components/BlogFilters.tsx';
+import BlogSearch from '../../components/BlogSearch.tsx';
+import BlogTopicFilters from '../../components/BlogTopicFilters.tsx';
 
-const posts = await getCollection('blog');
+const posts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
 const topics = new Set(posts.map(p => p.data.category)).size;
 
 function readTime(body: string) {
@@ -72,7 +73,36 @@ function tagStyle(color: string) {
           </h2>
           <p class="relative text-muted leading-relaxed">{post.data.excerpt}</p>
 
+          {post.data.codeSnippet && (
+            <div class="relative w-full bg-card2 rounded-lg p-4 flex flex-col gap-2 border border-line">
+              <div class="flex items-center justify-between font-mono text-[11px] text-muted2 pb-1">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-line"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-line"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-line"></span>
+                  <span class="ml-2 font-mono">{post.data.codeSnippet.filename}</span>
+                </div>
+                <span class="text-muted2 uppercase">illustrative example</span>
+              </div>
+              <pre class="font-mono text-[13px] text-paper overflow-x-auto p-3 bg-ink rounded leading-relaxed"><code>{post.data.codeSnippet.code}</code></pre>
+            </div>
+          )}
+
+          {post.data.pullQuote && (
+            <blockquote class="relative pl-4 py-2 border-l-2 border-signal/50 bg-card2/60 rounded-r-lg">
+              <p class="text-paper italic text-[15px]">"{post.data.pullQuote}"</p>
+              <span class="font-mono text-[11px] text-muted2">— from the post</span>
+            </blockquote>
+          )}
+
           <div class="relative pt-1 flex items-center justify-between">
+            {post.data.stack && (
+              <div class="flex flex-wrap gap-2">
+                {post.data.stack.map(s => (
+                  <span class="font-mono text-[11px] text-muted2 bg-card2 border border-line px-2 py-1 rounded">{s}</span>
+                ))}
+              </div>
+            )}
             {i === 0 ? (
               <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-card2 border border-line group-hover:border-signal group-hover:bg-signal group-hover:text-ink font-mono text-[12px] transition-all">
                 Read the full post <span aria-hidden="true">→</span>
@@ -90,7 +120,7 @@ function tagStyle(color: string) {
     </div>
 
     <aside class="lg:col-span-4 flex flex-col gap-8">
-      <BlogFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel }))} />
+      <BlogSearch client:load />
 
       <div class="bg-card p-6 rounded-xl border border-line flex flex-col gap-4">
         <div class="flex items-center gap-3">
@@ -108,6 +138,8 @@ function tagStyle(color: string) {
         </a>
       </div>
 
+      <BlogTopicFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel }))} />
+
       <div class="bg-card p-6 rounded-xl border border-line flex flex-col gap-2">
         <span class="font-mono text-[11px] text-signal uppercase tracking-widest">Direct</span>
         <h4 class="font-serif text-xl text-paper">Want to work together?</h4>
@@ -118,6 +150,21 @@ function tagStyle(color: string) {
       </div>
     </aside>
   </div>
+
+  <script>
+    function applyFilters() {
+      const q = (document.documentElement.dataset.blogSearch || '').trim().toLowerCase();
+      const tag = document.documentElement.dataset.blogTag || 'all';
+      document.querySelectorAll('[data-post-card]').forEach((el) => {
+        const category = el.getAttribute('data-category') || '';
+        const title = (el.getAttribute('data-title') || '').toLowerCase();
+        const matchesTag = tag === 'all' || category === tag;
+        const matchesQuery = q === '' || title.includes(q);
+        (el as HTMLElement).style.display = matchesTag && matchesQuery ? '' : 'none';
+      });
+    }
+    window.addEventListener('blogfilter:change', applyFilters);
+  </script>
 </main>
 
 </Layout>

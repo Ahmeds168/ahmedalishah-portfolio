@@ -11,6 +11,13 @@ const blog = defineCollection({
     categoryColor: z.string(),
     banner: z.string(),
     metaLine: z.string(),
+    order: z.number(),
+    stack: z.array(z.string()).optional(),
+    pullQuote: z.string().optional(),
+    codeSnippet: z.object({
+      filename: z.string(),
+      code: z.string(),
+    }).optional(),
   }),
 });
 

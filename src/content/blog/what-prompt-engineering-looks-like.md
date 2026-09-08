@@ -6,6 +6,9 @@ categoryLabel: "AI & Applied Engineering"
 categoryColor: "#FF5CA8"
 banner: "/images/banner-prompt.svg"
 metaLine: "Notes · Groq Chat App & applied AI work"
+order: 3
+stack: ["Groq API", "Prompting"]
+pullQuote: "A well-specified system prompt behaves less like a spell and more like a function signature."
 ---
 
 "Prompt engineering" sounds like it should mean finding a clever sentence that unlocks better answers. In practice, building it into a real app (like my Groq-based chat project) looks a lot more like ordinary software engineering than people expect.

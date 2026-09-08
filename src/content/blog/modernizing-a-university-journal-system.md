@@ -6,6 +6,8 @@ categoryLabel: "Systems & Infrastructure"
 categoryColor: "#5B8CFF"
 banner: "/images/banner-ojs.svg"
 metaLine: "Notes · Software Development Intern, Sukkur IBA University"
+order: 2
+stack: ["OJS", "Sysadmin"]
 ---
 
 Open Journal Systems (OJS) is the piece of software that quietly runs a huge share of the world's academic journals — including several at Sukkur IBA University's Department of Electrical Engineering, which I administered and upgraded during my time as a Software Development Intern. It's not glamorous work, but it taught me more about running production software for real users than any greenfield project has.

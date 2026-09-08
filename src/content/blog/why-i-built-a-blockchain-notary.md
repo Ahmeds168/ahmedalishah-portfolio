@@ -6,6 +6,16 @@ categoryLabel: "Blockchain & Cryptography"
 categoryColor: "signal"
 banner: "/images/banner-notary.svg"
 metaLine: "Notes · Decentralized Document Notary"
+order: 1
+stack: ["Solidity", "React", "Supabase"]
+codeSnippet:
+  filename: "concept.sol"
+  code: |
+    function verifyHash(bytes32 storedHash, bytes32 fileHash)
+        public view returns (bool) {
+      // the chain only ever sees a hash, never the document
+      return storedHash == fileHash;
+    }
 ---
 
 Most of the time, "store this document and remember when it was created" is a solved problem: a database row, a timestamp column, done. So why put a smart contract in front of it at all?
