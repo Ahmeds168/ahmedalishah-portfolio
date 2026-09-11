@@ -240,16 +240,31 @@ import resume from '../data/resume.json';
     });
     const certDots = certDotsWrap.children;
 
-    function updateCertDots() {
-      const scrollLeft = certTrack!.scrollLeft;
-      let closest = 0, minDist = Infinity;
-      certCards.forEach((c, i) => {
-        const dist = Math.abs((c as HTMLElement).offsetLeft - (certTrack as HTMLElement).offsetLeft - scrollLeft);
-        if (dist < minDist) { minDist = dist; closest = i; }
-      });
-      Array.from(certDots).forEach((d, i) => d.classList.toggle('active', i === closest));
+    // Cache card positions once (re-measured only on resize) instead of reading
+    // offsetLeft for every card on every scroll event, which forces layout reflow.
+    let cardOffsets: number[] = [];
+    function measureCards() {
+      const trackLeft = (certTrack as HTMLElement).offsetLeft;
+      cardOffsets = Array.from(certCards).map(c => (c as HTMLElement).offsetLeft - trackLeft);
     }
-    certTrack.addEventListener('scroll', updateCertDots);
+    measureCards();
+
+    let dotsRaf: number | null = null;
+    function updateCertDots() {
+      if (dotsRaf !== null) return;
+      dotsRaf = requestAnimationFrame(() => {
+        dotsRaf = null;
+        const scrollLeft = certTrack!.scrollLeft;
+        let closest = 0, minDist = Infinity;
+        cardOffsets.forEach((offset, i) => {
+          const dist = Math.abs(offset - scrollLeft);
+          if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        Array.from(certDots).forEach((d, i) => d.classList.toggle('active', i === closest));
+      });
+    }
+    certTrack.addEventListener('scroll', updateCertDots, { passive: true });
+    window.addEventListener('resize', () => { measureCards(); updateCertDots(); });
     updateCertDots();
 
     document.getElementById('certNext')?.addEventListener('click', () => {
@@ -264,7 +279,10 @@ import resume from '../data/resume.json';
   const marqueeWrap = document.getElementById('marqueeWrap');
   const marqueeTrack = document.getElementById('marqueeTrack');
   if (marqueeWrap && marqueeTrack) {
-    const halfWidth = () => marqueeTrack.scrollWidth / 2;
+    // Cache half-width (re-measured on resize) instead of reading scrollWidth every tick.
+    let half = marqueeTrack.scrollWidth / 2;
+    const halfWidth = () => half;
+    window.addEventListener('resize', () => { half = marqueeTrack.scrollWidth / 2; });
     let autoTimer: ReturnType<typeof setInterval> | null = null;
     let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
     const prefersReducedMotionMarquee = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
