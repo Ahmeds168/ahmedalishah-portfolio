@@ -112,17 +112,17 @@
     }
   ],
   "education": [
-    { "degree": "BS, Computer Science", "school": "Sukkur IBA University, Sukkur", "date": "Aug 2016 – Aug 2021", "logo": "/logos/sukkur-iba-logo.png" },
-    { "degree": "Intermediate", "school": "Islamia Science College, Sukkur", "date": "2012 – 2014", "logo": "/logos/islamia-college-logo.png" }
+    { "degree": "BS, Computer Science", "school": "Sukkur IBA University, Sukkur", "date": "Aug 2016 – Aug 2021", "logo": "/logos/sukkur-iba-logo.webp" },
+    { "degree": "Intermediate", "school": "Islamia Science College, Sukkur", "date": "2012 – 2014", "logo": "/logos/islamia-college-logo.webp" }
   ],
   "certificates": [
-    { "title": "AI Agents and Agentic AI with Python & Generative AI", "issuer": "Vanderbilt University, Coursera", "date": "Aug 2026", "url": "https://coursera.org/verify/QYURRCUBHM69", "image": "/certs/ai-agents-coursera.jpg" },
-    { "title": "Intermediate SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951", "image": "/certs/intermediate-sql.jpg" },
-    { "title": "Joining Data in SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f", "image": "/certs/joining-data-sql.jpg" },
-    { "title": "Prompt Engineering with the OpenAI API", "issuer": "DataCamp", "date": "Jul 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1", "image": "/certs/prompt-engineering-openai.jpg" },
-    { "title": "Working with Hugging Face", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597", "image": "/certs/hugging-face.jpg" },
-    { "title": "Introduction to SQL", "issuer": "DataCamp", "date": "Jul 2026", "url": null, "image": "/certs/intro-to-sql.jpg" },
-    { "title": "Blockchain Basics", "issuer": "Cyfrin", "date": "Mar 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics", "image": "/certs/cyfrin-blockchain-basics.jpg" },
+    { "title": "AI Agents and Agentic AI with Python & Generative AI", "issuer": "Vanderbilt University, Coursera", "date": "Aug 2026", "url": "https://coursera.org/verify/QYURRCUBHM69", "image": "/certs/ai-agents-coursera.webp" },
+    { "title": "Intermediate SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951", "image": "/certs/intermediate-sql.webp" },
+    { "title": "Joining Data in SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f", "image": "/certs/joining-data-sql.webp" },
+    { "title": "Prompt Engineering with the OpenAI API", "issuer": "DataCamp", "date": "Jul 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1", "image": "/certs/prompt-engineering-openai.webp" },
+    { "title": "Working with Hugging Face", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597", "image": "/certs/hugging-face.webp" },
+    { "title": "Introduction to SQL", "issuer": "DataCamp", "date": "Jul 2026", "url": null, "image": "/certs/intro-to-sql.webp" },
+    { "title": "Blockchain Basics", "issuer": "Cyfrin", "date": "Mar 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics", "image": "/certs/cyfrin-blockchain-basics.webp" },
     { "title": "Solidity Smart Contract Development", "issuer": "Cyfrin", "date": "Aug 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity", "image": null },
     { "title": "Internship Certificate", "issuer": "Vasona Systems International", "date": "2019", "url": null, "image": null }
   ],

@@ -124,7 +124,7 @@ import resume from '../data/resume.json';
       {resume.education.map(edu => (
         <div style="display:flex;gap:14px;align-items:flex-start;">
           <div class={`edu-logo ${edu.school.includes('Islamia') ? 'edu-logo-badge' : ''}`}>
-            <img src={edu.logo} alt={`${edu.school} logo`} />
+            <img src={edu.logo} alt={`${edu.school} logo`} width="56" height="56" loading="lazy" decoding="async" />
           </div>
           <div>
             <div class="edu-degree">{edu.degree}</div>
@@ -149,7 +149,7 @@ import resume from '../data/resume.json';
           return (
             <CardTag class="cert-card" href={cert.url || undefined} target={cert.url ? '_blank' : undefined} rel={cert.url ? 'noopener' : undefined}>
               {cert.image ? (
-                <img class="cert-thumb" src={cert.image} alt={`${cert.title} certificate`} />
+                <img class="cert-thumb" src={cert.image} alt={`${cert.title} certificate`} width="320" height="221" loading="lazy" decoding="async" />
               ) : (
                 <div class="cert-thumb-placeholder">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:32px;height:32px;"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></svg>
