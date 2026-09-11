@@ -171,7 +171,7 @@ import resume from '../data/resume.json';
 </div>
 
 <style>
-  .hero-aurora{position:relative;overflow:hidden;border-radius:var(--radius);}
+  .hero-aurora{position:relative;overflow:hidden;border-radius:var(--radius);background:var(--hero-ink);}
   .aurora-blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.55;pointer-events:none;z-index:0;}
   .aurora-1{width:420px;height:420px;background:#A259FF;top:-160px;left:-100px;animation:drift1 16s ease-in-out infinite alternate;}
   .aurora-2{width:360px;height:360px;background:#5B8CFF;top:20px;right:-120px;animation:drift2 20s ease-in-out infinite alternate;}
@@ -180,11 +180,19 @@ import resume from '../data/resume.json';
   @keyframes drift2{from{transform:translate(0,0) scale(1);}to{transform:translate(-30px,40px) scale(0.95);}}
   @keyframes drift3{from{transform:translate(0,0) scale(1);}to{transform:translate(20px,-20px) scale(1.08);}}
   .hero-content{position:relative;z-index:1;padding:80px 48px 64px;}
-  .hero-content h1{font-size:clamp(42px,7vw,80px);line-height:1.02;color:var(--paper);font-weight:700;}
-  .role-rotator{font-family:'JetBrains Mono Variable',monospace;color:var(--signal);font-size:clamp(16px,2.2vw,20px);margin-top:14px;min-height:1.4em;transition:opacity 0.3s ease;}
-  .role-rotator .rr-cursor{display:inline-block;width:9px;height:1em;background:var(--signal);margin-left:3px;vertical-align:-2px;animation:blink 1s steps(1) infinite;}
+  .hero-content h1{font-size:clamp(42px,7vw,80px);line-height:1.02;color:var(--hero-paper);font-weight:700;}
+  .role-rotator{font-family:'JetBrains Mono Variable',monospace;color:var(--hero-signal);font-size:clamp(16px,2.2vw,20px);margin-top:14px;min-height:1.4em;transition:opacity 0.3s ease;}
+  .role-rotator .rr-cursor{display:inline-block;width:9px;height:1em;background:var(--hero-signal);margin-left:3px;vertical-align:-2px;animation:blink 1s steps(1) infinite;}
   @keyframes blink{50%{opacity:0;}}
-  .hero-content p.lede{color:var(--muted);margin-top:20px;max-width:60ch;font-size:15.5px;}
+  .hero-content p.lede{color:var(--hero-muted);margin-top:20px;max-width:60ch;font-size:15.5px;}
+
+  /* Hero keeps the dark treatment, so its chips/buttons need dark-scoped styles
+     rather than inheriting the site's new light theme. */
+  .hero-content .chip{border-color:#2A2635;color:var(--hero-muted);background:#121019;}
+  .hero-content .chip:hover{border-color:var(--hero-signal);color:var(--hero-paper);}
+  .hero-content .btn-primary{background:var(--hero-signal);color:#0B0A10;}
+  .hero-content .btn-ghost{border-color:#2A2635;color:var(--hero-paper);}
+  .hero-content .btn-ghost:hover{border-color:var(--hero-signal);color:var(--hero-signal);}
   .skill-groups{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
   @media (max-width:640px){.skill-groups{grid-template-columns:1fr;}}
   @media (min-width:1000px){.skill-groups{grid-template-columns:repeat(4,1fr);}}

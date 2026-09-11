@@ -6,14 +6,14 @@
 @import "@fontsource-variable/newsreader/wght-italic.css";
 
 @theme {
-  --color-ink: #0B0A10;
-  --color-card: #161420;
-  --color-card2: #121019;
-  --color-paper: #F5F3F8;
-  --color-muted: #A79FB5;
-  --color-muted2: #8F8A9C;
-  --color-signal: #A259FF;
-  --color-line: #2A2635;
+  --color-ink: #FAF9FB;
+  --color-card: #FFFFFF;
+  --color-card2: #F3F1F6;
+  --color-paper: #16141D;
+  --color-muted: #4A4459;
+  --color-muted2: #635C73;
+  --color-signal: #6D28D9;
+  --color-line: #E4E0EC;
   --font-display: 'Space Grotesk Variable', sans-serif;
   --font-body: 'Inter Variable', sans-serif;
   --font-mono: 'JetBrains Mono Variable', monospace;
@@ -21,17 +21,23 @@
 }
 
 :root{
-  --ink:#0B0A10;
-  --card:#161420;
-  --card-2:#121019;
-  --paper:#F5F3F8;
+  --ink:#FAF9FB;
+  --card:#FFFFFF;
+  --card-2:#F3F1F6;
+  --paper:#16141D;
 
-  --muted:#A79FB5;
-  --muted-2:#8F8A9C;
-  --signal:#A259FF;
-  --signal-dim: rgba(162,89,255,0.14);
-  --line:#2A2635;
+  --muted:#4A4459;
+  --muted-2:#635C73;
+  --signal:#6D28D9;
+  --signal-dim: rgba(109,40,217,0.10);
+  --line:#E4E0EC;
   --radius:10px;
+
+  /* hero keeps the original dark treatment */
+  --hero-ink:#0B0A10;
+  --hero-paper:#F5F3F8;
+  --hero-muted:#A79FB5;
+  --hero-signal:#A259FF;
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -67,7 +73,7 @@ section:last-of-type{border-bottom:none;}
 
 header.nav{
   position:sticky;top:0;z-index:50;
-  background:rgba(11,10,16,0.86);
+  background:rgba(250,249,251,0.86);
   backdrop-filter:blur(8px);
   border-bottom:1px solid var(--line);
 }
