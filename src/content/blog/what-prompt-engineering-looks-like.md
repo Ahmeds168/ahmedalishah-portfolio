@@ -6,6 +6,7 @@ categoryLabel: "AI & Applied Engineering"
 categoryColor: "#FF5CA8"
 banner: "/images/banner-prompt.svg"
 metaLine: "Notes · Groq Chat App & applied AI work"
+pubDate: 2026-08-29
 order: 3
 stack: ["Groq API", "Prompting"]
 pullQuote: "A well-specified system prompt behaves less like a spell and more like a function signature."

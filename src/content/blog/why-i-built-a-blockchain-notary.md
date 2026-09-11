@@ -6,6 +6,7 @@ categoryLabel: "Blockchain & Cryptography"
 categoryColor: "signal"
 banner: "/images/banner-notary.svg"
 metaLine: "Notes · Decentralized Document Notary"
+pubDate: 2026-08-29
 order: 1
 stack: ["Solidity", "React", "Supabase"]
 codeSnippet:

@@ -11,6 +11,7 @@ const blog = defineCollection({
     categoryColor: z.string(),
     banner: z.string(),
     metaLine: z.string(),
+    pubDate: z.coerce.date(),
     order: z.number(),
     stack: z.array(z.string()).optional(),
     pullQuote: z.string().optional(),

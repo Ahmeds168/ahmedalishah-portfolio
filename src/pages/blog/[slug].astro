@@ -13,61 +13,245 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
+const allPosts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+const related = allPosts
+  .filter(p => p.id !== post.id)
+  .sort((a, b) => {
+    const aSame = a.data.category === post.data.category ? 0 : 1;
+    const bSame = b.data.category === post.data.category ? 0 : 1;
+    return aSame - bSame;
+  })
+  .slice(0, 3);
+
 function readTime(body: string) {
   const words = body.trim().split(/\s+/).length;
   return Math.max(1, Math.round(words / 200));
 }
-
 const rt = readTime(post.body || '');
+const wordCount = (post.body || '').trim().split(/\s+/).length;
+
 const catColorStyle = post.data.categoryColor === 'signal' ? 'var(--color-signal)' : post.data.categoryColor;
+const pageUrl = new URL(`/blog/${post.id}`, Astro.site).toString();
+const ogImage = `/images/og/${post.id}.png`;
+const ogImageAbs = new URL(ogImage, Astro.site).toString();
+
+const dateISO = post.data.pubDate.toISOString();
+const dateHuman = post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.excerpt,
+  "image": ogImageAbs,
+  "datePublished": dateISO,
+  "dateModified": dateISO,
+  "wordCount": wordCount,
+  "keywords": [post.data.categoryLabel, ...(post.data.stack || [])].join(', '),
+  "articleSection": post.data.categoryLabel,
+  "inLanguage": "en",
+  "url": pageUrl,
+  "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
+  "author": {
+    "@type": "Person",
+    "name": "Syed Ahmed Ali Shah",
+    "url": new URL('/about', Astro.site).toString(),
+    "jobTitle": "Software Developer",
+    "sameAs": ["https://github.com/Ahmeds168", "https://linkedin.com/in/syed-ahmed-ali-shah-477936b4"]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Syed Ahmed Ali Shah",
+    "url": Astro.site?.toString()
+  }
+};
+
+const encodedUrl = encodeURIComponent(pageUrl);
+const encodedTitle = encodeURIComponent(post.data.title);
 ---
-<Layout title={`${post.data.title} — Ahmed Ali Shah`} description={post.data.excerpt} activePage="blog">
+<Layout
+  title={`${post.data.title} — Syed Ahmed Ali Shah`}
+  description={post.data.excerpt}
+  activePage="blog"
+  ogImage={ogImage}
+  ogType="article"
+>
+  <Fragment slot="head">
+    <meta property="article:published_time" content={dateISO} />
+    <meta property="article:modified_time" content={dateISO} />
+    <meta property="article:author" content="Syed Ahmed Ali Shah" />
+    <meta property="article:section" content={post.data.categoryLabel} />
+    {(post.data.stack || []).map(tag => <meta property="article:tag" content={tag} />)}
+    <meta name="keywords" content={[post.data.categoryLabel, ...(post.data.stack || [])].join(', ')} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </Fragment>
 
-<div class="max-w-[800px] mx-auto px-5 lg:px-8 bg-ink text-paper font-body">
+  <div id="readProgress" class="fixed top-0 left-0 h-[3px] bg-signal z-[60] transition-[width] duration-100" style="width:0%"></div>
 
-  <section class="pt-10 pb-2">
-    <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
-    <div class="flex flex-wrap items-center gap-3 mt-5">
-      <span
-        class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]"
-        style={`background:${catColorStyle}1A;color:${catColorStyle};`}
-      >
-        <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
-        {post.data.categoryLabel}
-      </span>
-      <span class="flex items-center gap-1 font-mono text-[11px] text-muted2">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-        {rt} min read
-      </span>
-    </div>
-    <h1 class="font-serif text-4xl md:text-5xl tracking-tight mt-4 leading-[1.1]">{post.data.title}</h1>
-    <p class="font-mono text-[12px] text-muted2 mt-3">{post.data.metaLine}</p>
-  </section>
+  <article class="max-w-[720px] mx-auto px-5 lg:px-6 bg-ink text-paper font-body">
 
-  <section class="pt-6">
-    <img src={post.data.banner} alt="" class="w-full rounded-xl border border-line" />
-  </section>
+    <header class="pt-10 pb-2">
+      <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
 
-  <section>
-    <div class="article-body">
-      <Content />
-    </div>
-  </section>
+      <div class="flex flex-wrap items-center gap-3 mt-6">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={`background:${catColorStyle}1A;color:${catColorStyle};`}>
+          <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
+          {post.data.categoryLabel}
+        </span>
+      </div>
 
-  <section class="pt-4 pb-16">
-    <div class="bg-card p-6 rounded-xl border border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="w-11 h-11 rounded-full bg-signal flex items-center justify-center font-display font-bold text-ink shrink-0">AS</div>
-        <div>
-          <div class="font-display font-semibold text-paper text-sm">Ahmed Ali Shah</div>
-          <div class="font-mono text-[11px] text-muted2">Software Developer — full-stack, blockchain &amp; AI</div>
+      <h1 class="font-serif text-4xl md:text-[46px] tracking-tight mt-4 leading-[1.12]">{post.data.title}</h1>
+      <p class="text-muted text-lg leading-relaxed mt-4">{post.data.excerpt}</p>
+
+      <div class="flex items-center justify-between flex-wrap gap-4 mt-7 py-5 border-y border-line">
+        <div class="flex items-center gap-3">
+          <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" width="44" height="44" class="w-11 h-11 rounded-full object-cover" />
+          <div class="flex flex-col">
+            <a href="/about" class="font-display font-semibold text-paper text-[15px] hover:text-signal transition-colors">Syed Ahmed Ali Shah</a>
+            <span class="font-mono text-[11.5px] text-muted2">
+              <time datetime={dateISO}>{dateHuman}</time> · {rt} min read
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2" aria-label="Share this article">
+          <a class="share-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a class="share-btn" href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener" aria-label="Share on X" title="Share on X">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.7-8.8L1 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L6.4 3.9H4.5L17.7 20z"/></svg>
+          </a>
+          <a class="share-btn" href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`} target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          </a>
+          <button class="share-btn" id="copyLinkBtn" type="button" aria-label="Copy link" title="Copy link">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+          </button>
+          <button class="share-btn hidden" id="nativeShareBtn" type="button" aria-label="Share" title="Share">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+          </button>
         </div>
       </div>
-      <a href="/contact" class="inline-flex items-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap">
-        Get in touch →
-      </a>
-    </div>
-  </section>
-</div>
+    </header>
 
+    <figure class="pt-8">
+      <img src={post.data.banner} alt={`Illustration for: ${post.data.title}`} width="1200" height="400" class="w-full rounded-xl border border-line" />
+    </figure>
+
+    <section class="article-body article-body-medium">
+      <Content />
+    </section>
+
+    <footer class="mt-14 pt-8 border-t border-line">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="flex flex-wrap gap-2">
+          {(post.data.stack || []).map(tag => (
+            <span class="font-mono text-[11px] text-muted2 bg-card2 border border-line px-2.5 py-1 rounded-full">{tag}</span>
+          ))}
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-[11px] text-muted2 mr-1">Share</span>
+          <a class="share-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a class="share-btn" href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener" aria-label="Share on X">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.7-8.8L1 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L6.4 3.9H4.5L17.7 20z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-10 bg-card p-6 rounded-xl border border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        <div class="flex items-center gap-4">
+          <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" width="56" height="56" class="w-14 h-14 rounded-full object-cover shrink-0" />
+          <div>
+            <div class="font-mono text-[10.5px] text-muted2 uppercase tracking-widest mb-1">Written by</div>
+            <div class="font-serif text-lg text-paper">Syed Ahmed Ali Shah</div>
+            <div class="text-muted text-sm mt-0.5">Software developer — full-stack, blockchain &amp; applied AI. I write about the reasoning behind projects, not tutorials.</div>
+          </div>
+        </div>
+        <a href="/contact" class="inline-flex items-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap shrink-0">
+          Get in touch →
+        </a>
+      </div>
+    </footer>
+  </article>
+
+  {related.length > 0 && (
+    <aside class="max-w-[1120px] mx-auto px-5 lg:px-8 pt-16 pb-20 bg-ink text-paper font-body" aria-label="Related articles">
+      <div class="flex items-center gap-2 mb-6">
+        <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
+        <span class="font-mono text-[11px] text-signal uppercase tracking-widest">Keep reading</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {related.map(r => {
+          const rColor = r.data.categoryColor === 'signal' ? 'var(--color-signal)' : r.data.categoryColor;
+          return (
+            <a href={`/blog/${r.id}`} class="group bg-card border border-line hover:border-signal rounded-xl overflow-hidden transition-colors no-underline flex flex-col">
+              <img src={r.data.banner} alt="" width="1200" height="400" class="w-full aspect-[3/1] object-cover" loading="lazy" />
+              <div class="p-5 flex flex-col gap-2 flex-1">
+                <span class="font-mono text-[10.5px]" style={`color:${rColor}`}>{r.data.categoryLabel}</span>
+                <h3 class="font-serif text-[17px] text-paper leading-snug group-hover:text-signal transition-colors">{r.data.title}</h3>
+                <span class="font-mono text-[11px] text-muted2 mt-auto pt-2">{readTime(r.body || '')} min read</span>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </aside>
+  )}
+
+  <style is:global>
+    .share-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s ease,color .2s ease,background .2s ease;}
+    .share-btn:hover{border-color:var(--signal);color:var(--signal);}
+    .article-body-medium{margin-top:36px;font-size:18px;line-height:1.75;color:var(--muted);}
+    .article-body-medium p{margin:0 0 26px;}
+    .article-body-medium h2{font-family:'Newsreader',serif;font-size:28px;color:var(--paper);margin:44px 0 16px;line-height:1.25;}
+    .article-body-medium h3{font-family:'Newsreader',serif;font-size:22px;color:var(--paper);margin:34px 0 12px;}
+    .article-body-medium strong,.article-body-medium em{color:var(--paper);}
+    .article-body-medium a{color:var(--signal);text-decoration:underline;text-underline-offset:2px;}
+    .article-body-medium blockquote{border-left:3px solid var(--signal);padding:4px 0 4px 20px;margin:28px 0;color:var(--paper);font-style:italic;font-family:'Newsreader',serif;font-size:20px;}
+    .article-body-medium ul,.article-body-medium ol{padding-left:24px;margin:0 0 26px;}
+    .article-body-medium li{margin-bottom:8px;}
+    .article-body-medium code{font-family:'JetBrains Mono',monospace;font-size:0.9em;background:var(--card-2);padding:2px 6px;border-radius:4px;color:var(--paper);}
+    .article-body-medium pre{background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;margin:0 0 26px;}
+    .article-body-medium pre code{background:none;padding:0;}
+    .article-body-medium img{max-width:100%;border-radius:10px;}
+    @media (max-width:640px){
+      .article-body-medium{font-size:17px;}
+      .article-body-medium h2{font-size:24px;}
+    }
+  </style>
+
+  <script>
+    const bar = document.getElementById('readProgress');
+    const article = document.querySelector('article');
+    function updateProgress() {
+      if (!bar || !article) return;
+      const rect = article.getBoundingClientRect();
+      const total = article.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(total, 1));
+      bar.style.width = `${(scrolled / Math.max(total, 1)) * 100}%`;
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    const copyBtn = document.getElementById('copyLinkBtn');
+    copyBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        copyBtn.setAttribute('title', 'Copied!');
+        copyBtn.classList.add('!border-signal', '!text-signal');
+        setTimeout(() => { copyBtn.setAttribute('title', 'Copy link'); copyBtn.classList.remove('!border-signal', '!text-signal'); }, 1600);
+      } catch {}
+    });
+
+    const nativeBtn = document.getElementById('nativeShareBtn');
+    if (nativeBtn && typeof navigator.share === 'function') {
+      nativeBtn.classList.remove('hidden');
+      nativeBtn.addEventListener('click', () => {
+        navigator.share({ title: document.title, url: window.location.href }).catch(() => {});
+      });
+    }
+  </script>
 </Layout>

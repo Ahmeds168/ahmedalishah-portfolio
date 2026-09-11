@@ -6,6 +6,7 @@ categoryLabel: "AI & Applied Engineering"
 categoryColor: "#FF5CA8"
 banner: "/images/banner-breach.svg"
 metaLine: "Notes · Industry incident analysis"
+pubDate: 2026-09-10
 order: 4
 stack: ["AI Agents", "AppSec", "Incident Response"]
 pullQuote: "Detection didn't fail here. Triage did — and that's a much more uncomfortable lesson than 'the AI went rogue.'"

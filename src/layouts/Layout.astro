@@ -5,12 +5,20 @@ interface Props {
   title: string;
   description?: string;
   activePage?: 'home' | 'about' | 'projects' | 'blog' | 'contact';
+  ogImage?: string;
+  ogType?: 'website' | 'article';
 }
 
-const { title, description = "Software Developer — full-stack, blockchain & AI. Portfolio of Syed Ahmed Ali Shah.", activePage } = Astro.props;
+const {
+  title,
+  description = "Software Developer — full-stack, blockchain & AI. Portfolio of Syed Ahmed Ali Shah.",
+  activePage,
+  ogImage = '/images/og-image.png',
+  ogType = 'website',
+} = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL('/images/og-image.png', Astro.site);
+const ogImageURL = new URL(ogImage, Astro.site);
 
 const navLinks = [
   { href: '/', label: 'Home', key: 'home' },
@@ -31,12 +39,15 @@ const navLinks = [
   <link rel="canonical" href={canonicalURL} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content={ogType} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:image" content={ogImageURL} />
   <meta property="og:site_name" content="Syed Ahmed Ali Shah" />
+  <meta name="author" content="Syed Ahmed Ali Shah" />
+
+  <slot name="head" />
 
   <meta name="google-site-verification" content="K3dnbx54uUMbwm_4kuaA5Uhmd_93XKVKSFD4WUdaP6M" />
 

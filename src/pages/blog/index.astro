@@ -62,9 +62,15 @@ function tagStyle(color: string) {
               <span class="w-1.5 h-1.5 rounded-full" style={`background:${post.data.categoryColor === 'signal' ? 'var(--color-signal)' : post.data.categoryColor}`}></span>
               {post.data.categoryLabel}
             </span>
-            <span class="flex items-center gap-1 font-mono text-[11px] text-muted2">
-              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-              {readTime(post.body || '')} min read
+            <span class="flex items-center gap-3 font-mono text-[11px] text-muted2">
+              <span class="flex items-center gap-1">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
+              </span>
+              <span class="flex items-center gap-1">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                {readTime(post.body || '')} min read
+              </span>
             </span>
           </div>
 

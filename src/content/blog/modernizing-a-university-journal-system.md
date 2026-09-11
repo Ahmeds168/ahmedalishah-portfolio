@@ -6,6 +6,7 @@ categoryLabel: "Systems & Infrastructure"
 categoryColor: "#5B8CFF"
 banner: "/images/banner-ojs.svg"
 metaLine: "Notes · Software Development Intern, Sukkur IBA University"
+pubDate: 2026-08-29
 order: 2
 stack: ["OJS", "Sysadmin"]
 ---
