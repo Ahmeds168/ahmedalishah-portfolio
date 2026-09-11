@@ -96,6 +96,8 @@ header.nav{
 .about-card p{color:var(--muted);margin:0;font-size:15.5px;}
 .about-card p + p{margin-top:14px;}
 .about-card .tag{color:var(--signal);}
+.inline-link{color:var(--signal);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:1px;}
+.inline-link:hover{text-decoration-thickness:2px;}
 
 .pill-row{display:flex;flex-wrap:wrap;gap:8px;}
 .pill{
