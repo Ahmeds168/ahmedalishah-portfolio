@@ -15,6 +15,10 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [react(), sitemap()],
 
+  build: {
+    inlineStylesheets: 'always',
+  },
+
   vite: {
     plugins: [tailwindcss()]
   }
