@@ -23,7 +23,7 @@ const catColorStyle = post.data.categoryColor === 'signal' ? 'var(--color-signal
 ---
 <Layout title={`${post.data.title} — Ahmed Ali Shah`} description={post.data.excerpt} activePage="blog">
 
-<main class="max-w-[800px] mx-auto px-5 lg:px-8 bg-ink text-paper font-body">
+<div class="max-w-[800px] mx-auto px-5 lg:px-8 bg-ink text-paper font-body">
 
   <section class="pt-10 pb-2">
     <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
@@ -68,6 +68,6 @@ const catColorStyle = post.data.categoryColor === 'signal' ? 'var(--color-signal
       </a>
     </div>
   </section>
-</main>
+</div>
 
 </Layout>
