@@ -20,6 +20,12 @@ const accents: Record<string, string> = {
   'Groq Chat App': '#0891B2',
 };
 
+const screenshots: Record<string, string> = {
+  'Decentralized Document Notary': '/images/projects/notary.webp',
+  'On-Chain Voting dApp': '/images/projects/voting.webp',
+  'Groq Chat App': '/images/projects/groq-chat.webp',
+};
+
 // Experience: split the combined "meta" string into period + location
 function splitMeta(meta: string) {
   const [period, ...rest] = meta.split('·').map(s => s.trim());
@@ -85,6 +91,7 @@ const certs = resume.certificates;
           url={p.url}
           tag={p.tag}
           accent={accents[p.name] ?? '#2563EB'}
+          screenshot={screenshots[p.name] ?? null}
         />
       ))}
     </div>
@@ -98,6 +105,7 @@ const certs = resume.certificates;
         tag={featured.tag}
         featured={true}
         accent={accents[featured.name] ?? '#2563EB'}
+        screenshot={screenshots[featured.name] ?? null}
       />
     </div>
 

@@ -7,8 +7,9 @@ interface Props {
   tag?: string | null;
   featured?: boolean;
   accent?: string;
+  screenshot?: string | null;
 }
-const { name, desc, stack, url, tag, featured = false, accent = '#2563EB' } = Astro.props;
+const { name, desc, stack, url, tag, featured = false, accent = '#2563EB', screenshot = null } = Astro.props;
 
 const initials = name
   .replace(/[^A-Za-z ]/g, '')
@@ -23,8 +24,18 @@ const isRepo = !!url && url.includes('github.com');
 const linkLabel = isRepo ? 'View source' : 'View live demo';
 ---
 <article class={`pcard ${featured ? 'pcard-featured' : ''}`}>
-  <div class="pcard-preview" style={`--tint:${accent}`} aria-hidden="true">
-    <span class="pcard-monogram">{initials}</span>
+  <div class="pcard-preview" style={`--tint:${accent}`}>
+    {screenshot ? (
+      <img
+        class="pcard-screenshot"
+        src={screenshot}
+        alt={`Screenshot of the ${name} interface`}
+        width="1000" height="720"
+        loading="lazy" decoding="async"
+      />
+    ) : (
+      <span class="pcard-monogram" aria-hidden="true">{initials}</span>
+    )}
   </div>
 
   <div class="pcard-body">
@@ -73,7 +84,12 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
     display:flex;align-items:center;justify-content:center;
     overflow:hidden;
   }
-  .pcard-preview::before{
+  .pcard-screenshot{
+    width:100%;height:100%;object-fit:cover;object-position:top;
+    transition:transform .4s ease;
+  }
+  .pcard:hover .pcard-screenshot{transform:scale(1.035);}
+  .pcard-preview:not(:has(.pcard-screenshot))::before{
     content:"";position:absolute;inset:0;
     background-image:
       linear-gradient(color-mix(in srgb, var(--tint) 12%, transparent) 1px, transparent 1px),

@@ -17,6 +17,12 @@ const accents: Record<string, string> = {
   'Campus Management Solution': '#B45309',
 };
 
+const screenshots: Record<string, string> = {
+  'Decentralized Document Notary': '/images/projects/notary.webp',
+  'On-Chain Voting dApp': '/images/projects/voting.webp',
+  'Groq Chat App': '/images/projects/groq-chat.webp',
+};
+
 function initials(name: string) {
   return name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean)
     .slice(0, 2).map(w => w[0]).join('').toUpperCase();
@@ -50,8 +56,18 @@ function linkLabel(url: string) {
     <div class="plist">
       {projects.map((p, i) => (
         <article class="prow reveal">
-          <div class="prow-visual" style={`--tint:${accents[p.name] ?? '#2563EB'}`} aria-hidden="true">
-            <span>{initials(p.name)}</span>
+          <div class="prow-visual" style={`--tint:${accents[p.name] ?? '#2563EB'}`}>
+            {screenshots[p.name] ? (
+              <img
+                class="prow-screenshot"
+                src={screenshots[p.name]}
+                alt={`Screenshot of the ${p.name} interface`}
+                width="1000" height="720"
+                loading="lazy" decoding="async"
+              />
+            ) : (
+              <span aria-hidden="true">{initials(p.name)}</span>
+            )}
           </div>
 
           <div class="prow-body">
@@ -108,6 +124,12 @@ function linkLabel(url: string) {
       linear-gradient(90deg, color-mix(in srgb, var(--tint) 12%, transparent) 1px, transparent 1px);
     background-size:26px 26px;opacity:.5;
   }
+  .prow-visual:has(.prow-screenshot)::before{display:none;}
+  .prow-screenshot{
+    position:relative;width:100%;height:100%;object-fit:cover;object-position:top;
+    transition:transform .4s ease;
+  }
+  .prow:hover .prow-screenshot{transform:scale(1.03);}
   .prow-visual span{
     position:relative;font-family:var(--font-display);font-size:44px;font-weight:700;
     letter-spacing:-0.03em;color:color-mix(in srgb, var(--tint) 62%, #fff);
