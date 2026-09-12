@@ -1,6 +1,6 @@
 ---
-interface Props { title: string; issuer: string; date: string; url?: string | null }
-const { title, issuer, date, url } = Astro.props;
+interface Props { title: string; issuer: string; date: string; url?: string | null; image?: string | null }
+const { title, issuer, date, url, image } = Astro.props;
 const Tag = url ? 'a' : 'div';
 ---
 <Tag
@@ -9,21 +9,35 @@ const Tag = url ? 'a' : 'div';
   target={url ? '_blank' : undefined}
   rel={url ? 'noopener' : undefined}
 >
-  <div class="cert-top">
-    <h3>{title}</h3>
-    {url && <span class="cert-arrow" aria-hidden="true">↗</span>}
+  {image ? (
+    <img class="cert-thumb" src={image} alt={`${title} certificate`} width="320" height="221" loading="lazy" decoding="async" />
+  ) : (
+    <div class="cert-thumb cert-thumb-placeholder" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/>
+      </svg>
+    </div>
+  )}
+  <div class="cert-body">
+    <div class="cert-top">
+      <h3>{title}</h3>
+      {url && <span class="cert-arrow" aria-hidden="true">↗</span>}
+    </div>
+    <p class="cert-meta">{issuer}</p>
+    <span class="cert-date">{date}</span>
   </div>
-  <p class="cert-meta">{issuer}</p>
-  <span class="cert-date">{date}</span>
 </Tag>
 
 <style>
   .cert{
     display:block;background:var(--card);border:1px solid var(--line);
-    border-radius:12px;padding:20px;
+    border-radius:12px;overflow:hidden;
     transition:border-color .2s ease,transform .2s ease;
   }
   a.cert:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .cert-thumb{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--subtle);display:block;}
+  .cert-thumb-placeholder{display:flex;align-items:center;justify-content:center;color:var(--muted);}
+  .cert-body{padding:16px 20px 20px;}
   .cert-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
   .cert h3{font-size:15.5px;line-height:1.4;letter-spacing:-0.01em;}
   .cert-arrow{color:var(--muted);font-size:14px;flex-shrink:0;}
