@@ -1,0 +1,43 @@
+---
+interface Props { period: string; org: string; role: string; location?: string; bullets: string[]; stack?: string[] }
+const { period, org, role, location, bullets, stack = [] } = Astro.props;
+---
+<div class="exp">
+  <div class="exp-period">
+    <span>{period}</span>
+    {location && <span class="exp-loc">{location}</span>}
+  </div>
+  <div class="exp-main">
+    <h3>{role}</h3>
+    <p class="exp-org">{org}</p>
+    <ul class="exp-bullets">
+      {bullets.map(b => <li>{b}</li>)}
+    </ul>
+    {stack.length > 0 && (
+      <div class="tag-row exp-stack">
+        {stack.map(s => <span class="tag">{s}</span>)}
+      </div>
+    )}
+  </div>
+</div>
+
+<style>
+  .exp{
+    display:grid;grid-template-columns:210px 1fr;gap:32px;
+    padding:34px 0;border-top:1px solid var(--line);
+  }
+  .exp-period{display:flex;flex-direction:column;gap:4px;}
+  .exp-period span:first-child{
+    font-family:var(--font-mono);font-size:13px;font-weight:500;color:var(--ink);
+  }
+  .exp-loc{font-size:13px;color:var(--muted);}
+  .exp-main h3{font-size:20px;letter-spacing:-0.02em;}
+  .exp-org{margin:4px 0 0;font-size:15.5px;color:var(--accent);font-weight:500;}
+  .exp-bullets{margin:14px 0 0;padding-left:18px;}
+  .exp-bullets li{font-size:15.5px;line-height:1.65;color:var(--muted);margin-bottom:6px;}
+  .exp-stack{margin-top:16px;}
+  @media (max-width:768px){
+    .exp{grid-template-columns:1fr;gap:12px;padding:28px 0;}
+    .exp-period{flex-direction:row;gap:12px;align-items:center;}
+  }
+</style>

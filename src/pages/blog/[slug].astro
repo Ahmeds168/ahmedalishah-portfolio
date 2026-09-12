@@ -86,12 +86,12 @@ const encodedTitle = encodeURIComponent(post.data.title);
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
-  <div id="readProgress" class="fixed top-0 left-0 h-[3px] bg-signal z-[60] transition-[width] duration-100" style="width:0%"></div>
+  <div id="readProgress" class="fixed top-0 left-0 h-[3px] bg-accent z-[60] transition-[width] duration-100" style="width:0%"></div>
 
-  <article class="max-w-[720px] mx-auto px-5 lg:px-6 bg-ink text-paper font-body">
+  <article class="max-w-[720px] mx-auto px-5 lg:px-6 bg-canvas text-ink font-body">
 
     <header class="pt-10 pb-2">
-      <a class="font-mono text-[12px] text-signal hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
+      <a class="font-mono text-[12px] text-accent hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
 
       <div class="flex flex-wrap items-center gap-3 mt-6">
         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={`background:${catColorStyle}1A;color:${catColorStyle};`}>
@@ -100,15 +100,15 @@ const encodedTitle = encodeURIComponent(post.data.title);
         </span>
       </div>
 
-      <h1 class="font-serif text-4xl md:text-[46px] tracking-tight mt-4 leading-[1.12]">{post.data.title}</h1>
+      <h1 class="font-display text-4xl md:text-[46px] tracking-tight mt-4 leading-[1.12]">{post.data.title}</h1>
       <p class="text-muted text-lg leading-relaxed mt-4">{post.data.excerpt}</p>
 
       <div class="flex items-center justify-between flex-wrap gap-4 mt-7 py-5 border-y border-line">
         <div class="flex items-center gap-3">
           <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" width="44" height="44" class="w-11 h-11 rounded-full object-cover" />
           <div class="flex flex-col">
-            <a href="/about" class="font-display font-semibold text-paper text-[15px] hover:text-signal transition-colors">Syed Ahmed Ali Shah</a>
-            <span class="font-mono text-[11.5px] text-muted2">
+            <a href="/about" class="font-display font-semibold text-ink text-[15px] hover:text-accent transition-colors">Syed Ahmed Ali Shah</a>
+            <span class="font-mono text-[11.5px] text-muted">
               <time datetime={dateISO}>{dateHuman}</time> · {rt} min read
             </span>
           </div>
@@ -146,11 +146,11 @@ const encodedTitle = encodeURIComponent(post.data.title);
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex flex-wrap gap-2">
           {(post.data.stack || []).map(tag => (
-            <span class="font-mono text-[11px] text-muted2 bg-card2 border border-line px-2.5 py-1 rounded-full">{tag}</span>
+            <span class="font-mono text-[11px] text-muted bg-subtle border border-line px-2.5 py-1 rounded-full">{tag}</span>
           ))}
         </div>
         <div class="flex items-center gap-2">
-          <span class="font-mono text-[11px] text-muted2 mr-1">Share</span>
+          <span class="font-mono text-[11px] text-muted mr-1">Share</span>
           <a class="share-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`} target="_blank" rel="noopener" aria-label="Share on LinkedIn">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
           </a>
@@ -164,12 +164,12 @@ const encodedTitle = encodeURIComponent(post.data.title);
         <div class="flex items-center gap-4">
           <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" width="56" height="56" class="w-14 h-14 rounded-full object-cover shrink-0" />
           <div>
-            <div class="font-mono text-[10.5px] text-muted2 uppercase tracking-widest mb-1">Written by</div>
-            <div class="font-serif text-lg text-paper">Syed Ahmed Ali Shah</div>
+            <div class="font-mono text-[10.5px] text-muted uppercase tracking-widest mb-1">Written by</div>
+            <div class="font-display text-lg text-ink">Syed Ahmed Ali Shah</div>
             <div class="text-muted text-sm mt-0.5">Software developer — full-stack, blockchain &amp; applied AI. I write about the reasoning behind projects, not tutorials.</div>
           </div>
         </div>
-        <a href="/contact" class="inline-flex items-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap shrink-0">
+        <a href="/contact" class="inline-flex items-center gap-2 bg-accent text-white hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap shrink-0">
           Get in touch →
         </a>
       </div>
@@ -177,21 +177,21 @@ const encodedTitle = encodeURIComponent(post.data.title);
   </article>
 
   {related.length > 0 && (
-    <aside class="max-w-[1120px] mx-auto px-5 lg:px-8 pt-16 pb-20 bg-ink text-paper font-body" aria-label="Related articles">
+    <aside class="max-w-[1120px] mx-auto px-5 lg:px-8 pt-16 pb-20 bg-canvas text-ink font-body" aria-label="Related articles">
       <div class="flex items-center gap-2 mb-6">
-        <span class="inline-block w-2 h-2 rounded-full bg-signal"></span>
-        <span class="font-mono text-[11px] text-signal uppercase tracking-widest">Keep reading</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
+        <span class="font-mono text-[11px] text-accent uppercase tracking-widest">Keep reading</span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         {related.map(r => {
           const rColor = r.data.categoryColor === 'signal' ? 'var(--color-signal)' : r.data.categoryColor;
           return (
-            <a href={`/blog/${r.id}`} class="group bg-card border border-line hover:border-signal rounded-xl overflow-hidden transition-colors no-underline flex flex-col">
+            <a href={`/blog/${r.id}`} class="group bg-card border border-line hover:border-accent rounded-xl overflow-hidden transition-colors no-underline flex flex-col">
               <img src={r.data.banner} alt="" width="1200" height="400" class="w-full aspect-[3/1] object-cover" loading="lazy" />
               <div class="p-5 flex flex-col gap-2 flex-1">
                 <span class="font-mono text-[10.5px]" style={`color:${rColor}`}>{r.data.categoryLabel}</span>
-                <h3 class="font-serif text-[17px] text-paper leading-snug group-hover:text-signal transition-colors">{r.data.title}</h3>
-                <span class="font-mono text-[11px] text-muted2 mt-auto pt-2">{readTime(r.body || '')} min read</span>
+                <h3 class="font-display text-[17px] text-ink leading-snug group-hover:text-accent transition-colors">{r.data.title}</h3>
+                <span class="font-mono text-[11px] text-muted mt-auto pt-2">{readTime(r.body || '')} min read</span>
               </div>
             </a>
           );
@@ -201,19 +201,19 @@ const encodedTitle = encodeURIComponent(post.data.title);
   )}
 
   <style is:global>
-    .share-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--paper);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s ease,color .2s ease,background .2s ease;}
-    .share-btn:hover{border-color:var(--signal);color:var(--signal);}
+    .share-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s ease,color .2s ease,background .2s ease;}
+    .share-btn:hover{border-color:var(--accent);color:var(--accent);}
     .article-body-medium{margin-top:36px;font-size:18px;line-height:1.75;color:var(--muted);}
     .article-body-medium p{margin:0 0 26px;}
-    .article-body-medium h2{font-family:'Newsreader Variable',serif;font-size:28px;color:var(--paper);margin:44px 0 16px;line-height:1.25;}
-    .article-body-medium h3{font-family:'Newsreader Variable',serif;font-size:22px;color:var(--paper);margin:34px 0 12px;}
-    .article-body-medium strong,.article-body-medium em{color:var(--paper);}
-    .article-body-medium a{color:var(--signal);text-decoration:underline;text-underline-offset:2px;}
-    .article-body-medium blockquote{border-left:3px solid var(--signal);padding:4px 0 4px 20px;margin:28px 0;color:var(--paper);font-style:italic;font-family:'Newsreader Variable',serif;font-size:20px;}
+    .article-body-medium h2{font-size:28px;color:var(--ink);margin:44px 0 16px;line-height:1.25;}
+    .article-body-medium h3{font-size:22px;color:var(--ink);margin:34px 0 12px;}
+    .article-body-medium strong,.article-body-medium em{color:var(--ink);}
+    .article-body-medium a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
+    .article-body-medium blockquote{border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:28px 0;color:var(--ink);font-style:italic;font-size:20px;}
     .article-body-medium ul,.article-body-medium ol{padding-left:24px;margin:0 0 26px;}
     .article-body-medium li{margin-bottom:8px;}
-    .article-body-medium code{font-family:'JetBrains Mono Variable',monospace;font-size:0.9em;background:var(--card-2);padding:2px 6px;border-radius:4px;color:var(--paper);}
-    .article-body-medium pre{background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;margin:0 0 26px;}
+    .article-body-medium code{font-family:'JetBrains Mono Variable',monospace;font-size:0.9em;background:var(--subtle);padding:2px 6px;border-radius:4px;color:var(--ink);}
+    .article-body-medium pre{background:var(--subtle);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;margin:0 0 26px;}
     .article-body-medium pre code{background:none;padding:0;}
     .article-body-medium img{max-width:100%;border-radius:10px;}
     @media (max-width:640px){
@@ -241,8 +241,8 @@ const encodedTitle = encodeURIComponent(post.data.title);
       try {
         await navigator.clipboard.writeText(window.location.href);
         copyBtn.setAttribute('title', 'Copied!');
-        copyBtn.classList.add('!border-signal', '!text-signal');
-        setTimeout(() => { copyBtn.setAttribute('title', 'Copy link'); copyBtn.classList.remove('!border-signal', '!text-signal'); }, 1600);
+        copyBtn.classList.add('!border-accent', '!text-accent');
+        setTimeout(() => { copyBtn.setAttribute('title', 'Copy link'); copyBtn.classList.remove('!border-accent', '!text-accent'); }, 1600);
       } catch {}
     });
 

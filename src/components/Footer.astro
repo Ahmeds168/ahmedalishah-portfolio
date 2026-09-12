@@ -1,0 +1,15 @@
+---
+import resume from '../data/resume.json';
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="footer-inner">
+    <small>© {year} {resume.name}</small>
+    <small>Built with Astro &amp; deployed on Vercel</small>
+    <div class="footer-links">
+      <a href={resume.contact.github} target="_blank" rel="noopener">GitHub</a>
+      <a href={resume.contact.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a href={`mailto:${resume.contact.email}`}>Email</a>
+    </div>
+  </div>
+</footer>

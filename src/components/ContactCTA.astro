@@ -1,0 +1,41 @@
+---
+import resume from '../data/resume.json';
+---
+<section class="cta-wrap">
+  <div class="shell">
+    <div class="cta reveal">
+      <h2>Have a project in mind?<br />Let's build something useful.</h2>
+      <p>
+        Whether you're looking for a developer, need help with a web application,
+        automation, AI integration, or a blockchain project — or just want to talk
+        technology — feel free to reach out.
+      </p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href={`mailto:${resume.contact.email}`}>Send Email</a>
+        <a class="btn btn-secondary" href={resume.contact.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-secondary" href={resume.contact.github} target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-wrap{padding:0 0 96px;}
+  .cta{
+    background:linear-gradient(160deg,#EFF6FF 0%,#F8FAFF 60%,#FAFAF8 100%);
+    border:1px solid #DBEAFE;
+    border-radius:20px;
+    padding:64px 56px;
+    text-align:center;
+  }
+  .cta h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-0.025em;}
+  .cta p{
+    margin:18px auto 0;max-width:58ch;
+    font-size:16.5px;color:var(--muted);line-height:1.7;
+  }
+  .cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:32px;}
+  @media (max-width:640px){
+    .cta{padding:44px 24px;border-radius:16px;}
+    .cta-wrap{padding-bottom:64px;}
+  }
+</style>

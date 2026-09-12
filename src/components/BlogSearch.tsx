@@ -12,7 +12,7 @@ export default function BlogSearch() {
 
   return (
     <div className="bg-card p-5 rounded-xl border border-line flex flex-col gap-3">
-      <label htmlFor="post-search" className="font-mono text-[11px] text-muted2 uppercase tracking-wider">
+      <label htmlFor="post-search" className="font-mono text-[11px] text-muted uppercase tracking-wider">
         Search notes
       </label>
       <input
@@ -21,7 +21,7 @@ export default function BlogSearch() {
         placeholder="Search by title..."
         value={query}
         onChange={handleChange}
-        className="w-full bg-card2 text-paper placeholder:text-muted2 font-mono text-[13px] px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-signal"
+        className="w-full bg-subtle text-ink placeholder:text-muted font-mono text-[13px] px-3 py-2 rounded-lg border border-line focus:outline-none focus:border-accent"
       />
     </div>
   );

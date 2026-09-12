@@ -19,24 +19,24 @@ function tagStyle(color: string) {
 ---
 <Layout title="Blog — Syed Ahmed Ali Shah" description="Notes on the decisions behind Ahmed's projects — blockchain, systems administration, and applied AI." activePage="blog">
 
-<div class="max-w-[1120px] mx-auto px-5 lg:px-8 bg-ink text-paper font-body">
+<div class="max-w-[1120px] mx-auto px-5 lg:px-8 bg-canvas text-ink font-body">
 
   <section class="pt-12 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-4">
     <div class="flex flex-col gap-2">
       <div class="flex items-center gap-2">
-        <span class="inline-block w-2 h-2 rounded-full bg-signal animate-pulse"></span>
-        <span class="font-mono text-[11px] text-signal uppercase tracking-widest">Index // Notes</span>
+        <span class="inline-block w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+        <span class="font-mono text-[11px] text-accent uppercase tracking-widest">Index // Notes</span>
       </div>
-      <h1 class="font-serif text-4xl md:text-5xl tracking-tight leading-[1.1]">Notes from actually building the thing</h1>
+      <h1 class="font-display text-4xl md:text-5xl tracking-tight leading-[1.1]">Notes from actually building the thing</h1>
       <p class="text-muted max-w-[62ch]">Short write-ups on the decisions behind the projects — not tutorials, just the reasoning.</p>
     </div>
     <div class="flex items-center gap-3 self-start md:self-end shrink-0">
-      <div class="bg-card2 px-3 py-1.5 rounded-lg flex items-center gap-2 border border-line">
-        <span class="font-mono text-[11px] text-muted2">POSTS:</span>
-        <span class="font-mono text-[12px] text-paper">{String(posts.length).padStart(2, '0')}</span>
-        <span class="text-muted2 font-mono text-[11px]">/</span>
-        <span class="font-mono text-[11px] text-muted2">TOPICS:</span>
-        <span class="font-mono text-[12px] text-signal">{String(topics).padStart(2, '0')}</span>
+      <div class="bg-subtle px-3 py-1.5 rounded-lg flex items-center gap-2 border border-line">
+        <span class="font-mono text-[11px] text-muted">POSTS:</span>
+        <span class="font-mono text-[12px] text-ink">{String(posts.length).padStart(2, '0')}</span>
+        <span class="text-muted font-mono text-[11px]">/</span>
+        <span class="font-mono text-[11px] text-muted">TOPICS:</span>
+        <span class="font-mono text-[12px] text-accent">{String(topics).padStart(2, '0')}</span>
       </div>
     </div>
   </section>
@@ -51,7 +51,7 @@ function tagStyle(color: string) {
           data-slug={post.id}
           data-category={post.data.category}
           data-title={post.data.title}
-          class={`group relative overflow-hidden bg-card border border-line hover:border-signal ${i === 0 ? 'p-6 lg:p-8' : 'p-6'} rounded-xl transition-all duration-300 flex flex-col gap-4 no-underline`}
+          class={`group relative overflow-hidden bg-card border border-line hover:border-accent ${i === 0 ? 'p-6 lg:p-8' : 'p-6'} rounded-xl transition-all duration-300 flex flex-col gap-4 no-underline`}
         >
           {i === 0 && (
             <div class="absolute top-0 right-0 w-64 h-64 pointer-events-none rounded-tr-xl" style="background:radial-gradient(circle at top right, color-mix(in srgb, var(--color-signal) 12%, transparent), transparent 70%);"></div>
@@ -62,7 +62,7 @@ function tagStyle(color: string) {
               <span class="w-1.5 h-1.5 rounded-full" style={`background:${post.data.categoryColor === 'signal' ? 'var(--color-signal)' : post.data.categoryColor}`}></span>
               {post.data.categoryLabel}
             </span>
-            <span class="flex items-center gap-3 font-mono text-[11px] text-muted2">
+            <span class="flex items-center gap-3 font-mono text-[11px] text-muted">
               <span class="flex items-center gap-1">
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                 <time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</time>
@@ -74,30 +74,30 @@ function tagStyle(color: string) {
             </span>
           </div>
 
-          <h2 class={`relative font-serif ${i === 0 ? 'text-[28px]' : 'text-2xl'} text-paper group-hover:text-signal transition-colors leading-snug`}>
+          <h2 class={`relative font-display ${i === 0 ? 'text-[28px]' : 'text-2xl'} text-ink group-hover:text-accent transition-colors leading-snug`}>
             {post.data.title}
           </h2>
           <p class="relative text-muted leading-relaxed">{post.data.excerpt}</p>
 
           {post.data.codeSnippet && (
-            <div class="relative w-full bg-card2 rounded-lg p-4 flex flex-col gap-2 border border-line">
-              <div class="flex items-center justify-between font-mono text-[11px] text-muted2 pb-1">
+            <div class="relative w-full bg-subtle rounded-lg p-4 flex flex-col gap-2 border border-line">
+              <div class="flex items-center justify-between font-mono text-[11px] text-muted pb-1">
                 <div class="flex items-center gap-2">
                   <span class="w-2.5 h-2.5 rounded-full bg-line"></span>
                   <span class="w-2.5 h-2.5 rounded-full bg-line"></span>
                   <span class="w-2.5 h-2.5 rounded-full bg-line"></span>
                   <span class="ml-2 font-mono">{post.data.codeSnippet.filename}</span>
                 </div>
-                <span class="text-muted2 uppercase">illustrative example</span>
+                <span class="text-muted uppercase">illustrative example</span>
               </div>
-              <pre class="font-mono text-[13px] text-paper overflow-x-auto p-3 bg-ink rounded leading-relaxed"><code>{post.data.codeSnippet.code}</code></pre>
+              <pre class="font-mono text-[13px] text-ink overflow-x-auto p-3 bg-canvas rounded leading-relaxed"><code>{post.data.codeSnippet.code}</code></pre>
             </div>
           )}
 
           {post.data.pullQuote && (
-            <blockquote class="relative pl-4 py-2 border-l-2 border-signal/50 bg-card2/60 rounded-r-lg">
-              <p class="text-paper italic text-[15px]">"{post.data.pullQuote}"</p>
-              <span class="font-mono text-[11px] text-muted2">— from the post</span>
+            <blockquote class="relative pl-4 py-2 border-l-2 border-accent/50 bg-subtle/60 rounded-r-lg">
+              <p class="text-ink italic text-[15px]">"{post.data.pullQuote}"</p>
+              <span class="font-mono text-[11px] text-muted">— from the post</span>
             </blockquote>
           )}
 
@@ -105,16 +105,16 @@ function tagStyle(color: string) {
             {post.data.stack && (
               <div class="flex flex-wrap gap-2">
                 {post.data.stack.map(s => (
-                  <span class="font-mono text-[11px] text-muted2 bg-card2 border border-line px-2 py-1 rounded">{s}</span>
+                  <span class="font-mono text-[11px] text-muted bg-subtle border border-line px-2 py-1 rounded">{s}</span>
                 ))}
               </div>
             )}
             {i === 0 ? (
-              <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-card2 border border-line group-hover:border-signal group-hover:bg-signal group-hover:text-ink font-mono text-[12px] transition-all">
+              <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-subtle border border-line group-hover:border-accent group-hover:bg-accent group-hover:text-white font-mono text-[12px] transition-all">
                 Read the full post <span aria-hidden="true">→</span>
               </span>
             ) : (
-              <span class="font-mono text-[12px] text-signal inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+              <span class="font-mono text-[12px] text-accent inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                 Read the full post <span aria-hidden="true">→</span>
               </span>
             )}
@@ -122,7 +122,7 @@ function tagStyle(color: string) {
         </a>
       ))}
 
-      <p class="text-muted2 text-sm font-mono text-center pt-2">— that's everything so far, more notes as new projects ship —</p>
+      <p class="text-muted text-sm font-mono text-center pt-2">— that's everything so far, more notes as new projects ship —</p>
     </div>
 
     <aside class="lg:col-span-4 flex flex-col gap-8">
@@ -132,14 +132,14 @@ function tagStyle(color: string) {
         <div class="flex items-center gap-3">
           <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" class="w-12 h-12 rounded-full object-cover shrink-0" />
           <div class="flex flex-col min-w-0">
-            <span class="font-serif text-[17px] text-paper">Syed Ahmed Ali Shah</span>
-            <span class="font-mono text-[11px] text-signal">Software Developer</span>
+            <span class="font-display text-[17px] text-ink">Syed Ahmed Ali Shah</span>
+            <span class="font-mono text-[11px] text-accent">Software Developer</span>
           </div>
         </div>
         <p class="text-muted text-sm leading-relaxed">
           Full-stack, blockchain, and applied AI. I write about the reasoning behind projects, not tutorials.
         </p>
-        <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener" class="font-mono text-[11px] text-muted2 hover:text-signal transition-colors">
+        <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener" class="font-mono text-[11px] text-muted hover:text-accent transition-colors">
           github.com/Ahmeds168
         </a>
       </div>
@@ -147,10 +147,10 @@ function tagStyle(color: string) {
       <BlogTopicFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel }))} />
 
       <div class="bg-card p-6 rounded-xl border border-line flex flex-col gap-2">
-        <span class="font-mono text-[11px] text-signal uppercase tracking-widest">Direct</span>
-        <h4 class="font-serif text-xl text-paper">Want to work together?</h4>
+        <span class="font-mono text-[11px] text-accent uppercase tracking-widest">Direct</span>
+        <h4 class="font-display text-xl text-ink">Want to work together?</h4>
         <p class="text-muted text-sm">Freelance work, full-time roles, or just a question about a project.</p>
-        <a href="/contact" class="mt-2 inline-flex items-center justify-center gap-2 bg-signal text-ink hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity">
+        <a href="/contact" class="mt-2 inline-flex items-center justify-center gap-2 bg-accent text-white hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity">
           Get in touch →
         </a>
       </div>

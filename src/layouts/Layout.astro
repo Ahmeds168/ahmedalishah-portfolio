@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -20,13 +22,6 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL(ogImage, Astro.site);
 
-const navLinks = [
-  { href: '/', label: 'Home', key: 'home' },
-  { href: '/about', label: 'About', key: 'about' },
-  { href: '/projects', label: 'Projects', key: 'projects' },
-  { href: '/blog', label: 'Blog', key: 'blog' },
-  { href: '/contact', label: 'Contact', key: 'contact' },
-];
 ---
 
 <!DOCTYPE html>
@@ -64,24 +59,29 @@ const navLinks = [
 </head>
 <body>
 
-<header class="nav">
-  <div class="nav-inner">
-    <a class="nav-brand" href="/">Ahmed<span style="color:var(--signal)">.</span></a>
-    <nav class="nav-links">
-      {navLinks.map(link => (
-        <a href={link.href} class={activePage === link.key ? 'active' : ''}>{link.label}</a>
-      ))}
-    </nav>
-    <a class="nav-cta" href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">↓ Resume</a>
-  </div>
-</header>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<main>
+<Navbar activePage={activePage} />
+
+<main id="main">
 <slot /></main>
 
-<footer>
-  <div class="foot-line">built &amp; deployed by Ahmed · <a href="/contact">get in touch</a> · <a href="https://github.com/Ahmeds168" target="_blank" rel="noopener">github.com/Ahmeds168</a></div>
-</footer>
+<Footer />
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const items = document.querySelectorAll('.reveal');
+  if (prefersReduced) {
+    items.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(el => io.observe(el));
+  }
+</script>
 
 </body>
 </html>

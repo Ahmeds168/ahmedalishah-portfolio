@@ -1,0 +1,55 @@
+---
+interface Props { activePage?: string }
+const { activePage } = Astro.props;
+
+const links = [
+  { href: '/projects', label: 'Work', key: 'projects' },
+  { href: '/#experience', label: 'Experience', key: 'experience' },
+  { href: '/blog', label: 'Writing', key: 'blog' },
+  { href: '/about', label: 'About', key: 'about' },
+  { href: '/contact', label: 'Contact', key: 'contact' },
+];
+---
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">Ahmed<span>.</span></a>
+
+    <nav class="nav-links" aria-label="Primary">
+      {links.map(l => (
+        <a href={l.href} aria-current={activePage === l.key ? 'page' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+
+    <div class="nav-right">
+      <a class="nav-cta" href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">Resume ↗</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="17" x2="21" y2="17"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <nav aria-label="Mobile">
+    {links.map(l => <a href={l.href}>{l.label}</a>)}
+    <a href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">Resume ↗</a>
+  </nav>
+</div>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    menu.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+  }));
+</script>

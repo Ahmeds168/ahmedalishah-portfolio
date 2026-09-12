@@ -31,15 +31,15 @@ export default function BlogTopicFilters({ posts }: Props) {
   return (
     <div className="bg-card p-6 rounded-xl border border-line flex flex-col gap-3">
       <div className="flex items-center justify-between pb-1">
-        <span className="font-mono text-[11px] text-muted2 uppercase tracking-wider">Filter by topic</span>
-        <span className="font-mono text-[11px] text-muted2">{categoryOrder.length} topics</span>
+        <span className="font-mono text-[11px] text-muted uppercase tracking-wider">Filter by topic</span>
+        <span className="font-mono text-[11px] text-muted">{categoryOrder.length} topics</span>
       </div>
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => select('all')}
           className={`px-3 py-1 rounded-full font-mono text-[11px] transition-colors ${
-            activeTag === 'all' ? 'bg-signal text-ink font-medium' : 'bg-card2 border border-line text-paper hover:border-signal'
+            activeTag === 'all' ? 'bg-accent text-white font-medium' : 'bg-subtle border border-line text-ink hover:border-accent'
           }`}
         >
           All <span className="opacity-70">{String(counts.all ?? 0).padStart(2, '0')}</span>
@@ -50,7 +50,7 @@ export default function BlogTopicFilters({ posts }: Props) {
             type="button"
             onClick={() => select(cat)}
             className={`px-3 py-1 rounded-full font-mono text-[11px] flex items-center gap-1 transition-colors ${
-              activeTag === cat ? 'bg-signal text-ink font-medium' : 'bg-card2 border border-line text-paper hover:border-signal'
+              activeTag === cat ? 'bg-accent text-white font-medium' : 'bg-subtle border border-line text-ink hover:border-accent'
             }`}
           >
             <span className="capitalize">{cat}</span>

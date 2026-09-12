@@ -1,33 +1,140 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ContactCTA from '../components/ContactCTA.astro';
 import resume from '../data/resume.json';
+
+const projects = resume.projects;
+const liveCount = projects.filter(p => p.tag === 'live').length;
+
+const accents: Record<string, string> = {
+  'Decentralized Document Notary': '#2563EB',
+  'On-Chain Voting dApp': '#7C3AED',
+  'Groq Chat App': '#0891B2',
+  'Election System Using Blockchain (SISC)': '#4F46E5',
+  "Analyzing Students' Mental Health": '#059669',
+  'Pet Recognition (CNN)': '#DB2777',
+  'Campus Management Solution': '#B45309',
+};
+
+function initials(name: string) {
+  return name.replace(/[^A-Za-z ]/g, '').split(' ').filter(Boolean)
+    .slice(0, 2).map(w => w[0]).join('').toUpperCase();
+}
+function linkLabel(url: string) {
+  if (url.includes('github.com')) return url.includes('blob') ? 'View notebook' : 'View source';
+  return 'View live demo';
+}
 ---
-<Layout title="Projects — Syed Ahmed Ali Shah" activePage="projects">
+<Layout
+  title="Projects — Syed Ahmed Ali Shah"
+  description="Production web apps, smart contracts, and data-driven tools built by Syed Ahmed Ali Shah."
+  activePage="projects"
+>
 
-<div class="wrap">
+<section class="page-head">
+  <div class="shell">
+    <SectionHeader
+      kicker={`${projects.length} projects · ${liveCount} live`}
+      as="h1"
+      title="Selected work."
+      intro="Production web apps, decentralized smart contracts, and data-driven tools — built to actually run, not just demo."
+    />
+  </div>
+</section>
 
-  <section class="page-hero">
-    <div class="eyebrow">Projects</div>
-    <h1>Shipped, deployed, and still running.</h1>
-    <p class="lede">A closer look at the projects that took real design decisions — not just the one-liners from the resume.</p>
-  </section>
+<hr class="rule" />
 
-  <section>
-    {resume.projects.map(p => (
-      <div class="project-deep">
-        <h3>{p.name}</h3>
-        <div class="meta">{p.stack.join(' · ')}</div>
-        <p>{p.longDesc}</p>
-        {p.extra && <p>{p.extra}</p>}
-        {p.url && (
-          <a class="link" href={p.url} target="_blank" rel="noopener">
-            → {p.url.includes('github.com') ? (p.url.includes('blob') ? 'notebook on GitHub' : 'source on GitHub') : (p.tag === 'live' ? 'view live demo' : p.url)}
-          </a>
-        )}
-      </div>
-    ))}
-  </section>
+<section class="section-tight">
+  <div class="shell">
+    <div class="plist">
+      {projects.map((p, i) => (
+        <article class="prow reveal">
+          <div class="prow-visual" style={`--tint:${accents[p.name] ?? '#2563EB'}`} aria-hidden="true">
+            <span>{initials(p.name)}</span>
+          </div>
 
-</div>
+          <div class="prow-body">
+            <div class="prow-top">
+              <span class="prow-index">{String(i + 1).padStart(2, '0')}</span>
+              {p.tag === 'live' && <span class="prow-live"><span class="prow-dot"></span>Live</span>}
+            </div>
+
+            <h2>{p.name}</h2>
+            <p class="prow-desc">{p.longDesc}</p>
+            {p.extra && <p class="prow-extra">{p.extra}</p>}
+
+            <div class="tag-row prow-stack">
+              {p.stack.map(s => <span class="tag">{s}</span>)}
+            </div>
+
+            {p.url ? (
+              <a class="arrow-link prow-link" href={p.url} target="_blank" rel="noopener">
+                {linkLabel(p.url)} <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            ) : (
+              <span class="prow-nolink">Academic project — not publicly deployed</span>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<ContactCTA />
+
+<style>
+  .page-head{padding:72px 0 56px;}
+  @media (max-width:768px){ .page-head{padding:52px 0 40px;} }
+
+  .plist{display:flex;flex-direction:column;}
+  .prow{
+    display:grid;grid-template-columns:280px 1fr;gap:40px;
+    padding:44px 0;border-bottom:1px solid var(--line);
+  }
+  .prow:first-child{border-top:1px solid var(--line);}
+
+  .prow-visual{
+    position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;
+    border:1px solid var(--line);
+    background:linear-gradient(135deg, color-mix(in srgb, var(--tint) 10%, #fff) 0%, color-mix(in srgb, var(--tint) 4%, #fff) 100%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .prow-visual::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--tint) 12%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--tint) 12%, transparent) 1px, transparent 1px);
+    background-size:26px 26px;opacity:.5;
+  }
+  .prow-visual span{
+    position:relative;font-family:var(--font-display);font-size:44px;font-weight:700;
+    letter-spacing:-0.03em;color:color-mix(in srgb, var(--tint) 62%, #fff);
+    transition:transform .3s ease;
+  }
+  .prow:hover .prow-visual span{transform:scale(1.06);}
+
+  .prow-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+  .prow-index{font-family:var(--font-mono);font-size:12.5px;color:var(--muted);}
+  .prow-live{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:600;color:#15803D;
+    background:#F0FDF4;border:1px solid #BBF7D0;padding:3px 9px;border-radius:9999px;
+  }
+  .prow-dot{width:6px;height:6px;border-radius:50%;background:#16A34A;}
+
+  .prow-body h2{font-size:clamp(22px,2.4vw,28px);letter-spacing:-0.025em;}
+  .prow-desc{margin:14px 0 0;font-size:16.5px;line-height:1.7;color:var(--body);max-width:68ch;}
+  .prow-extra{margin:14px 0 0;font-size:15.5px;line-height:1.7;color:var(--muted);max-width:68ch;}
+  .prow-stack{margin-top:20px;}
+  .prow-link{margin-top:20px;}
+  .prow-nolink{display:block;margin-top:20px;font-size:14.5px;color:var(--muted);}
+
+  @media (max-width:860px){
+    .prow{grid-template-columns:1fr;gap:22px;padding:36px 0;}
+    .prow-visual{aspect-ratio:16/9;max-width:100%;}
+  }
+</style>
 
 </Layout>

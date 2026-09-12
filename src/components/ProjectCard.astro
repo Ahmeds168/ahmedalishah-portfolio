@@ -1,0 +1,121 @@
+---
+interface Props {
+  name: string;
+  desc: string;
+  stack: string[];
+  url?: string | null;
+  tag?: string | null;
+  featured?: boolean;
+  accent?: string;
+}
+const { name, desc, stack, url, tag, featured = false, accent = '#2563EB' } = Astro.props;
+
+const initials = name
+  .replace(/[^A-Za-z ]/g, '')
+  .split(' ')
+  .filter(Boolean)
+  .slice(0, 2)
+  .map(w => w[0])
+  .join('')
+  .toUpperCase();
+
+const isRepo = !!url && url.includes('github.com');
+const linkLabel = isRepo ? 'View source' : 'View live demo';
+---
+<article class={`pcard ${featured ? 'pcard-featured' : ''}`}>
+  <div class="pcard-preview" style={`--tint:${accent}`} aria-hidden="true">
+    <span class="pcard-monogram">{initials}</span>
+  </div>
+
+  <div class="pcard-body">
+    <div class="pcard-head">
+      <h3>{name}</h3>
+      {tag === 'live' && <span class="pcard-live"><span class="pcard-live-dot"></span>Live</span>}
+    </div>
+
+    <p class="pcard-desc">{desc}</p>
+
+    <div class="tag-row pcard-stack">
+      {stack.map(s => <span class="tag">{s}</span>)}
+    </div>
+
+    {url ? (
+      <a class="arrow-link pcard-link" href={url} target="_blank" rel="noopener">
+        {linkLabel} <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    ) : (
+      <span class="pcard-nolink">Academic / not publicly deployed</span>
+    )}
+  </div>
+</article>
+
+<style>
+  .pcard{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  }
+  .pcard:hover{
+    border-color:var(--line-strong);
+    transform:translateY(-3px);
+    box-shadow:0 8px 24px -12px rgba(17,24,39,0.16);
+  }
+
+  .pcard-preview{
+    position:relative;
+    aspect-ratio:16/9;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--tint) 10%, #fff) 0%, color-mix(in srgb, var(--tint) 4%, #fff) 100%);
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .pcard-preview::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--tint) 12%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--tint) 12%, transparent) 1px, transparent 1px);
+    background-size:28px 28px;
+    opacity:.5;
+  }
+  .pcard-monogram{
+    position:relative;
+    font-family:var(--font-display);
+    font-size:44px;font-weight:700;letter-spacing:-0.03em;
+    color:color-mix(in srgb, var(--tint) 62%, #fff);
+    transition:transform .3s ease;
+  }
+  .pcard:hover .pcard-monogram{transform:scale(1.06);}
+
+  .pcard-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .pcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .pcard-head h3{font-size:20px;letter-spacing:-0.02em;}
+  .pcard-live{
+    display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
+    font-size:12px;font-weight:600;color:#15803D;
+    background:#F0FDF4;border:1px solid #BBF7D0;
+    padding:3px 9px;border-radius:9999px;
+  }
+  .pcard-live-dot{width:6px;height:6px;border-radius:50%;background:#16A34A;}
+  .pcard-desc{margin:0;font-size:15.5px;line-height:1.65;color:var(--muted);flex:1;}
+  .pcard-stack{margin-top:2px;}
+  .pcard-link{margin-top:6px;}
+  .pcard-nolink{margin-top:6px;font-size:14px;color:var(--muted);}
+
+  /* Featured: side-by-side on desktop */
+  @media (min-width:900px){
+    .pcard-featured{flex-direction:row;}
+    .pcard-featured .pcard-preview{
+      aspect-ratio:auto;
+      flex:0 0 46%;
+      border-bottom:0;border-right:1px solid var(--line);
+    }
+    .pcard-featured .pcard-monogram{font-size:60px;}
+    .pcard-featured .pcard-body{padding:36px;justify-content:center;}
+    .pcard-featured .pcard-head h3{font-size:26px;}
+    .pcard-featured .pcard-desc{font-size:16.5px;}
+  }
+</style>

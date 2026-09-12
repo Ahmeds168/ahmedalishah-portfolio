@@ -2,44 +2,110 @@
 import Layout from '../layouts/Layout.astro';
 import resume from '../data/resume.json';
 ---
-<Layout title="Contact — Syed Ahmed Ali Shah" activePage="contact">
+<Layout
+  title="Contact — Syed Ahmed Ali Shah"
+  description="Get in touch with Syed Ahmed Ali Shah about freelance work, full-time roles, or a project."
+  activePage="contact"
+>
 
-<div class="wrap">
+<section class="page-head">
+  <div class="shell">
+    <div class="kicker">Contact</div>
+    <h1>Let's talk.</h1>
+    <p class="contact-intro">
+      Freelance work, full-time roles, or just a question about one of the
+      projects — all welcome. I usually reply within a day or two.
+    </p>
+  </div>
+</section>
 
-  <section class="page-hero">
-    <div class="eyebrow">Contact</div>
-    <h1>Say hello.</h1>
-    <p class="lede">Freelance work, full-time roles, or just a question about one of the projects — all welcome.</p>
-  </section>
+<hr class="rule" />
 
-  <section>
-    <form class="contact-form" action="https://formspree.io/f/mzebpedg" method="POST">
-      <div>
-        <label for="name">Name</label><br/>
-        <input type="text" id="name" name="name" required style="width:100%;margin-top:6px;">
-      </div>
-      <div>
-        <label for="email">Email</label><br/>
-        <input type="email" id="email" name="email" required style="width:100%;margin-top:6px;">
-      </div>
-      <div>
-        <label for="message">Message</label><br/>
-        <textarea id="message" name="message" required style="width:100%;margin-top:6px;"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:fit-content;">Send message →</button>
-      <div class="form-note">Goes straight to {resume.contact.email}. No spam, no newsletter.</div>
-    </form>
-  </section>
+<section class="section-tight">
+  <div class="shell">
+    <div class="contact-grid">
+      <form class="contact-form card" action="https://formspree.io/f/mzebpedg" method="POST">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary contact-submit">
+          Send message <span class="arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="contact-note">Goes straight to my inbox. No spam, no newsletter.</p>
+      </form>
 
-  <section>
-    <div class="eyebrow">Other Ways to Reach Me</div>
-    <div class="about-card">
-      <p>Email: <span class="tag">{resume.contact.email}</span></p>
-      <p>LinkedIn: <a href={resume.contact.linkedin} target="_blank" rel="noopener" class="inline-link">{resume.contact.linkedinLabel}</a></p>
-      <p>GitHub: <a href={resume.contact.github} target="_blank" rel="noopener" class="inline-link">{resume.contact.githubLabel}</a></p>
+      <aside class="contact-side">
+        <h2>Other ways to reach me</h2>
+        <ul class="contact-list">
+          <li>
+            <span>Email</span>
+            <a class="link" href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
+          </li>
+          <li>
+            <span>LinkedIn</span>
+            <a class="link" href={resume.contact.linkedin} target="_blank" rel="noopener">
+              {resume.contact.linkedinLabel}
+            </a>
+          </li>
+          <li>
+            <span>GitHub</span>
+            <a class="link" href={resume.contact.github} target="_blank" rel="noopener">
+              {resume.contact.githubLabel}
+            </a>
+          </li>
+          <li>
+            <span>Location</span>
+            <strong>{resume.contact.location}</strong>
+          </li>
+        </ul>
+
+        <div class="contact-resume">
+          <p>Prefer the short version?</p>
+          <a class="btn btn-secondary" href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">
+            Download Resume (PDF)
+          </a>
+        </div>
+      </aside>
     </div>
-  </section>
+  </div>
+</section>
 
-</div>
+<style>
+  .page-head{padding:72px 0 48px;}
+  .page-head h1{margin-top:14px;font-size:clamp(34px,4.6vw,52px);letter-spacing:-0.03em;}
+  .contact-intro{margin:18px 0 0;font-size:17.5px;color:var(--muted);max-width:56ch;line-height:1.7;}
+  @media (max-width:768px){ .page-head{padding:52px 0 36px;} }
+
+  .contact-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:start;}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr;gap:40px;} }
+
+  .contact-form{padding:32px;display:flex;flex-direction:column;gap:20px;}
+  .contact-submit{align-self:flex-start;margin-top:4px;}
+  .contact-note{margin:0;font-size:13.5px;color:var(--muted);}
+
+  .contact-side h2{font-size:19px;letter-spacing:-0.02em;}
+  .contact-list{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:18px;}
+  .contact-list li{display:flex;flex-direction:column;gap:3px;}
+  .contact-list span{
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .contact-list strong{font-size:15.5px;color:var(--ink);font-weight:500;}
+  .contact-list a{font-size:15.5px;word-break:break-word;}
+
+  .contact-resume{
+    margin-top:34px;padding-top:26px;border-top:1px solid var(--line);
+  }
+  .contact-resume p{margin:0 0 14px;font-size:15px;color:var(--muted);}
+</style>
 
 </Layout>

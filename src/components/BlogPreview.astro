@@ -1,0 +1,39 @@
+---
+interface Props { href: string; title: string; excerpt: string; date: Date; readTime: number; category: string }
+const { href, title, excerpt, date, readTime, category } = Astro.props;
+const formatted = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+const iso = date.toISOString().split('T')[0];
+---
+<a class="bpost" href={href}>
+  <div class="bpost-meta">
+    <time datetime={iso}>{formatted}</time>
+    <span aria-hidden="true">·</span>
+    <span>{readTime} min read</span>
+    <span aria-hidden="true">·</span>
+    <span class="bpost-cat">{category}</span>
+  </div>
+  <h3>{title}</h3>
+  <p>{excerpt}</p>
+  <span class="arrow-link">Read article <span class="arrow" aria-hidden="true">→</span></span>
+</a>
+
+<style>
+  .bpost{
+    display:block;padding:32px 0;border-top:1px solid var(--line);
+    transition:opacity .2s ease;
+  }
+  .bpost-meta{
+    display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+    font-family:var(--font-mono);font-size:12.5px;color:var(--muted);
+  }
+  .bpost-cat{color:var(--accent);}
+  .bpost h3{
+    margin:14px 0 0;font-size:clamp(21px,2.3vw,27px);
+    letter-spacing:-0.022em;line-height:1.28;max-width:40ch;
+    transition:color .2s ease;
+  }
+  .bpost:hover h3{color:var(--accent);}
+  .bpost p{margin:12px 0 16px;font-size:16px;color:var(--muted);max-width:66ch;line-height:1.65;}
+  .bpost .arrow{transition:transform .2s ease;}
+  .bpost:hover .arrow{transform:translateX(3px);}
+</style>

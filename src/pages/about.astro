@@ -1,34 +1,129 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ContactCTA from '../components/ContactCTA.astro';
+import resume from '../data/resume.json';
 ---
-<Layout title="About — Syed Ahmed Ali Shah" activePage="about">
+<Layout
+  title="About — Syed Ahmed Ali Shah"
+  description="Software developer based in Sukkur, Pakistan — full-stack web, Python, applied AI and blockchain development."
+  activePage="about"
+>
 
-<div class="wrap">
+<section class="page-head">
+  <div class="shell">
+    <div class="about-grid">
+      <div class="about-left">
+        <div class="kicker">About me</div>
+        <h1>I like building things that actually run.</h1>
+        <img
+          class="about-photo"
+          src="/images/ahmed-photo.jpg"
+          alt="Portrait of Syed Ahmed Ali Shah"
+          width="140" height="140" loading="lazy" decoding="async"
+        />
+        <div class="about-facts">
+          <div><span>Based in</span><strong>{resume.contact.location}</strong></div>
+          <div><span>Languages</span><strong>English · Urdu · Sindhi</strong></div>
+          <div><span>Focus</span><strong>Full-stack · AI · Blockchain</strong></div>
+        </div>
+      </div>
 
-  <section class="page-hero">
-    <div class="eyebrow">About</div>
-    <h1>The short version: I like building things that actually run.</h1>
-    <p class="lede">Not slide decks. Not Figma files. Things with a URL, a database, and someone other than me clicking around in them.</p>
-  </section>
+      <div class="about-right">
+        <p class="about-lead">
+          Not slide decks. Not Figma files. Things with a URL, a database, and
+          someone other than me clicking around in them.
+        </p>
 
-  <section>
-    <div class="about-card">
-      <p>I grew up and studied in Sukkur, Sindh — did my BS in Computer Science at Sukkur IBA University, where my final-year project was a blockchain-based voting system. That project is basically the reason the rest of my career has bent toward blockchain: I got curious about what it actually takes to make a system where "nobody can quietly change the record" isn't a policy, it's a property of the code.</p>
-      <p>My first real developer job was remote, for three years, at Clear Edge Technology in Canada — mostly Django/Flask and PostgreSQL, plus interactive canvas work with Konva.js. It's where I learned that the boring 20% of a project (migrations, admin panels, deployment, the stuff nobody demos) is usually what determines whether the interesting 80% survives contact with real users.</p>
-      <p>After that I came back to Sukkur IBA, this time on the other side of the desk — as a Software Development Intern in the Department of Electrical Engineering, running their OJS (Open Journal Systems) installation, the department website, and a pile of office automation nobody else wanted to touch. It's unglamorous work, but it taught me a lot about maintaining systems other people depend on daily, not just shipping new ones.</p>
-      <p>Somewhere in the middle of all that I got pulled into prompt engineering and applied AI — partly through coursework (DataCamp, Hugging Face), partly by just building things: a Groq-powered chat app, some small ML models, a notarization app that leans on an LLM-adjacent workflow for document handling. I don't think of AI and blockchain as separate lanes from "normal" web development — they're just more tools for the same underlying job, which is turning a real problem into something that works reliably.</p>
-      <p>These days I'm freelancing full-time — React and Node.js on the frontend/backend side, Python where data or ML is involved, Solidity when the problem genuinely calls for a blockchain (which, to be clear, is rarer than blockchain Twitter would have you believe). I'd rather ship a smaller thing that's actually deployed than a bigger thing that only exists in a repo.</p>
-      <p>Outside of work: I read a fair amount, listen to podcasts on long stretches of nothing-to-do, and play games when I want my brain to stop optimizing anything. English, Urdu, and Sindhi are all fair game if you want to reach out in any of them.</p>
+        <p>
+          I grew up and studied in Sukkur, Sindh — did my BS in Computer Science at
+          Sukkur IBA University, where my final-year project was a blockchain-based
+          voting system. That project is basically the reason the rest of my career
+          has bent toward blockchain: I got curious about what it actually takes to
+          make a system where "nobody can quietly change the record" isn't a policy,
+          it's a property of the code.
+        </p>
+
+        <p>
+          My first real developer job was remote, for three years, at Clear Edge
+          Technology in Canada — mostly Django/Flask and PostgreSQL, plus interactive
+          canvas work with Konva.js. It's where I learned that the boring 20% of a
+          project (migrations, admin panels, deployment, the stuff nobody demos) is
+          usually what determines whether the interesting 80% survives contact with
+          real users.
+        </p>
+
+        <p>
+          After that I came back to Sukkur IBA, this time on the other side of the
+          desk — as a Software Development Intern in the Department of Electrical
+          Engineering, running their OJS (Open Journal Systems) installation, the
+          department website, and a pile of office automation nobody else wanted to
+          touch. It's unglamorous work, but it taught me a lot about maintaining
+          systems other people depend on daily, not just shipping new ones.
+        </p>
+
+        <p>
+          Somewhere in the middle of all that I got pulled into prompt engineering and
+          applied AI — partly through coursework (DataCamp, Hugging Face), partly by
+          just building things: a Groq-powered chat app, some small ML models, a
+          notarization app that leans on an LLM-adjacent workflow for document
+          handling. I don't think of AI and blockchain as separate lanes from "normal"
+          web development — they're just more tools for the same underlying job, which
+          is turning a real problem into something that works reliably.
+        </p>
+
+        <p>
+          These days I'm freelancing full-time — React and Node.js on the
+          frontend/backend side, Python where data or ML is involved, Solidity when
+          the problem genuinely calls for a blockchain (which, to be clear, is rarer
+          than blockchain Twitter would have you believe). I'd rather ship a smaller
+          thing that's actually deployed than a bigger thing that only exists in a repo.
+        </p>
+
+        <h2 class="about-sub">How I work</h2>
+        <p>
+          Three things I try to hold myself to on every project: ship something a real
+          user can touch as early as possible, don't reach for a heavier tool
+          (blockchain, a new microservice, a new framework) than the problem actually
+          needs, and leave the boring parts — docs, deploys, admin — in better shape
+          than I found them.
+        </p>
+
+        <p class="about-outro">
+          Outside of work: I read a fair amount, listen to podcasts on long stretches
+          of nothing-to-do, and play games when I want my brain to stop optimizing
+          anything.
+        </p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="eyebrow">How I Work</div>
-    <div class="about-card">
-      <p>Three things I try to hold myself to on every project: ship something a real user can touch as early as possible, don't reach for a heavier tool (blockchain, a new microservice, a new framework) than the problem actually needs, and leave the boring parts — docs, deploys, admin — in better shape than I found them.</p>
-    </div>
-  </section>
+<ContactCTA />
 
-</div>
+<style>
+  .page-head{padding:72px 0 88px;}
+  @media (max-width:768px){ .page-head{padding:52px 0 64px;} }
+
+  .about-grid{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:80px;}
+  @media (max-width:900px){ .about-grid{grid-template-columns:1fr;gap:44px;} }
+
+  .about-left h1{margin-top:14px;font-size:clamp(30px,3.6vw,42px);letter-spacing:-0.03em;line-height:1.12;}
+  .about-photo{
+    margin-top:32px;width:140px;height:140px;border-radius:16px;
+    object-fit:cover;border:1px solid var(--line);
+  }
+  .about-facts{margin-top:32px;display:flex;flex-direction:column;gap:16px;}
+  .about-facts div{display:flex;flex-direction:column;gap:2px;}
+  .about-facts span{
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--muted);
+  }
+  .about-facts strong{font-size:15px;color:var(--ink);font-weight:600;}
+
+  .about-right p{margin:0 0 22px;font-size:17px;line-height:1.78;color:var(--body);max-width:68ch;}
+  .about-lead{font-size:20px !important;color:var(--ink) !important;line-height:1.6 !important;}
+  .about-sub{margin:38px 0 14px;font-size:22px;letter-spacing:-0.02em;}
+  .about-outro{color:var(--muted) !important;}
+</style>
 
 </Layout>
