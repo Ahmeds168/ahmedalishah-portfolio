@@ -1,0 +1,28 @@
+---
+import services from '../data/services.json';
+
+interface Props { serviceSlug: string }
+const { serviceSlug } = Astro.props;
+const service = services.services.find(s => s.slug === serviceSlug);
+---
+{service && (
+  <div class="service-cta">
+    <div>
+      <p class="service-cta-title">{service.ctaText}</p>
+      <p class="service-cta-sub">{service.ctaSub}</p>
+    </div>
+    <a class="arrow-link" href={`/services/${service.slug}`}>
+      View {service.navLabel} <span class="arrow" aria-hidden="true">→</span>
+    </a>
+  </div>
+)}
+
+<style>
+  .service-cta{
+    display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;
+    background:var(--accent-soft);border:1px solid #DBEAFE;border-radius:14px;padding:22px 24px;
+    margin:36px 0;
+  }
+  .service-cta-title{margin:0;font-size:16px;font-weight:600;color:var(--ink);}
+  .service-cta-sub{margin:5px 0 0;font-size:14.5px;color:var(--muted);}
+</style>

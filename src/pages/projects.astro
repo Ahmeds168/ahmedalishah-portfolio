@@ -84,13 +84,20 @@ function linkLabel(url: string) {
               {p.stack.map(s => <span class="tag">{s}</span>)}
             </div>
 
-            {p.url ? (
-              <a class="arrow-link prow-link" href={p.url} target="_blank" rel="noopener">
-                {linkLabel(p.url)} <span class="arrow" aria-hidden="true">→</span>
-              </a>
-            ) : (
-              <span class="prow-nolink">Academic project — not publicly deployed</span>
-            )}
+            <div class="prow-links">
+              {p.caseStudy && (
+                <a class="arrow-link prow-link" href={`/projects/${p.caseStudy.slug}`}>
+                  Read full case study <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              )}
+              {p.url ? (
+                <a class="arrow-link prow-link" href={p.url} target="_blank" rel="noopener">
+                  {linkLabel(p.url)} <span class="arrow" aria-hidden="true">→</span>
+                </a>
+              ) : (
+                <span class="prow-nolink">Academic project — not publicly deployed</span>
+              )}
+            </div>
           </div>
         </article>
       ))}
@@ -150,7 +157,8 @@ function linkLabel(url: string) {
   .prow-desc{margin:14px 0 0;font-size:16.5px;line-height:1.7;color:var(--body);max-width:68ch;}
   .prow-extra{margin:14px 0 0;font-size:15.5px;line-height:1.7;color:var(--muted);max-width:68ch;}
   .prow-stack{margin-top:20px;}
-  .prow-link{margin-top:20px;}
+  .prow-links{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;}
+  .prow-link{margin-top:0;}
   .prow-nolink{display:block;margin-top:20px;font-size:14.5px;color:var(--muted);}
 
   @media (max-width:860px){

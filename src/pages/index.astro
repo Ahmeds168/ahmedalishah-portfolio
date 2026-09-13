@@ -10,6 +10,7 @@ import ContactCTA from '../components/ContactCTA.astro';
 import FeaturedEpisode from '../components/FeaturedEpisode.astro';
 import EpisodeRow from '../components/EpisodeRow.astro';
 import resume from '../data/resume.json';
+import servicesData from '../data/services.json';
 import { getCollection } from 'astro:content';
 import { getPodcastAudioUrl } from '../lib/podcast';
 
@@ -161,6 +162,32 @@ const certs = resume.certificates;
       {Object.entries(resume.skills).map(([group, items]) => (
         <SkillGroup title={group} items={items} />
       ))}
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ================= SERVICES PREVIEW ================= -->
+<section class="section" id="services">
+  <div class="shell">
+    <SectionHeader
+      kicker="Services"
+      title="How I can help."
+      intro="Software development and technical services, grounded in things I've actually built and run in production."
+    />
+
+    <div class="services-preview reveal">
+      {servicesData.services.map(s => (
+        <a class="service-preview-card" href={`/services/${s.slug}`}>
+          <h3>{s.navLabel}</h3>
+          <p>{s.shortDesc}</p>
+        </a>
+      ))}
+    </div>
+
+    <div class="work-more reveal">
+      <a class="arrow-link" href="/services">View all services <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -338,6 +365,18 @@ const certs = resume.certificates;
   @media (max-width:520px){ .skills-grid{grid-template-columns:1fr;} }
 
   /* ---------- Writing ---------- */
+  /* ---------- Services preview ---------- */
+  .services-preview{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;}
+  @media (max-width:900px){ .services-preview{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .services-preview{grid-template-columns:1fr;} }
+  .service-preview-card{
+    display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;transition:border-color .2s ease, transform .2s ease;
+  }
+  .service-preview-card:hover{border-color:var(--line-strong);transform:translateY(-2px);}
+  .service-preview-card h3{font-size:17px;letter-spacing:-0.015em;}
+  .service-preview-card p{margin:8px 0 0;font-size:14.5px;color:var(--muted);line-height:1.6;}
+
   .writing-list{margin-top:40px;border-bottom:1px solid var(--line);}
 
   /* ---------- Podcast ---------- */

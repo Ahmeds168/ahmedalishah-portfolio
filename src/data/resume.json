@@ -1,6 +1,6 @@
 {
   "name": "Syed Ahmed Ali Shah",
-  "role": "Software Developer — full-stack, blockchain & AI",
+  "role": "Software Developer \u2014 full-stack, blockchain & AI",
   "contact": {
     "email": "ahmedalishah96@gmail.com",
     "phone": "+92 301 2278148",
@@ -12,16 +12,37 @@
   },
   "summary": "Software developer with 5+ years spanning web, mobile, and database-driven applications. Most recently a Software Development Intern at Sukkur IBA University's Department of Electrical Engineering, managing OJS journal administration, departmental web systems, and office automation. Previously built Django/Flask and PostgreSQL solutions remotely for Clear Edge Technology (Canada). Holds a BS in Computer Science from Sukkur IBA University, with a blockchain-based voting system as a final-year project. Skilled in Python, JavaScript, Java, PHP, and Oracle/PostgreSQL administration, with growing expertise in prompt engineering, machine learning, and smart contract development.",
   "skills": {
-    "Languages & Frameworks": ["Python", "JavaScript", "Java", "PHP", "Django", "Flask", "Solidity"],
-    "Data & Platforms": ["PostgreSQL Admin", "Oracle DB Admin", "Web Development", "Android Development", "Desktop Apps"],
-    "Emerging & Applied": ["Blockchain", "Prompt Engineering", "Machine Learning"],
-    "Working style": ["Communication", "Management"]
+    "Languages & Frameworks": [
+      "Python",
+      "JavaScript",
+      "Java",
+      "PHP",
+      "Django",
+      "Flask",
+      "Solidity"
+    ],
+    "Data & Platforms": [
+      "PostgreSQL Admin",
+      "Oracle DB Admin",
+      "Web Development",
+      "Android Development",
+      "Desktop Apps"
+    ],
+    "Emerging & Applied": [
+      "Blockchain",
+      "Prompt Engineering",
+      "Machine Learning"
+    ],
+    "Working style": [
+      "Communication",
+      "Management"
+    ]
   },
   "experience": [
     {
       "title": "Software Development Intern",
       "org": "Dept. of Electrical Engineering, Sukkur IBA University",
-      "meta": "Jun 2024 – Jul 2026 · Sukkur, Sindh, Pakistan",
+      "meta": "Jun 2024 \u2013 Jul 2026 \u00b7 Sukkur, Sindh, Pakistan",
       "bullets": [
         "Administered and upgraded the department's Open Journal Systems (OJS) installation",
         "Owned department website administration end-to-end",
@@ -31,7 +52,7 @@
     {
       "title": "Software Developer",
       "org": "Clear Edge Technology",
-      "meta": "May 2021 – May 2024 · Canada (Remote)",
+      "meta": "May 2021 \u2013 May 2024 \u00b7 Canada (Remote)",
       "bullets": [
         "Built and maintained Django/Flask applications backed by PostgreSQL",
         "Developed interactive canvas features with Konva.js"
@@ -40,7 +61,7 @@
     {
       "title": "Web Application Developer Intern",
       "org": "Vasona Systems International",
-      "meta": "Aug 2019 – Dec 2019 · Sukkur, Sindh, Pakistan",
+      "meta": "Aug 2019 \u2013 Dec 2019 \u00b7 Sukkur, Sindh, Pakistan",
       "bullets": [
         "Built features in .NET; handled website and email troubleshooting"
       ]
@@ -50,37 +71,90 @@
     {
       "name": "Decentralized Document Notary",
       "tag": "live",
-      "shortDesc": "Blockchain-based document notarization app (Solidity, React, Node.js, Supabase, Cloudflare R2) — deployed on Sepolia, Render & Vercel.",
-      "longDesc": "The problem: proving a document existed in a specific state at a specific time, without trusting a single company's database to not quietly change it later. Traditional notarization solves this with a person and a stamp; this project solves it by hashing the document client-side and writing that hash to a smart contract on Sepolia — so the proof of existence lives on a public, append-only ledger instead of in someone's private table.",
-      "extra": "The interesting engineering problem wasn't the smart contract itself (that part is genuinely simple) — it was everything around it. Files themselves are too large and too sensitive to put on-chain, so the actual documents live in Cloudflare R2, with Supabase handling user accounts, metadata, and the mapping between a file and its on-chain hash. The contract only ever sees a hash, never the document. Deployed across three different platforms doing three different jobs — Vercel for the frontend, Render for a small backend service, Sepolia for the actual notarization — which turned out to be a good, if accidental, lesson in keeping deploy responsibilities cleanly separated.",
-      "stack": ["Solidity", "React", "Node.js", "Supabase", "Cloudflare R2", "Sepolia testnet"],
-      "url": "https://doc-notary.vercel.app"
+      "shortDesc": "Blockchain-based document notarization app (Solidity, React, Node.js, Supabase, Cloudflare R2) \u2014 deployed on Sepolia, Render & Vercel.",
+      "longDesc": "The problem: proving a document existed in a specific state at a specific time, without trusting a single company's database to not quietly change it later. Traditional notarization solves this with a person and a stamp; this project solves it by hashing the document client-side and writing that hash to a smart contract on Sepolia \u2014 so the proof of existence lives on a public, append-only ledger instead of in someone's private table.",
+      "extra": "The interesting engineering problem wasn't the smart contract itself (that part is genuinely simple) \u2014 it was everything around it. Files themselves are too large and too sensitive to put on-chain, so the actual documents live in Cloudflare R2, with Supabase handling user accounts, metadata, and the mapping between a file and its on-chain hash. The contract only ever sees a hash, never the document. Deployed across three different platforms doing three different jobs \u2014 Vercel for the frontend, Render for a small backend service, Sepolia for the actual notarization \u2014 which turned out to be a good, if accidental, lesson in keeping deploy responsibilities cleanly separated.",
+      "stack": [
+        "Solidity",
+        "React",
+        "Node.js",
+        "Supabase",
+        "Cloudflare R2",
+        "Sepolia testnet"
+      ],
+      "url": "https://doc-notary.vercel.app",
+      "caseStudy": {
+        "slug": "decentralized-document-notary",
+        "problem": "Proving a document existed in a specific, unaltered state at a specific time \u2014 without trusting a single company's database not to quietly change that record later. A timestamp in a normal database is only as trustworthy as whoever controls that database.",
+        "architecture": "The document itself never touches the blockchain. The app hashes the document client-side and writes only that hash to a smart contract on Sepolia. The actual file lives in Cloudflare R2; Supabase manages user accounts and the mapping between a user, a file, and its on-chain hash. The chain's only job is answering one question: did a hash matching this exact document exist at this block?",
+        "technicalDecisions": [
+          "Splitting the system across three platforms deliberately \u2014 Vercel for the frontend, Render for backend services, Sepolia for the actual notarization logic \u2014 kept 'serve the UI,' 'handle app logic,' and 'provide immutability' as separate concerns, easier to reason about and swap out independently.",
+          "Hashing client-side rather than uploading the raw file to any notarization service, so the document's contents never need to be trusted to a third party at all, on-chain or off."
+        ],
+        "challenges": "The interesting engineering problem wasn't the smart contract itself \u2014 verifying a hash match is genuinely simple Solidity. The real work was everything around it: keeping the actual file, the hash, and the on-chain record correctly linked across three different platforms without any single point where the record could be quietly altered.",
+        "whatILearned": "A public blockchain isn't free \u2014 gas costs money (even fake testnet money has real friction) and a public chain means the hash is technically visible to anyone, even though the document isn't. For most use cases a signed database record with an audit log is genuinely fine. This project exists for the narrower slice of cases where that isn't good enough, and building it was a good way to actually feel that trade-off rather than just read about it."
+      }
     },
     {
       "name": "On-Chain Voting dApp",
       "tag": "live",
       "shortDesc": "Solidity (Hardhat) voting contract with a React + ethers.js frontend styled like an official paper ballot.",
-      "longDesc": "A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before — same visual language as a polling booth, with the wallet connection and transaction confirmation handled quietly in the background.",
-      "extra": "Hardhat handled local contract testing and deployment scripting; ethers.js bridged the contract calls to the UI. It's a small project, but it's the direct descendant of my final-year university project — same core idea (votes as immutable on-chain records), much cleaner execution.",
-      "stack": ["Solidity", "Hardhat", "React (Vite)", "ethers.js"],
-      "url": "https://onchain-voting-dapp-ahmed-ali-shahs-projects-c142f759.vercel.app/"
+      "longDesc": "A minimal voting contract, deliberately kept small so the interesting part could be the frontend: a ballot UI styled to look like an actual official paper ballot rather than a typical crypto dashboard. The goal was to test whether a blockchain voting interface could feel familiar to someone who's never touched a wallet before \u2014 same visual language as a polling booth, with the wallet connection and transaction confirmation handled quietly in the background.",
+      "extra": "Hardhat handled local contract testing and deployment scripting; ethers.js bridged the contract calls to the UI. It's a small project, but it's the direct descendant of my final-year university project \u2014 same core idea (votes as immutable on-chain records), much cleaner execution.",
+      "stack": [
+        "Solidity",
+        "Hardhat",
+        "React (Vite)",
+        "ethers.js"
+      ],
+      "url": "https://onchain-voting-dapp-ahmed-ali-shahs-projects-c142f759.vercel.app/",
+      "caseStudy": {
+        "slug": "on-chain-voting-dapp",
+        "problem": "Most blockchain voting demos look and feel like crypto dashboards, which is exactly wrong for something meant to feel trustworthy to someone who's never touched a wallet. The goal was a ballot that felt like an actual official paper ballot, with the blockchain machinery handled quietly in the background.",
+        "architecture": "A minimal Solidity voting contract, deliberately kept small so the interesting part could be the frontend. Hardhat handles local contract testing and deployment scripting; ethers.js bridges the contract calls to a React UI styled to look like an official paper ballot rather than a typical Web3 dashboard.",
+        "technicalDecisions": [
+          "Keeping the contract itself minimal on purpose \u2014 the design goal was UX and trust, not contract complexity.",
+          "Using Hardhat for the local testing/deployment loop, ethers.js for the frontend bridge, and React for a UI intentionally styled away from typical crypto-app visual language."
+        ],
+        "challenges": "Making a wallet-connected, on-chain transaction feel as unremarkable as clicking a checkbox on a government form \u2014 hiding the genuinely awkward parts of Web3 UX (wallet connection, transaction confirmation) behind an interface that doesn't ask the user to think about any of it.",
+        "whatILearned": "This project is the direct descendant of my university final-year project \u2014 same core idea, votes as immutable on-chain records \u2014 with a much cleaner execution once I wasn't also learning Solidity for the first time while building it."
+      }
     },
     {
       "name": "Groq Chat App",
       "tag": "live",
-      "shortDesc": "Full-stack chat app — Node.js/Express backend calling the Groq API, React (Vite) frontend.",
-      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference — Groq's API serves responses fast enough that the usual 'typing indicator' UX patterns barely matter. The Express backend handles the API calls and keeps the key server-side; the Vite/React frontend is deliberately simple, just a textbox and a response stream, so the focus stays on the model interaction rather than UI chrome.",
-      "extra": "This project doubled as a testbed for prompt engineering technique — testing how system prompts, temperature, and message history structure change response quality in a low-latency setting.",
-      "stack": ["Node.js", "Express", "React (Vite)", "Groq API"],
-      "url": "https://groq-chat-frontend-ahmed-ali-shahs-projects-c142f759.vercel.app/"
+      "shortDesc": "Full-stack chat app \u2014 Node.js/Express backend calling the Groq API, React (Vite) frontend.",
+      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference \u2014 Groq's API serves responses fast enough that the usual 'typing indicator' UX patterns barely matter. The Express backend handles the API calls and keeps the key server-side; the Vite/React frontend is deliberately simple, just a textbox and a response stream, so the focus stays on the model interaction rather than UI chrome.",
+      "extra": "This project doubled as a testbed for prompt engineering technique \u2014 testing how system prompts, temperature, and message history structure change response quality in a low-latency setting.",
+      "stack": [
+        "Node.js",
+        "Express",
+        "React (Vite)",
+        "Groq API"
+      ],
+      "url": "https://groq-chat-frontend-ahmed-ali-shahs-projects-c142f759.vercel.app/",
+      "caseStudy": {
+        "slug": "groq-ai-chat",
+        "problem": "Getting genuinely hands-on with fast LLM inference, and using a real chat interface as a testbed for prompt engineering technique rather than just reading about it.",
+        "architecture": "A Node.js/Express backend calls the Groq API and keeps the API key server-side; a React (Vite) frontend handles the chat interface. Groq's low latency is fast enough that the usual 'typing indicator, then a wall of text appears' UX pattern barely matters.",
+        "technicalDecisions": [
+          "Keeping the API key strictly server-side in the Express backend rather than calling Groq directly from the frontend.",
+          "Using the app as a deliberate testbed for testing how system prompts, temperature, and message history structure change response quality in a low-latency setting."
+        ],
+        "challenges": "The real lesson wasn't about the UI \u2014 it was that prompt engineering is closer to ordinary software engineering than the phrase suggests: the biggest quality gains came from being explicit about output format, scope, and failure modes, not from clever wording.",
+        "whatILearned": "Temperature and message-history length are load-bearing settings that get less attention than the prompt text itself, but matter just as much for response quality and cost."
+      }
     },
     {
       "name": "Election System Using Blockchain (SISC)",
       "tag": null,
-      "shortDesc": "Final-year project — permissioned blockchain voting system on Hyperledger Fabric via IBM Blockchain VS Code extension.",
-      "longDesc": "My university final-year project, and the one that got me into blockchain in the first place. Unlike public, permissionless blockchains, this uses Hyperledger Fabric — a permissioned blockchain, meaning only known, vetted participants can validate transactions. That's a deliberate choice: for something like an election, you often want accountability and known identities behind each validating node, not full anonymity.",
+      "shortDesc": "Final-year project \u2014 permissioned blockchain voting system on Hyperledger Fabric via IBM Blockchain VS Code extension.",
+      "longDesc": "My university final-year project, and the one that got me into blockchain in the first place. Unlike public, permissionless blockchains, this uses Hyperledger Fabric \u2014 a permissioned blockchain, meaning only known, vetted participants can validate transactions. That's a deliberate choice: for something like an election, you often want accountability and known identities behind each validating node, not full anonymity.",
       "extra": "Built and deployed through the IBM Blockchain VS Code extension, which handles a lot of the Fabric network scaffolding that would otherwise be painful to configure by hand.",
-      "stack": ["Hyperledger Fabric", "IBM Blockchain VS Code Extension"],
+      "stack": [
+        "Hyperledger Fabric",
+        "IBM Blockchain VS Code Extension"
+      ],
       "url": null
     },
     {
@@ -89,7 +163,10 @@
       "shortDesc": "PostgreSQL-driven analysis of whether studying abroad affects student mental health.",
       "longDesc": "A data-driven look at whether studying abroad measurably affects student mental health, using PostgreSQL to structure and query the underlying survey data. Less flashy than the blockchain work, but it's the project that keeps my data-analysis and SQL skills honest.",
       "extra": null,
-      "stack": ["PostgreSQL", "Data analysis"],
+      "stack": [
+        "PostgreSQL",
+        "Data analysis"
+      ],
       "url": "https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb"
     },
     {
@@ -98,34 +175,104 @@
       "shortDesc": "Convolutional neural network classifying cats vs. dogs at ~90% accuracy.",
       "longDesc": "Convolutional neural network classifying cats vs. dogs at ~90% accuracy.",
       "extra": null,
-      "stack": ["CNN", "Machine Learning"],
+      "stack": [
+        "CNN",
+        "Machine Learning"
+      ],
       "url": null
     },
     {
       "name": "Campus Management Solution",
       "tag": null,
       "shortDesc": "Java + Oracle SQL system for storing student, teacher and course records.",
-      "longDesc": "A Java application backed by an Oracle database for storing student, teacher, and course records — the kind of project that's less about novelty and more about getting the fundamentals of relational schema design and Java application architecture right.",
+      "longDesc": "A Java application backed by an Oracle database for storing student, teacher, and course records \u2014 the kind of project that's less about novelty and more about getting the fundamentals of relational schema design and Java application architecture right.",
       "extra": null,
-      "stack": ["Java", "Oracle SQL"],
+      "stack": [
+        "Java",
+        "Oracle SQL"
+      ],
       "url": "https://github.com/Ahmeds168/Campus-Management-Solution-Using-Oracle-Database-in-Java"
     }
   ],
   "education": [
-    { "degree": "BS, Computer Science", "school": "Sukkur IBA University, Sukkur", "date": "Aug 2016 – Aug 2021", "logo": "/logos/sukkur-iba-logo.webp" },
-    { "degree": "Intermediate", "school": "Islamia Science College, Sukkur", "date": "2012 – 2014", "logo": "/logos/islamia-college-logo.webp" }
+    {
+      "degree": "BS, Computer Science",
+      "school": "Sukkur IBA University, Sukkur",
+      "date": "Aug 2016 \u2013 Aug 2021",
+      "logo": "/logos/sukkur-iba-logo.webp"
+    },
+    {
+      "degree": "Intermediate",
+      "school": "Islamia Science College, Sukkur",
+      "date": "2012 \u2013 2014",
+      "logo": "/logos/islamia-college-logo.webp"
+    }
   ],
   "certificates": [
-    { "title": "AI Agents and Agentic AI with Python & Generative AI", "issuer": "Vanderbilt University, Coursera", "date": "Aug 2026", "url": "https://coursera.org/verify/QYURRCUBHM69", "image": "/certs/ai-agents-coursera.webp" },
-    { "title": "Intermediate SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951", "image": "/certs/intermediate-sql.webp" },
-    { "title": "Joining Data in SQL", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f", "image": "/certs/joining-data-sql.webp" },
-    { "title": "Prompt Engineering with the OpenAI API", "issuer": "DataCamp", "date": "Jul 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1", "image": "/certs/prompt-engineering-openai.webp" },
-    { "title": "Working with Hugging Face", "issuer": "DataCamp", "date": "Aug 2026", "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597", "image": "/certs/hugging-face.webp" },
-    { "title": "Introduction to SQL", "issuer": "DataCamp", "date": "Jul 2026", "url": null, "image": "/certs/intro-to-sql.webp" },
-    { "title": "Blockchain Basics", "issuer": "Cyfrin", "date": "Mar 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics", "image": "/certs/cyfrin-blockchain-basics.webp" },
-    { "title": "Solidity Smart Contract Development", "issuer": "Cyfrin", "date": "Aug 2026", "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity", "image": null },
-    { "title": "Internship Certificate", "issuer": "Vasona Systems International", "date": "2019", "url": null, "image": null }
+    {
+      "title": "AI Agents and Agentic AI with Python & Generative AI",
+      "issuer": "Vanderbilt University, Coursera",
+      "date": "Aug 2026",
+      "url": "https://coursera.org/verify/QYURRCUBHM69",
+      "image": "/certs/ai-agents-coursera.webp"
+    },
+    {
+      "title": "Intermediate SQL",
+      "issuer": "DataCamp",
+      "date": "Aug 2026",
+      "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/23b50d8a1f729b35261f7ad42dec9e8b456d2951",
+      "image": "/certs/intermediate-sql.webp"
+    },
+    {
+      "title": "Joining Data in SQL",
+      "issuer": "DataCamp",
+      "date": "Aug 2026",
+      "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/3f4641402a4960d125c594b8acfcec8b4d7ab82f",
+      "image": "/certs/joining-data-sql.webp"
+    },
+    {
+      "title": "Prompt Engineering with the OpenAI API",
+      "issuer": "DataCamp",
+      "date": "Jul 2026",
+      "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/d976e79b35b1d1deeb33d3dba0738324770f45b1",
+      "image": "/certs/prompt-engineering-openai.webp"
+    },
+    {
+      "title": "Working with Hugging Face",
+      "issuer": "DataCamp",
+      "date": "Aug 2026",
+      "url": "https://www.datacamp.com/completed/statement-of-accomplishment/course/de7ca41c80b3ff209d431a2cfecbb90f51097597",
+      "image": "/certs/hugging-face.webp"
+    },
+    {
+      "title": "Introduction to SQL",
+      "issuer": "DataCamp",
+      "date": "Jul 2026",
+      "url": null,
+      "image": "/certs/intro-to-sql.webp"
+    },
+    {
+      "title": "Blockchain Basics",
+      "issuer": "Cyfrin",
+      "date": "Mar 2026",
+      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics",
+      "image": "/certs/cyfrin-blockchain-basics.webp"
+    },
+    {
+      "title": "Solidity Smart Contract Development",
+      "issuer": "Cyfrin",
+      "date": "Aug 2026",
+      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity",
+      "image": null
+    },
+    {
+      "title": "Internship Certificate",
+      "issuer": "Vasona Systems International",
+      "date": "2019",
+      "url": null,
+      "image": null
+    }
   ],
-  "achievements": "Won Aptech Web Development Challenge (Nov 2017 – Feb 2018)",
+  "achievements": "Won Aptech Web Development Challenge (Nov 2017 \u2013 Feb 2018)",
   "languages": "English (Full Professional), Urdu (Native), Sindhi (Native)"
 }

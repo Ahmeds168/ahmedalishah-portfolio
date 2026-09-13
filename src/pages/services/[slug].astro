@@ -1,0 +1,145 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ContactCTA from '../../components/ContactCTA.astro';
+import servicesData from '../../data/services.json';
+import resume from '../../data/resume.json';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return servicesData.services.map(s => ({
+    params: { slug: s.slug },
+    props: { service: s },
+  }));
+}
+
+const { service } = Astro.props;
+
+const relatedProjects = resume.projects.filter(p => service.relatedProjects.includes(p.name));
+
+const allPosts = await getCollection('blog');
+const relatedArticles = service.relatedArticles
+  .map(slug => allPosts.find(p => p.id === slug))
+  .filter((p): p is NonNullable<typeof p> => !!p);
+
+const allEpisodes = await getCollection('podcast');
+const relatedEpisodes = service.relatedPodcasts
+  .map(slug => allEpisodes.find(e => e.id === slug))
+  .filter((e): e is NonNullable<typeof e> => !!e);
+
+const pageUrl = new URL(`/services/${service.slug}`, Astro.site).toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.h1,
+  "description": service.shortDesc,
+  "url": pageUrl,
+  "provider": {
+    "@type": "Person",
+    "name": "Syed Ahmed Ali Shah",
+    "url": new URL('/about', Astro.site).toString(),
+  },
+};
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).toString() },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": new URL('/services', Astro.site).toString() },
+    { "@type": "ListItem", "position": 3, "name": service.navLabel, "item": pageUrl },
+  ],
+};
+---
+<Layout
+  title={`${service.seoTitle} — Syed Ahmed Ali Shah`}
+  description={service.shortDesc}
+  activePage="services"
+>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
+
+<div class="service-page">
+  <div class="shell shell-narrow">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/services">Services</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{service.navLabel}</span>
+    </nav>
+
+    <h1>{service.h1}</h1>
+    <p class="intro">{service.intro}</p>
+
+    <section class="svc-section">
+      <h2>What I can help with</h2>
+      <ul class="problem-list">
+        {service.problems.map(p => <li>{p}</li>)}
+      </ul>
+    </section>
+
+    <section class="svc-section">
+      <h2>Technologies</h2>
+      <div class="tag-row">
+        {service.technologies.map(t => <span class="tag tag-accent">{t}</span>)}
+      </div>
+    </section>
+
+    {relatedProjects.length > 0 && (
+      <section class="svc-section">
+        <h2>Relevant projects</h2>
+        <ul class="resource-list">
+          {relatedProjects.map(p => (
+            <li><a class="link" href="/projects">{p.name} — {p.shortDesc}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {(relatedArticles.length > 0 || relatedEpisodes.length > 0) && (
+      <section class="svc-section">
+        <h2>Related reading &amp; listening</h2>
+        <ul class="resource-list">
+          {relatedArticles.map(a => (
+            <li><a class="link" href={`/blog/${a.id}`}>{a.data.title} →</a></li>
+          ))}
+          {relatedEpisodes.map(e => (
+            <li><a class="link" href={`/podcasts/${e.id}`}>{e.data.title} (podcast) →</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <div class="svc-cta">
+      <h2>{service.ctaText}</h2>
+      <p>{service.ctaSub}</p>
+      <a class="btn btn-primary" href={`/contact?service=${encodeURIComponent(service.navLabel)}`}>Discuss your project →</a>
+    </div>
+
+  </div>
+</div>
+
+<ContactCTA />
+
+<style>
+  .shell-narrow{max-width:760px;}
+  .service-page{padding:56px 0 80px;}
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);}
+  .breadcrumb a{color:var(--accent);font-weight:500;}
+  .breadcrumb a:hover{text-decoration:underline;}
+  h1{margin-top:22px;font-size:clamp(30px,4.4vw,44px);letter-spacing:-0.03em;line-height:1.15;}
+  .intro{margin:20px 0 0;font-size:18px;line-height:1.75;color:var(--body);}
+
+  .svc-section{margin-top:44px;}
+  .svc-section h2{font-size:22px;letter-spacing:-0.02em;margin-bottom:16px;}
+  .problem-list{margin:0;padding-left:22px;}
+  .problem-list li{font-size:16px;line-height:1.7;color:var(--body);margin-bottom:8px;}
+  .resource-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+
+  .svc-cta{
+    margin-top:52px;padding:32px;border-radius:16px;
+    background:var(--accent-soft);border:1px solid #DBEAFE;text-align:center;
+  }
+  .svc-cta h2{margin:0;font-size:24px;letter-spacing:-0.02em;}
+  .svc-cta p{margin:12px 0 24px;color:var(--muted);font-size:16px;}
+</style>
+
+</Layout>

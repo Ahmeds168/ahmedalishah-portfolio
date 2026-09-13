@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceCTA from '../../components/ServiceCTA.astro';
+import resume from '../../data/resume.json';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  return resume.projects
+    .filter(p => p.caseStudy)
+    .map(p => ({
+      params: { slug: p.caseStudy.slug },
+      props: { project: p },
+    }));
+}
+
+const { project } = Astro.props;
+const cs = project.caseStudy;
+
+// Map each case-study project to the one relevant service, for the closing CTA
+const SERVICE_BY_PROJECT: Record<string, string> = {
+  'Decentralized Document Notary': 'solidity-foundry-development',
+  'On-Chain Voting dApp': 'solidity-foundry-development',
+  'Groq Chat App': 'ai-integration',
+};
+const serviceSlug = SERVICE_BY_PROJECT[project.name];
+
+const allPosts = await getCollection('blog');
+const allEpisodes = await getCollection('podcast');
+
+// Find articles/episodes whose relatedArticles/relatedEpisodes (or resource links) reference this project
+const relatedArticles = allPosts.filter(p =>
+  p.data.title.toLowerCase().includes(project.name.split(' ')[0].toLowerCase()) ||
+  (project.name === 'Decentralized Document Notary' && p.id === 'why-i-built-a-blockchain-notary')
+);
+const relatedEpisodes = allEpisodes.filter(e =>
+  (e.data.relatedEpisodes || []).length >= 0 && (
+    (project.name.includes('Notary') && ['foundry-vs-hardhat', 'how-foundry-testing-works', 'defensive-engineering-fundme-contract'].includes(e.id)) ||
+    (project.name.includes('Voting') && ['foundry-vs-hardhat', 'how-foundry-testing-works'].includes(e.id)) ||
+    (project.name.includes('Groq') && e.id === 'ai-agents-software-security')
+  )
+);
+
+const pageUrl = new URL(`/projects/${cs.slug}`, Astro.site).toString();
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).toString() },
+    { "@type": "ListItem", "position": 2, "name": "Projects", "item": new URL('/projects', Astro.site).toString() },
+    { "@type": "ListItem", "position": 3, "name": project.name, "item": pageUrl },
+  ],
+};
+const creativeWorkLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": project.name,
+  "description": project.shortDesc,
+  "url": pageUrl,
+  "creator": { "@type": "Person", "name": "Syed Ahmed Ali Shah" },
+  "keywords": project.stack.join(', '),
+};
+---
+<Layout
+  title={`${project.name} — Case Study — Syed Ahmed Ali Shah`}
+  description={project.shortDesc}
+  activePage="projects"
+>
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
+<script type="application/ld+json" set:html={JSON.stringify(creativeWorkLd)} slot="head" />
+
+<div class="case-study">
+  <div class="shell shell-narrow">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/projects">Projects</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{project.name}</span>
+    </nav>
+
+    <div class="cs-top">
+      {project.tag === 'live' && <span class="pcard-live"><span class="pcard-live-dot"></span>Live</span>}
+      <h1>{project.name}</h1>
+      <div class="tag-row">
+        {project.stack.map((s: string) => <span class="tag tag-accent">{s}</span>)}
+      </div>
+    </div>
+
+    <section class="cs-section">
+      <h2>Overview</h2>
+      <p>{project.shortDesc}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Problem</h2>
+      <p>{cs.problem}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Architecture</h2>
+      <p>{cs.architecture}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>Technical Decisions</h2>
+      <ul>
+        {cs.technicalDecisions.map((d: string) => <li>{d}</li>)}
+      </ul>
+    </section>
+
+    <section class="cs-section">
+      <h2>Challenges</h2>
+      <p>{cs.challenges}</p>
+    </section>
+
+    <section class="cs-section">
+      <h2>What I Learned</h2>
+      <p>{cs.whatILearned}</p>
+    </section>
+
+    {project.url && (
+      <section class="cs-section">
+        <h2>Links</h2>
+        <ul class="resource-list">
+          <li><a class="link" href={project.url} target="_blank" rel="noopener">
+            {project.url.includes('github.com') ? 'Source on GitHub' : 'Live Demo'} →
+          </a></li>
+        </ul>
+      </section>
+    )}
+
+    {(relatedArticles.length > 0 || relatedEpisodes.length > 0) && (
+      <section class="cs-section">
+        <h2>Related Reading &amp; Listening</h2>
+        <ul class="resource-list">
+          {relatedArticles.map(a => (
+            <li><a class="link" href={`/blog/${a.id}`}>{a.data.title} →</a></li>
+          ))}
+          {relatedEpisodes.map(e => (
+            <li><a class="link" href={`/podcasts/${e.id}`}>{e.data.title} (podcast) →</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {serviceSlug && (
+      <section class="cs-section">
+        <h2>Need something similar?</h2>
+        <ServiceCTA serviceSlug={serviceSlug} />
+      </section>
+    )}
+
+    <div class="cs-cta">
+      <a class="btn btn-secondary" href="/projects">← All projects</a>
+      <a class="btn btn-primary" href="/contact">Get in touch</a>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .shell-narrow{max-width:760px;}
+  .case-study{padding:56px 0 96px;}
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);}
+  .breadcrumb a{color:var(--accent);font-weight:500;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  .cs-top{margin-top:22px;}
+  .cs-top h1{margin-top:12px;font-size:clamp(28px,4.4vw,42px);letter-spacing:-0.03em;line-height:1.15;}
+  .cs-top .tag-row{margin-top:18px;}
+  .pcard-live{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;font-weight:600;color:#15803D;
+    background:#F0FDF4;border:1px solid #BBF7D0;padding:3px 9px;border-radius:9999px;
+  }
+  .pcard-live-dot{width:6px;height:6px;border-radius:50%;background:#16A34A;}
+
+  .cs-section{margin-top:40px;}
+  .cs-section h2{font-size:22px;letter-spacing:-0.02em;margin-bottom:14px;}
+  .cs-section p{font-size:17px;line-height:1.75;color:var(--body);margin:0;}
+  .cs-section ul{margin:0;padding-left:22px;}
+  .cs-section li{font-size:16px;line-height:1.7;color:var(--body);margin-bottom:10px;}
+  .resource-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;}
+
+  .cs-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:32px;border-top:1px solid var(--line);}
+</style>
+
+</Layout>

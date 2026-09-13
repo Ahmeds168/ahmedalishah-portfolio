@@ -34,8 +34,19 @@ import resume from '../data/resume.json';
           <input type="email" id="email" name="email" required autocomplete="email" />
         </div>
         <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" required></textarea>
+          <label for="service">Service</label>
+          <select id="service" name="service">
+            <option value="">Not sure / other</option>
+            <option value="Full-Stack Development">Full-Stack Development</option>
+            <option value="Python Automation">Python Automation</option>
+            <option value="OJS Support">OJS Support</option>
+            <option value="Solidity & Foundry">Solidity &amp; Foundry Development</option>
+            <option value="AI Integration">AI Integration</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Project / Problem Description</label>
+          <textarea id="message" name="message" required placeholder="What are you trying to build, or what problem are you running into?"></textarea>
         </div>
         <button type="submit" class="btn btn-primary contact-submit">
           Send message <span class="arrow" aria-hidden="true">→</span>
@@ -107,5 +118,21 @@ import resume from '../data/resume.json';
   }
   .contact-resume p{margin:0 0 14px;font-size:15px;color:var(--muted);}
 </style>
+
+<script>
+  // Preselect the Service dropdown based on ?service=... in the URL, so a
+  // visitor arriving from a service page or CTA doesn't have to re-select it.
+  const params = new URLSearchParams(window.location.search);
+  const requested = params.get('service');
+  if (requested) {
+    const select = document.getElementById('service') as HTMLSelectElement | null;
+    if (select) {
+      const match = Array.from(select.options).find(
+        o => o.value.toLowerCase() === requested.toLowerCase() || o.text.toLowerCase() === requested.toLowerCase()
+      );
+      if (match) select.value = match.value;
+    }
+  }
+</script>
 
 </Layout>
