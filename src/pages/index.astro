@@ -11,6 +11,7 @@ import FeaturedEpisode from '../components/FeaturedEpisode.astro';
 import EpisodeRow from '../components/EpisodeRow.astro';
 import resume from '../data/resume.json';
 import { getCollection } from 'astro:content';
+import { getPodcastAudioUrl } from '../lib/podcast';
 
 const projects = resume.projects;
 const topTwo = projects.slice(1, 3);        // Voting dApp, Groq Chat
@@ -214,7 +215,7 @@ const certs = resume.certificates;
         duration={featuredEpisode.data.duration}
         date={featuredEpisode.data.date}
         topics={featuredEpisode.data.topics}
-        hasAudio={!!featuredEpisode.data.audioUrl}
+        hasAudio={!!getPodcastAudioUrl(featuredEpisode.data.audioPath)}
       />
     </div>
 
@@ -227,7 +228,7 @@ const certs = resume.certificates;
           shortDescription={e.data.shortDescription}
           duration={e.data.duration}
           topics={e.data.topics}
-          hasAudio={!!e.data.audioUrl}
+          hasAudio={!!getPodcastAudioUrl(e.data.audioPath)}
         />
       ))}
     </div>

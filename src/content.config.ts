@@ -32,7 +32,7 @@ const podcast = defineCollection({
     date: z.coerce.date(),
     duration: z.string(),          // e.g. "18 min" — display string
     durationSeconds: z.number().optional(), // for schema.org ISO 8601 duration
-    audioUrl: z.string().nullable().default(null),
+    audioPath: z.string().nullable().default(null), // e.g. "/podcasts/001-ai-agents-security/episode.mp3" — resolved against PUBLIC_PODCAST_MEDIA_URL
     topics: z.array(z.string()),
     featured: z.boolean().default(false),
     inThisEpisode: z.array(z.string()),

@@ -4,7 +4,7 @@ const { audioUrl, title, id } = Astro.props;
 ---
 {audioUrl ? (
   <div class="player">
-    <audio id={id} controls preload="none" aria-label={`Audio player for ${title}`}>
+    <audio id={id} controls preload="metadata" aria-label={`Audio player for ${title}`}>
       <source src={audioUrl} type="audio/mpeg" />
       Your browser doesn't support embedded audio. Use the transcript below instead.
     </audio>

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import AudioPlayer from '../../components/AudioPlayer.astro';
 import PodcastArtwork from '../../components/PodcastArtwork.astro';
 import { getCollection, render } from 'astro:content';
+import { getPodcastAudioUrl } from '../../lib/podcast';
 
 export async function getStaticPaths() {
   const episodes = await getCollection('podcast');
@@ -33,6 +34,7 @@ const dateISO = ep.data.date.toISOString();
 const dateHuman = ep.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const pageUrl = new URL(`/podcasts/${ep.id}`, Astro.site).toString();
 const ogImage = `/images/og/${ep.id}-podcast.png`;
+const audioUrl = getPodcastAudioUrl(ep.data.audioPath);
 
 const jsonLd: Record<string, unknown> = {
   "@context": "https://schema.org",
@@ -53,10 +55,10 @@ const jsonLd: Record<string, unknown> = {
     "url": new URL('/about', Astro.site).toString(),
   },
 };
-if (ep.data.audioUrl) {
+if (audioUrl) {
   jsonLd.associatedMedia = {
     "@type": "AudioObject",
-    "contentUrl": new URL(ep.data.audioUrl, Astro.site).toString(),
+    "contentUrl": audioUrl,
     ...(ep.data.durationSeconds ? { "duration": `PT${ep.data.durationSeconds}S` } : {}),
   };
 }
@@ -95,7 +97,7 @@ if (ep.data.audioUrl) {
       <PodcastArtwork episodeNumber={ep.data.episodeNumber} topic={ep.data.topics[0] ?? 'Software'} />
     </div>
 
-    <AudioPlayer audioUrl={ep.data.audioUrl} title={ep.data.title} id={`audio-${ep.id}`} />
+    <AudioPlayer audioUrl={audioUrl} title={ep.data.title} id={`audio-${ep.id}`} />
 
     <section class="ep-section">
       <p class="ep-summary">{ep.data.description}</p>

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import FeaturedEpisode from '../../components/FeaturedEpisode.astro';
 import EpisodeRow from '../../components/EpisodeRow.astro';
 import { getCollection } from 'astro:content';
+import { getPodcastAudioUrl } from '../../lib/podcast';
 
 const episodes = (await getCollection('podcast')).sort((a, b) => b.data.episodeNumber - a.data.episodeNumber);
 const featured = episodes.find(e => e.data.featured) ?? episodes[0];
@@ -54,7 +55,7 @@ const jsonLd = {
       duration={featured.data.duration}
       date={featured.data.date}
       topics={featured.data.topics}
-      hasAudio={!!featured.data.audioUrl}
+      hasAudio={!!getPodcastAudioUrl(featured.data.audioPath)}
     />
   </div>
 </section>
@@ -83,7 +84,7 @@ const jsonLd = {
             shortDescription={e.data.shortDescription}
             duration={e.data.duration}
             topics={e.data.topics}
-            hasAudio={!!e.data.audioUrl}
+            hasAudio={!!getPodcastAudioUrl(e.data.audioPath)}
           />
         </div>
       ))}
