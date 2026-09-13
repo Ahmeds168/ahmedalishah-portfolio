@@ -23,7 +23,7 @@ timestamps:
 resources:
   - { label: "Foundry Book — Forge testing reference", url: "https://book.getfoundry.sh/forge/tests" }
   - { label: "My On-Chain Voting dApp (built and tested with Foundry-style tooling)", url: "/projects" }
-relatedArticles: ["why-i-built-a-blockchain-notary"]
+relatedArticles: ["why-i-built-a-blockchain-notary", "foundry-test-sol-not-found-vscode"]
 relatedEpisodes: ["foundry-vs-hardhat"]
 seoTitle: "How Foundry Testing Works — Forge, Anvil, and Fuzz Testing Explained"
 seoDescription: "A practical explanation of Foundry's Forge test runner, Anvil local node, and fuzz testing for Solidity smart contracts."

@@ -24,7 +24,7 @@ resources:
   - { label: "Foundry Book (official docs)", url: "https://book.getfoundry.sh/" }
   - { label: "Hardhat (official docs)", url: "https://hardhat.org/" }
   - { label: "My On-Chain Voting dApp project", url: "/projects" }
-relatedArticles: ["why-i-built-a-blockchain-notary"]
+relatedArticles: ["why-i-built-a-blockchain-notary", "foundry-forge-test-mt"]
 relatedEpisodes: ["how-foundry-testing-works"]
 seoTitle: "Foundry vs Hardhat — A Practical Ethereum Development Comparison"
 seoDescription: "Comparing Foundry and Hardhat on testing speed, scripting, and developer experience, based on real smart contract project work."

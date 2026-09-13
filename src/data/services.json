@@ -6,7 +6,7 @@
       "seoTitle": "Full-Stack Web Development Services",
       "h1": "Full-Stack Web Development",
       "shortDesc": "Web applications built end-to-end with React, Node.js, and a database that fits the problem.",
-      "intro": "I build web applications end-to-end — frontend, backend, database, and deployment — rather than handing off pieces to different specialists. That means fewer integration surprises and a single person who understands the whole system when something needs to change.",
+      "intro": "I build web applications end-to-end \u2014 frontend, backend, database, and deployment \u2014 rather than handing off pieces to different specialists. That means fewer integration surprises and a single person who understands the whole system when something needs to change.",
       "problems": [
         "You need a web application built from scratch, not just a design handed to a developer",
         "An existing app needs a feature added, a bug fixed, or a backend rebuilt",
@@ -14,10 +14,27 @@
         "User accounts, authentication, and permissions need to be done properly",
         "The app needs to actually get deployed and stay running, not just work on localhost"
       ],
-      "technologies": ["React", "Node.js", "Express", "JavaScript", "PostgreSQL", "REST APIs", "Vercel", "Render"],
-      "relatedProjects": ["Decentralized Document Notary", "Groq Chat App", "Campus Management Solution"],
-      "relatedArticles": ["modernizing-a-university-journal-system"],
-      "relatedPodcasts": ["running-ojs-in-production"],
+      "technologies": [
+        "React",
+        "Node.js",
+        "Express",
+        "JavaScript",
+        "PostgreSQL",
+        "REST APIs",
+        "Vercel",
+        "Render"
+      ],
+      "relatedProjects": [
+        "Decentralized Document Notary",
+        "Groq Chat App",
+        "Campus Management Solution"
+      ],
+      "relatedArticles": [
+        "modernizing-a-university-journal-system"
+      ],
+      "relatedPodcasts": [
+        "running-ojs-in-production"
+      ],
       "ctaText": "Need a web application built?",
       "ctaSub": "Tell me what you're trying to build and I'll tell you honestly whether it's a good fit."
     },
@@ -27,7 +44,7 @@
       "seoTitle": "Python Automation & Data Processing Services",
       "h1": "Python Automation & Data Processing",
       "shortDesc": "Turning repetitive spreadsheet and file work into a script that runs itself.",
-      "intro": "A lot of office and research work is the same manual steps repeated on slightly different data every time — cleaning a CSV, merging spreadsheets, generating a report. If you can describe the steps, there's a decent chance they can be automated with a Python script instead of done by hand every week.",
+      "intro": "A lot of office and research work is the same manual steps repeated on slightly different data every time \u2014 cleaning a CSV, merging spreadsheets, generating a report. If you can describe the steps, there's a decent chance they can be automated with a Python script instead of done by hand every week.",
       "problems": [
         "The same CSV/Excel cleanup or reformatting happens every week or month",
         "Data from multiple spreadsheets or sources needs to be combined and reconciled",
@@ -35,10 +52,23 @@
         "A small internal tool would save real time but doesn't need a full web app",
         "Data needs to move between a spreadsheet and a real database"
       ],
-      "technologies": ["Python", "pandas", "PostgreSQL", "Flask", "Django", "SQL", "CSV/Excel processing"],
-      "relatedProjects": ["Analyzing Students' Mental Health", "Campus Management Solution"],
+      "technologies": [
+        "Python",
+        "pandas",
+        "PostgreSQL",
+        "Flask",
+        "Django",
+        "SQL",
+        "CSV/Excel processing"
+      ],
+      "relatedProjects": [
+        "Analyzing Students' Mental Health",
+        "Campus Management Solution"
+      ],
       "relatedArticles": [],
-      "relatedPodcasts": ["sql-joins-explained"],
+      "relatedPodcasts": [
+        "sql-joins-explained"
+      ],
       "ctaText": "Doing the same manual data task every week?",
       "ctaSub": "Describe the repetitive task and I'll tell you if a script makes sense."
     },
@@ -48,12 +78,12 @@
       "seoTitle": "Open Journal Systems (OJS) Support, Upgrade & Troubleshooting",
       "h1": "Open Journal Systems Support & Administration",
       "shortDesc": "Upgrades, plugins, email, HTTPS, and production troubleshooting for real OJS installations.",
-      "intro": "I administered and upgraded a production OJS installation for a university's Electrical Engineering department — real journals, real submission cycles, real consequences when something breaks. If your OJS installation has a problem that needs an actual administrator rather than a generic web developer, this is that.",
+      "intro": "I administered and upgraded a production OJS installation for a university's Electrical Engineering department \u2014 real journals, real submission cycles, real consequences when something breaks. If your OJS installation has a problem that needs an actual administrator rather than a generic web developer, this is that.",
       "problems": [
         "OJS installation or initial setup",
         "Upgrading between OJS versions (including 3.x version jumps) without breaking active journals",
         "Plugin compatibility issues after an upgrade",
-        "SMTP and email delivery problems — notifications not sending, variables not replacing correctly",
+        "SMTP and email delivery problems \u2014 notifications not sending, variables not replacing correctly",
         "DOI and ORCID configuration",
         "Journal workflow and submission process issues",
         "HTTPS configuration and reverse proxy problems",
@@ -65,10 +95,20 @@
         "Performance troubleshooting on a slow installation",
         "User and role permission issues"
       ],
-      "technologies": ["OJS (Open Journal Systems)", "PHP", "MySQL", "Apache", "Linux server administration"],
+      "technologies": [
+        "OJS (Open Journal Systems)",
+        "PHP",
+        "MySQL",
+        "Apache",
+        "Linux server administration"
+      ],
       "relatedProjects": [],
-      "relatedArticles": ["modernizing-a-university-journal-system"],
-      "relatedPodcasts": ["running-ojs-in-production"],
+      "relatedArticles": [
+        "modernizing-a-university-journal-system"
+      ],
+      "relatedPodcasts": [
+        "running-ojs-in-production"
+      ],
       "ctaText": "Having an OJS problem?",
       "ctaSub": "I can help troubleshoot upgrades, email, plugins, permissions, HTTPS, indexing, and production issues."
     },
@@ -77,20 +117,41 @@
       "navLabel": "Solidity & Foundry",
       "seoTitle": "Solidity & Foundry Smart Contract Development",
       "h1": "Solidity & Foundry Smart Contract Development",
-      "shortDesc": "Smart contracts written, tested, and deployed with Foundry — plus the frontend that talks to them.",
-      "intro": "I build Solidity smart contracts and the Foundry-based testing and deployment workflow around them, along with the React/ethers.js frontend that lets people actually use the contract. I don't position this as professional security auditing — it's practical smart contract development and defensive engineering practices, not a formal audit.",
+      "shortDesc": "Smart contracts written, tested, and deployed with Foundry \u2014 plus the frontend that talks to them.",
+      "intro": "I build Solidity smart contracts and the Foundry-based testing and deployment workflow around them, along with the React/ethers.js frontend that lets people actually use the contract. I don't position this as professional security auditing \u2014 it's practical smart contract development and defensive engineering practices, not a formal audit.",
       "problems": [
         "A smart contract needs to be designed and written from a real requirement",
         "An existing contract needs a proper Foundry test suite (unit tests, fuzz tests)",
         "Deployment scripting for testnets like Sepolia",
-        "Frontend integration — connecting a React app to a deployed contract via ethers.js",
+        "Frontend integration \u2014 connecting a React app to a deployed contract via ethers.js",
         "Debugging unexpected contract behavior or failing transactions",
         "Reviewing contract architecture for common defensive-engineering patterns (reentrancy, access control, oracle safety)"
       ],
-      "technologies": ["Solidity", "Foundry", "Forge", "Anvil", "Hardhat", "ethers.js", "React", "Sepolia testnet"],
-      "relatedProjects": ["Decentralized Document Notary", "On-Chain Voting dApp", "Election System Using Blockchain (SISC)"],
-      "relatedArticles": ["why-i-built-a-blockchain-notary"],
-      "relatedPodcasts": ["foundry-vs-hardhat", "how-foundry-testing-works", "defensive-engineering-fundme-contract"],
+      "technologies": [
+        "Solidity",
+        "Foundry",
+        "Forge",
+        "Anvil",
+        "Hardhat",
+        "ethers.js",
+        "React",
+        "Sepolia testnet"
+      ],
+      "relatedProjects": [
+        "Decentralized Document Notary",
+        "On-Chain Voting dApp",
+        "Election System Using Blockchain (SISC)"
+      ],
+      "relatedArticles": [
+        "why-i-built-a-blockchain-notary",
+        "foundry-forge-test-mt",
+        "anvil-metamask-balance-not-showing"
+      ],
+      "relatedPodcasts": [
+        "foundry-vs-hardhat",
+        "how-foundry-testing-works",
+        "defensive-engineering-fundme-contract"
+      ],
       "ctaText": "Building or debugging a Solidity project?",
       "ctaSub": "Tell me about the contract or the problem you're running into."
     },
@@ -99,19 +160,32 @@
       "navLabel": "AI Integration",
       "seoTitle": "Practical AI & LLM Integration for Web Applications",
       "h1": "AI Integration for Web Applications",
-      "shortDesc": "Wiring LLM APIs into real applications — chat interfaces, prompt handling, tool calling.",
-      "intro": "This is practical software integration work, not AI research — connecting an LLM API to a real application, designing the prompt and system behavior around it, and handling the parts (rate limits, context management, tool calling) that make the difference between a demo and something that holds up with real users.",
+      "shortDesc": "Wiring LLM APIs into real applications \u2014 chat interfaces, prompt handling, tool calling.",
+      "intro": "This is practical software integration work, not AI research \u2014 connecting an LLM API to a real application, designing the prompt and system behavior around it, and handling the parts (rate limits, context management, tool calling) that make the difference between a demo and something that holds up with real users.",
       "problems": [
         "An application needs a chat interface backed by an LLM API (e.g. Groq, OpenAI-compatible APIs)",
         "Prompt design and system-prompt structure for consistent, constrained outputs",
-        "Tool/function calling — letting a model take real actions through your application safely",
+        "Tool/function calling \u2014 letting a model take real actions through your application safely",
         "Managing conversation context and history sensibly as costs and context windows grow",
         "General AI agent experimentation and prototyping"
       ],
-      "technologies": ["Groq API", "LLM APIs", "Prompt engineering", "Node.js", "React"],
-      "relatedProjects": ["Groq Chat App"],
-      "relatedArticles": ["what-prompt-engineering-looks-like", "the-hugging-face-ai-agent-breach"],
-      "relatedPodcasts": ["ai-agents-software-security"],
+      "technologies": [
+        "Groq API",
+        "LLM APIs",
+        "Prompt engineering",
+        "Node.js",
+        "React"
+      ],
+      "relatedProjects": [
+        "Groq Chat App"
+      ],
+      "relatedArticles": [
+        "what-prompt-engineering-looks-like",
+        "the-hugging-face-ai-agent-breach"
+      ],
+      "relatedPodcasts": [
+        "ai-agents-software-security"
+      ],
       "ctaText": "Want to add AI to an existing application?",
       "ctaSub": "Tell me what you're trying to build and what the model needs to do."
     }

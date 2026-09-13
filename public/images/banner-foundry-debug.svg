@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <linearGradient id="bgf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F8FAFF"/>
+    </linearGradient>
+    <filter id="blurf"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bgf)"/>
+  <circle cx="1060" cy="80" r="180" fill="#2563EB" opacity="0.10" filter="url(#blurf)"/>
+  <circle cx="140" cy="340" r="150" fill="#7C3AED" opacity="0.08" filter="url(#blurf)"/>
+
+  <!-- terminal window -->
+  <rect x="330" y="90" width="540" height="220" rx="10" fill="#0F172A"/>
+  <circle cx="356" cy="115" r="6" fill="#EF4444"/>
+  <circle cx="378" cy="115" r="6" fill="#F59E0B"/>
+  <circle cx="400" cy="115" r="6" fill="#22C55E"/>
+  <text x="356" y="160" font-family="JetBrains Mono, monospace" font-size="15" fill="#94A3B8">$ forge test --mt testFn -vvv</text>
+  <text x="356" y="190" font-family="JetBrains Mono, monospace" font-size="15" fill="#4ADE80">[PASS] testFn() (gas: 14523)</text>
+  <text x="356" y="220" font-family="JetBrains Mono, monospace" font-size="15" fill="#64748B">Suite result: ok. 1 passed; 0 failed</text>
+  <rect x="356" y="240" width="8" height="16" fill="#2563EB" opacity="0.8"/>
+</svg>
