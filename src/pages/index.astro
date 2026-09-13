@@ -190,45 +190,49 @@ const certs = resume.certificates;
 
 <hr class="rule" />
 
-<!-- ================= EDUCATION + CERTIFICATIONS ================= -->
+<!-- ================= EDUCATION ================= -->
 <section class="section" id="education">
   <div class="shell">
-    <div class="edu-layout">
-      <div class="reveal">
-        <SectionHeader kicker="Education" title="Background." />
-        <div class="edu-list">
-          {resume.education.map(e => (
-            <div class="edu-item">
-              <span class={`edu-logo-wrap ${e.logo.includes('sukkur-iba') ? 'edu-logo-dark' : ''}`}>
-                <img src={e.logo} alt={`${e.school} logo`} width="44" height="44" loading="lazy" decoding="async" />
-              </span>
-              <div>
-                <h3>{e.degree}</h3>
-                <p>{e.school}</p>
-                <span>{e.date}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <SectionHeader kicker="Education" title="Background." />
 
-      <div class="reveal">
-        <div class="kicker">Certifications</div>
-        <h2 class="section-title certs-title">{certs.length} credentials.</h2>
-        <div class="certs-grid" id="certsGrid">
-          {certs.map((c, i) => (
-            <div class={i >= 4 ? 'cert-hidden' : ''}>
-              <CertificateCard title={c.title} issuer={c.issuer} date={c.date} url={c.url} image={c.image} />
-            </div>
-          ))}
+    <div class="edu-list reveal">
+      {resume.education.map(e => (
+        <div class="edu-item">
+          <span class="edu-logo-wrap">
+            <img src={e.logo} alt={`${e.school} logo`} width="44" height="44" loading="lazy" decoding="async" />
+          </span>
+          <div>
+            <h3>{e.degree}</h3>
+            <p>{e.school}</p>
+            <span>{e.date}</span>
+          </div>
         </div>
-        {certs.length > 4 && (
-          <button class="btn btn-secondary certs-toggle" id="certsToggle" aria-expanded="false">
-            View all certifications
-          </button>
-        )}
-      </div>
+      ))}
     </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<!-- ================= CERTIFICATIONS ================= -->
+<section class="section" id="certifications">
+  <div class="shell">
+    <SectionHeader kicker="Certifications" title={`${certs.length} credentials.`} />
+
+    <div class="certs-grid reveal" id="certsGrid">
+      {certs.map((c, i) => (
+        <div class={i >= 4 ? 'cert-hidden' : ''}>
+          <CertificateCard title={c.title} issuer={c.issuer} date={c.date} url={c.url} image={c.image} />
+        </div>
+      ))}
+    </div>
+    {certs.length > 4 && (
+      <div class="reveal" style="text-align:center;">
+        <button class="btn btn-secondary certs-toggle" id="certsToggle" aria-expanded="false">
+          View all certifications
+        </button>
+      </div>
+    )}
   </div>
 </section>
 
@@ -285,39 +289,31 @@ const certs = resume.certificates;
   /* ---------- Writing ---------- */
   .writing-list{margin-top:40px;border-bottom:1px solid var(--line);}
 
-  /* ---------- Education + Certs ---------- */
-  .edu-layout{
-    display:grid;grid-template-columns:1fr 1fr;gap:72px;
-    position:relative;
+  /* ---------- Education ---------- */
+  .edu-list{
+    margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px;
   }
-  .edu-layout > div:last-child{
-    border-left:1px solid var(--line);padding-left:72px;
+  @media (max-width:640px){ .edu-list{grid-template-columns:1fr;} }
+  .edu-item{
+    display:flex;gap:16px;align-items:flex-start;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;
   }
-  @media (max-width:900px){
-    .edu-layout{grid-template-columns:1fr;gap:0;}
-    .edu-layout > div:last-child{
-      border-left:0;padding-left:0;
-      margin-top:56px;padding-top:56px;border-top:1px solid var(--line);
-    }
-  }
-  .edu-list{margin-top:36px;display:flex;flex-direction:column;gap:26px;}
-  .edu-item{display:flex;gap:16px;align-items:flex-start;}
   .edu-logo-wrap{
     flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
-    background:var(--card);border:1px solid var(--line);border-radius:10px;padding:5px;
+    background:#FFFFFF;border:1px solid var(--line);border-radius:10px;padding:5px;
   }
   .edu-logo-wrap img{width:100%;height:100%;object-fit:contain;}
-  .edu-logo-dark{background:#0B0A10;border-color:#0B0A10;}
   .edu-item h3{font-size:17px;letter-spacing:-0.015em;}
   .edu-item p{margin:3px 0 0;font-size:15px;color:var(--muted);}
   .edu-item span{display:block;margin-top:5px;font-family:var(--font-mono);font-size:12.5px;color:var(--muted);}
 
-  .certs-title{font-size:clamp(26px,3vw,34px);}
-  .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px;}
+  /* ---------- Certifications ---------- */
+  .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px;}
+  @media (min-width:900px){ .certs-grid{grid-template-columns:repeat(4,1fr);} }
   @media (max-width:560px){ .certs-grid{grid-template-columns:1fr;} }
   .cert-hidden{display:none;}
   .certs-grid.expanded .cert-hidden{display:block;}
-  .certs-toggle{margin-top:20px;}
+  .certs-toggle{margin-top:28px;}
 </style>
 
 <script>
