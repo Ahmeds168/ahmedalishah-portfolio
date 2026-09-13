@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceCTA from '../components/ServiceCTA.astro';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+  seoTitle: string;
+  description: string;
+  intro: string;
+  articleSlugs: string[];
+  podcastSlugs: string[];
+  serviceSlug?: string;
+  moreNote: string;
+}
+const { title, seoTitle, description, intro, articleSlugs, podcastSlugs, serviceSlug, moreNote } = Astro.props;
+
+const allPosts = await getCollection('blog');
+const articles = articleSlugs.map(slug => allPosts.find(p => p.id === slug)).filter((p): p is NonNullable<typeof p> => !!p);
+
+const allEpisodes = await getCollection('podcast');
+const episodes = podcastSlugs.map(slug => allEpisodes.find(e => e.id === slug)).filter((e): e is NonNullable<typeof e> => !!e);
+---
+<Layout title={`${seoTitle} — Syed Ahmed Ali Shah`} description={description}>
+
+<section class="page-head">
+  <div class="shell">
+    <div class="kicker">Topic</div>
+    <h1>{title}</h1>
+    <p class="intro">{intro}</p>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<section class="section-tight">
+  <div class="shell shell-narrow">
+    {articles.length > 0 && (
+      <section class="hub-section">
+        <h2>Articles</h2>
+        <ul class="resource-list">
+          {articles.map(a => <li><a class="link" href={`/blog/${a.id}`}>{a.data.title} →</a></li>)}
+        </ul>
+      </section>
+    )}
+
+    {episodes.length > 0 && (
+      <section class="hub-section">
+        <h2>Podcast episodes</h2>
+        <ul class="resource-list">
+          {episodes.map(e => <li><a class="link" href={`/podcasts/${e.id}`}>{e.data.title} →</a></li>)}
+        </ul>
+      </section>
+    )}
+
+    {serviceSlug && (
+      <section class="hub-section">
+        <h2>Need help with this?</h2>
+        <ServiceCTA serviceSlug={serviceSlug} />
+      </section>
+    )}
+
+    <p class="more-note">{moreNote}</p>
+  </div>
+</section>
+
+<style>
+  .page-head{padding:72px 0 48px;}
+  .page-head h1{margin-top:14px;font-size:clamp(30px,4vw,44px);letter-spacing:-0.03em;}
+  .intro{margin:18px 0 0;font-size:17.5px;color:var(--muted);max-width:65ch;line-height:1.7;}
+  @media (max-width:768px){ .page-head{padding:52px 0 36px;} }
+
+  .shell-narrow{max-width:760px;}
+  .hub-section{margin-top:12px;margin-bottom:44px;}
+  .hub-section h2{font-size:20px;letter-spacing:-0.02em;margin-bottom:14px;}
+  .resource-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .more-note{color:var(--muted);font-size:15px;margin-top:32px;}
+</style>
+
+</Layout>

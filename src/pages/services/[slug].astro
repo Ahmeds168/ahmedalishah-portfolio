@@ -111,7 +111,7 @@ const breadcrumbLd = {
     <div class="svc-cta">
       <h2>{service.ctaText}</h2>
       <p>{service.ctaSub}</p>
-      <a class="btn btn-primary" href={`/contact?service=${encodeURIComponent(service.navLabel)}`}>Discuss your project →</a>
+      <a class="btn btn-primary" href={`/contact?service=${encodeURIComponent(service.navLabel)}`} data-track="contact_click" data-track-source={`service_${service.slug}`}>Discuss your project →</a>
     </div>
 
   </div>
@@ -141,5 +141,10 @@ const breadcrumbLd = {
   .svc-cta h2{margin:0;font-size:24px;letter-spacing:-0.02em;}
   .svc-cta p{margin:12px 0 24px;color:var(--muted);font-size:16px;}
 </style>
+
+<script define:vars={{ serviceSlug: service.slug }}>
+  // @ts-ignore
+  if (window.va) window.va('event', { name: 'service_view', data: { service: serviceSlug } });
+</script>
 
 </Layout>

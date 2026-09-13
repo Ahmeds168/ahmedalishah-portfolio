@@ -11,7 +11,7 @@ const service = services.services.find(s => s.slug === serviceSlug);
       <p class="service-cta-title">{service.ctaText}</p>
       <p class="service-cta-sub">{service.ctaSub}</p>
     </div>
-    <a class="arrow-link" href={`/services/${service.slug}`}>
+    <a class="arrow-link" href={`/services/${service.slug}`} data-track="service_cta_click" data-track-service={service.slug}>
       View {service.navLabel} <span class="arrow" aria-hidden="true">→</span>
     </a>
   </div>

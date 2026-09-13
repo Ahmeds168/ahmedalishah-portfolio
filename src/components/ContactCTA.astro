@@ -11,9 +11,9 @@ import resume from '../data/resume.json';
         technology — feel free to reach out.
       </p>
       <div class="cta-actions">
-        <a class="btn btn-primary" href={`mailto:${resume.contact.email}`}>Send Email</a>
+        <a class="btn btn-primary" href={`mailto:${resume.contact.email}`} data-track="contact_click" data-track-source="contact_cta">Send Email</a>
         <a class="btn btn-secondary" href={resume.contact.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-        <a class="btn btn-secondary" href={resume.contact.github} target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-secondary" href={resume.contact.github} target="_blank" rel="noopener" data-track="github_click" data-track-source="contact_cta">GitHub</a>
       </div>
     </div>
   </div>

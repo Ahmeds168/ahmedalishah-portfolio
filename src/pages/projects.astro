@@ -91,7 +91,7 @@ function linkLabel(url: string) {
                 </a>
               )}
               {p.url ? (
-                <a class="arrow-link prow-link" href={p.url} target="_blank" rel="noopener">
+                <a class="arrow-link prow-link" href={p.url} target="_blank" rel="noopener" data-track="project_demo_click" data-track-project={p.name}>
                   {linkLabel(p.url)} <span class="arrow" aria-hidden="true">→</span>
                 </a>
               ) : (

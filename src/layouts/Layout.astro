@@ -83,5 +83,26 @@ const ogImageURL = new URL(ogImage, Astro.site);
   }
 </script>
 
+<script>
+  // Lightweight conversion-event tracking via Vercel Analytics' custom events
+  // (window.va, already loaded above). Any element with data-track="EventName"
+  // fires that event on click — one delegated listener, no per-page scripts.
+  // See: https://vercel.com/docs/analytics/custom-events
+  document.addEventListener('click', (e) => {
+    const target = (e.target as HTMLElement).closest('[data-track]') as HTMLElement | null;
+    if (!target) return;
+    const name = target.getAttribute('data-track');
+    if (!name) return;
+    const data: Record<string, string> = {};
+    for (const attr of Array.from(target.attributes)) {
+      if (attr.name.startsWith('data-track-')) {
+        data[attr.name.replace('data-track-', '')] = attr.value;
+      }
+    }
+    // @ts-ignore
+    if (window.va) window.va('event', { name, data });
+  });
+</script>
+
 </body>
 </html>

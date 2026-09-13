@@ -51,7 +51,7 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
     </div>
 
     {url ? (
-      <a class="arrow-link pcard-link" href={url} target="_blank" rel="noopener">
+      <a class="arrow-link pcard-link" href={url} target="_blank" rel="noopener" data-track="project_demo_click" data-track-project={name}>
         {linkLabel} <span class="arrow" aria-hidden="true">→</span>
       </a>
     ) : (

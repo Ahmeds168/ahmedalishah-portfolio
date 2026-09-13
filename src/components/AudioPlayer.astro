@@ -65,4 +65,16 @@ const mimeType = MIME_BY_EXT[ext] ?? 'audio/mpeg';
       if (audio) audio.playbackRate = parseFloat(target.value);
     });
   });
+
+  // Track the first time each episode's audio actually starts playing.
+  document.querySelectorAll('audio[id]').forEach((audio) => {
+    let tracked = false;
+    audio.addEventListener('play', () => {
+      if (tracked) return;
+      tracked = true;
+      const label = audio.getAttribute('aria-label') || audio.id;
+      // @ts-ignore
+      if (window.va) window.va('event', { name: 'podcast_play', data: { episode: label } });
+    });
+  });
 </script>

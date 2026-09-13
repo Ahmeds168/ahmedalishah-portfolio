@@ -121,7 +121,7 @@ const creativeWorkLd = {
       <section class="cs-section">
         <h2>Links</h2>
         <ul class="resource-list">
-          <li><a class="link" href={project.url} target="_blank" rel="noopener">
+          <li><a class="link" href={project.url} target="_blank" rel="noopener" data-track="project_demo_click" data-track-project={project.name}>
             {project.url.includes('github.com') ? 'Source on GitHub' : 'Live Demo'} →
           </a></li>
         </ul>
@@ -151,7 +151,7 @@ const creativeWorkLd = {
 
     <div class="cs-cta">
       <a class="btn btn-secondary" href="/projects">← All projects</a>
-      <a class="btn btn-primary" href="/contact">Get in touch</a>
+      <a class="btn btn-primary" href="/contact" data-track="contact_click" data-track-source="project_case_study">Get in touch</a>
     </div>
 
   </div>

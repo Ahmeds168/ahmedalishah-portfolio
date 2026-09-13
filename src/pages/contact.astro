@@ -48,7 +48,7 @@ import resume from '../data/resume.json';
           <label for="message">Project / Problem Description</label>
           <textarea id="message" name="message" required placeholder="What are you trying to build, or what problem are you running into?"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary contact-submit">
+        <button type="submit" class="btn btn-primary contact-submit" data-track="contact_click" data-track-source="contact_form_submit">
           Send message <span class="arrow" aria-hidden="true">→</span>
         </button>
         <p class="contact-note">Goes straight to my inbox. No spam, no newsletter.</p>
@@ -69,7 +69,7 @@ import resume from '../data/resume.json';
           </li>
           <li>
             <span>GitHub</span>
-            <a class="link" href={resume.contact.github} target="_blank" rel="noopener">
+            <a class="link" href={resume.contact.github} target="_blank" rel="noopener" data-track="github_click" data-track-source="contact_page">
               {resume.contact.githubLabel}
             </a>
           </li>
