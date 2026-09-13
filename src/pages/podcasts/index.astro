@@ -1,0 +1,134 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import FeaturedEpisode from '../../components/FeaturedEpisode.astro';
+import EpisodeRow from '../../components/EpisodeRow.astro';
+import { getCollection } from 'astro:content';
+
+const episodes = (await getCollection('podcast')).sort((a, b) => b.data.episodeNumber - a.data.episodeNumber);
+const featured = episodes.find(e => e.data.featured) ?? episodes[0];
+const rest = episodes.filter(e => e.id !== featured.id);
+
+const topicCounts = new Map<string, number>();
+for (const e of episodes) {
+  for (const t of e.data.topics) topicCounts.set(t, (topicCounts.get(t) ?? 0) + 1);
+}
+const topics = [...topicCounts.entries()].sort((a, b) => b[1] - a[1]);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "name": "Ahmed Ali Shah Podcast",
+  "description": "Technical conversations about software engineering, AI, blockchain, web development, developer tools, and lessons from building real systems.",
+  "url": new URL('/podcasts', Astro.site).toString(),
+  "author": { "@type": "Person", "name": "Syed Ahmed Ali Shah", "url": new URL('/about', Astro.site).toString() },
+  "webFeed": new URL('/podcasts', Astro.site).toString(),
+};
+---
+<Layout
+  title="Podcast — Syed Ahmed Ali Shah"
+  description="Technical conversations about software engineering, AI, blockchain, web development, developer tools, and lessons from building real systems."
+  activePage="podcasts"
+>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+<section class="page-head">
+  <div class="shell">
+    <div class="kicker">Podcast</div>
+    <h1>Ideas worth talking about.</h1>
+    <p class="page-intro">
+      Conversations and short episodes about software engineering, AI, blockchain,
+      web development, and lessons from building real systems.
+    </p>
+  </div>
+</section>
+
+<hr class="rule" />
+
+<section class="section-tight">
+  <div class="shell">
+    <FeaturedEpisode
+      slug={featured.id}
+      episodeNumber={featured.data.episodeNumber}
+      title={featured.data.title}
+      shortDescription={featured.data.shortDescription}
+      duration={featured.data.duration}
+      date={featured.data.date}
+      topics={featured.data.topics}
+      hasAudio={!!featured.data.audioUrl}
+    />
+  </div>
+</section>
+
+<hr class="rule" />
+
+<section class="section-tight">
+  <div class="shell">
+    <div class="archive-head">
+      <h2>All episodes</h2>
+      <div class="topic-filters" id="topicFilters">
+        <button class="filter-pill filter-pill-active" data-topic="all">All <span>({episodes.length})</span></button>
+        {topics.map(([t, count]) => (
+          <button class="filter-pill" data-topic={t}>{t} <span>({count})</span></button>
+        ))}
+      </div>
+    </div>
+
+    <div class="episode-list" id="episodeList">
+      {rest.map(e => (
+        <div data-topics={e.data.topics.join('|')}>
+          <EpisodeRow
+            slug={e.id}
+            episodeNumber={e.data.episodeNumber}
+            title={e.data.title}
+            shortDescription={e.data.shortDescription}
+            duration={e.data.duration}
+            topics={e.data.topics}
+            hasAudio={!!e.data.audioUrl}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .page-head{padding:72px 0 48px;}
+  .page-head h1{margin-top:14px;font-size:clamp(34px,4.6vw,52px);letter-spacing:-0.03em;}
+  .page-intro{margin:18px 0 0;font-size:17.5px;color:var(--muted);max-width:60ch;line-height:1.7;}
+  @media (max-width:768px){ .page-head{padding:52px 0 36px;} }
+
+  .archive-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px;}
+  .archive-head h2{font-size:24px;letter-spacing:-0.02em;}
+
+  .topic-filters{display:flex;flex-wrap:wrap;gap:8px;}
+  .filter-pill{
+    font-family:var(--font-mono);font-size:12.5px;color:var(--muted);
+    background:var(--card);border:1px solid var(--line);padding:6px 13px;border-radius:9999px;
+    cursor:pointer;transition:all .18s ease;
+  }
+  .filter-pill:hover{border-color:var(--accent);color:var(--accent);}
+  .filter-pill-active{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .filter-pill span{opacity:.75;}
+
+  .episode-list{border-bottom:1px solid var(--line);}
+  .episode-list [hidden]{display:none;}
+</style>
+
+<script>
+  const filters = document.querySelectorAll('.filter-pill');
+  const items = document.querySelectorAll('#episodeList > div');
+  filters.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filters.forEach(b => b.classList.remove('filter-pill-active'));
+      btn.classList.add('filter-pill-active');
+      const topic = btn.getAttribute('data-topic');
+      items.forEach(item => {
+        const topics = (item.getAttribute('data-topics') || '').split('|');
+        const show = topic === 'all' || topics.includes(topic || '');
+        if (show) item.removeAttribute('hidden'); else item.setAttribute('hidden', '');
+      });
+    });
+  });
+</script>
+
+</Layout>

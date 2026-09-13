@@ -23,6 +23,9 @@ const related = allPosts
   })
   .slice(0, 3);
 
+const allEpisodes = await getCollection('podcast');
+const relatedEpisode = allEpisodes.find(e => (e.data.relatedArticles ?? []).includes(post.id));
+
 function readTime(body: string) {
   const words = body.trim().split(/\s+/).length;
   return Math.max(1, Math.round(words / 200));
@@ -141,6 +144,15 @@ const encodedTitle = encodeURIComponent(post.data.title);
     <section class="article-body article-body-medium">
       <Content />
     </section>
+
+    {relatedEpisode && (
+      <div class="mt-8 bg-accent-soft border border-line rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
+        <span class="text-ink text-[15px]">Prefer listening? This topic is also a podcast episode.</span>
+        <a href={`/podcasts/${relatedEpisode.id}`} class="arrow-link whitespace-nowrap">
+          Listen to the episode <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    )}
 
     <footer class="mt-14 pt-8 border-t border-line">
       <div class="flex flex-wrap items-center justify-between gap-4">

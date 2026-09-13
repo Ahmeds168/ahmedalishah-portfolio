@@ -1,0 +1,45 @@
+---
+interface Props { slug: string; episodeNumber: number; title: string; shortDescription: string; duration: string; topics: string[]; hasAudio: boolean }
+const { slug, episodeNumber, title, shortDescription, duration, topics, hasAudio } = Astro.props;
+const num = String(episodeNumber).padStart(2, '0');
+---
+<a class="episode-row" href={`/podcasts/${slug}`}>
+  <div class="episode-meta">
+    <span class="episode-num">EP {num}</span>
+    <span aria-hidden="true">·</span>
+    <span>{duration}</span>
+  </div>
+  <h3>{title}</h3>
+  <p>{shortDescription}</p>
+  <div class="episode-foot">
+    <span class="tag-row">
+      {topics.slice(0, 3).map(t => <span class="tag">{t}</span>)}
+    </span>
+    <span class="episode-actions">
+      <span class="episode-listen">{hasAudio ? '▶ Listen' : 'Read episode'}</span>
+      <span class="episode-transcript">Transcript <span class="arrow" aria-hidden="true">→</span></span>
+    </span>
+  </div>
+</a>
+
+<style>
+  .episode-row{
+    display:block;padding:28px 0;border-top:1px solid var(--line);
+    transition:opacity .2s ease;
+  }
+  .episode-meta{
+    display:flex;align-items:center;gap:8px;
+    font-family:var(--font-mono);font-size:12.5px;color:var(--muted);
+  }
+  .episode-num{color:var(--accent);}
+  .episode-row h3{
+    margin:12px 0 0;font-size:clamp(19px,2.1vw,23px);letter-spacing:-0.02em;line-height:1.3;
+    transition:color .2s ease;
+  }
+  .episode-row:hover h3{color:var(--accent);}
+  .episode-row p{margin:10px 0 0;font-size:15.5px;color:var(--muted);max-width:64ch;line-height:1.6;}
+  .episode-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;}
+  .episode-actions{display:flex;align-items:center;gap:18px;font-size:14px;font-weight:600;color:var(--accent);}
+  .episode-transcript .arrow{display:inline-block;transition:transform .2s ease;}
+  .episode-row:hover .episode-transcript .arrow{transform:translateX(3px);}
+</style>

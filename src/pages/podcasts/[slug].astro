@@ -1,0 +1,214 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AudioPlayer from '../../components/AudioPlayer.astro';
+import PodcastArtwork from '../../components/PodcastArtwork.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const episodes = await getCollection('podcast');
+  return episodes.map(ep => ({
+    params: { slug: ep.id },
+    props: { ep },
+  }));
+}
+
+const { ep } = Astro.props;
+const { Content } = await render(ep);
+
+const allEpisodes = await getCollection('podcast');
+const allBlogPosts = await getCollection('blog');
+
+const relatedEpisodes = (ep.data.relatedEpisodes ?? [])
+  .map(slug => allEpisodes.find(e => e.id === slug))
+  .filter((e): e is NonNullable<typeof e> => !!e)
+  .slice(0, 3);
+
+const relatedArticles = (ep.data.relatedArticles ?? [])
+  .map(slug => allBlogPosts.find(p => p.id === slug))
+  .filter((p): p is NonNullable<typeof p> => !!p)
+  .slice(0, 3);
+
+const num = String(ep.data.episodeNumber).padStart(2, '0');
+const dateISO = ep.data.date.toISOString();
+const dateHuman = ep.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const pageUrl = new URL(`/podcasts/${ep.id}`, Astro.site).toString();
+const ogImage = `/images/og/${ep.id}-podcast.png`;
+
+const jsonLd: Record<string, unknown> = {
+  "@context": "https://schema.org",
+  "@type": "PodcastEpisode",
+  "name": ep.data.title,
+  "episodeNumber": ep.data.episodeNumber,
+  "datePublished": dateISO,
+  "description": ep.data.description,
+  "url": pageUrl,
+  "partOfSeries": {
+    "@type": "PodcastSeries",
+    "name": "Ahmed Ali Shah Podcast",
+    "url": new URL('/podcasts', Astro.site).toString(),
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Syed Ahmed Ali Shah",
+    "url": new URL('/about', Astro.site).toString(),
+  },
+};
+if (ep.data.audioUrl) {
+  jsonLd.associatedMedia = {
+    "@type": "AudioObject",
+    "contentUrl": new URL(ep.data.audioUrl, Astro.site).toString(),
+    ...(ep.data.durationSeconds ? { "duration": `PT${ep.data.durationSeconds}S` } : {}),
+  };
+}
+---
+<Layout
+  title={`${ep.data.seoTitle || ep.data.title} — Podcast`}
+  description={ep.data.seoDescription || ep.data.description}
+  activePage="podcasts"
+  ogType="article"
+  ogImage={ogImage}
+>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} slot="head" />
+
+<div class="episode-page">
+  <div class="shell shell-narrow">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/podcasts">Podcast</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Episode {num}</span>
+    </nav>
+
+    <header class="ep-header">
+      <h1>{ep.data.title}</h1>
+      <div class="ep-meta">
+        <time datetime={dateISO}>{dateHuman}</time>
+        <span aria-hidden="true">·</span>
+        <span>{ep.data.duration}</span>
+      </div>
+      <div class="tag-row ep-topics">
+        {ep.data.topics.map(t => <span class="tag tag-accent">{t}</span>)}
+      </div>
+    </header>
+
+    <div class="ep-cover">
+      <PodcastArtwork episodeNumber={ep.data.episodeNumber} topic={ep.data.topics[0] ?? 'Software'} />
+    </div>
+
+    <AudioPlayer audioUrl={ep.data.audioUrl} title={ep.data.title} id={`audio-${ep.id}`} />
+
+    <section class="ep-section">
+      <p class="ep-summary">{ep.data.description}</p>
+    </section>
+
+    <section class="ep-section">
+      <h2>In this episode</h2>
+      <ul class="in-episode-list">
+        {ep.data.inThisEpisode.map(item => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="ep-section">
+      <h2>Timestamps</h2>
+      <ul class="timestamp-list">
+        {ep.data.timestamps.map(t => (
+          <li><span class="ts-time">{t.time}</span><span>{t.label}</span></li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="ep-section" id="transcript">
+      <h2>Full Transcript</h2>
+      <div class="prose">
+        <Content />
+      </div>
+    </section>
+
+    {ep.data.resources && ep.data.resources.length > 0 && (
+      <section class="ep-section">
+        <h2>Resources Mentioned</h2>
+        <ul class="resource-list">
+          {ep.data.resources.map(r => (
+            <li><a class="link" href={r.url} target={r.url.startsWith('http') ? '_blank' : undefined} rel={r.url.startsWith('http') ? 'noopener' : undefined}>{r.label}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {relatedArticles.length > 0 && (
+      <section class="ep-section">
+        <h2>Related Reading</h2>
+        <ul class="resource-list">
+          {relatedArticles.map(a => (
+            <li><a class="link" href={`/blog/${a.id}`}>{a.data.title} →</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {relatedEpisodes.length > 0 && (
+      <section class="ep-section">
+        <h2>Related Episodes</h2>
+        <div class="related-episodes">
+          {relatedEpisodes.map(r => (
+            <a class="related-ep" href={`/podcasts/${r.id}`}>
+              <span class="episode-num">EP {String(r.data.episodeNumber).padStart(2, '0')}</span>
+              <h3>{r.data.title}</h3>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <div class="ep-cta">
+      <a class="btn btn-secondary" href="/podcasts">← All episodes</a>
+      <a class="btn btn-primary" href="/contact">Get in touch</a>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .shell-narrow{max-width:760px;}
+  .episode-page{padding:56px 0 96px;}
+
+  .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);}
+  .breadcrumb a{color:var(--accent);font-weight:500;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  .ep-header{margin-top:22px;}
+  .ep-header h1{font-size:clamp(28px,4vw,42px);letter-spacing:-0.03em;line-height:1.15;}
+  .ep-meta{margin-top:14px;font-family:var(--font-mono);font-size:13.5px;color:var(--muted);display:flex;gap:8px;align-items:center;}
+  .ep-topics{margin-top:16px;}
+
+  .ep-cover{max-width:220px;margin:32px 0;}
+
+  .ep-section{margin-top:40px;}
+  .ep-section h2{font-size:22px;letter-spacing:-0.02em;margin-bottom:16px;}
+  .ep-summary{font-size:18px;line-height:1.75;color:var(--body);}
+
+  .in-episode-list{margin:0;padding-left:22px;}
+  .in-episode-list li{font-size:16px;line-height:1.7;color:var(--body);margin-bottom:8px;}
+
+  .timestamp-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;}
+  .timestamp-list li{
+    display:flex;gap:16px;padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;
+  }
+  .ts-time{font-family:var(--font-mono);color:var(--accent);flex-shrink:0;width:52px;}
+
+  .resource-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;}
+
+  .related-episodes{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:560px){ .related-episodes{grid-template-columns:1fr;} }
+  .related-ep{
+    display:block;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;
+    transition:border-color .2s ease;
+  }
+  .related-ep:hover{border-color:var(--accent);}
+  .related-ep .episode-num{font-family:var(--font-mono);font-size:11.5px;color:var(--accent);}
+  .related-ep h3{margin-top:8px;font-size:15.5px;letter-spacing:-0.01em;line-height:1.4;}
+
+  .ep-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:32px;border-top:1px solid var(--line);}
+</style>
+
+</Layout>

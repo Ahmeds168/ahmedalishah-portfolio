@@ -1,0 +1,36 @@
+---
+interface Props { episodeNumber: number; topic: string }
+const { episodeNumber, topic } = Astro.props;
+const num = String(episodeNumber).padStart(2, '0');
+// subtle per-episode variation without a different palette per episode
+const rotations = [0, 6, -5, 4, -3];
+const rot = rotations[episodeNumber % rotations.length];
+---
+<div class="art">
+  <svg viewBox="0 0 400 400" role="img" aria-label={`Cover artwork for episode ${num}: ${topic}`}>
+    <rect width="400" height="400" fill="#FFFFFF"/>
+    <rect x="0.5" y="0.5" width="399" height="399" fill="none" stroke="#E5E7EB"/>
+
+    <!-- geometric accent shape -->
+    <g transform={`rotate(${rot} 320 80)`} opacity="0.9">
+      <rect x="270" y="30" width="100" height="100" rx="18" fill="none" stroke="#2563EB" stroke-width="2"/>
+      <circle cx="320" cy="80" r="6" fill="#2563EB"/>
+    </g>
+
+    <text x="40" y="70" font-family="Manrope, Inter, sans-serif" font-size="20" font-weight="700" fill="#111827">AHMED<tspan fill="#2563EB">.</tspan></text>
+
+    <text x="40" y="220" font-family="Manrope, Inter, sans-serif" font-size="110" font-weight="700" fill="#2563EB">{num}</text>
+
+    <text x="40" y="270" font-family="JetBrains Mono, monospace" font-size="15" letter-spacing="0.14em" fill="#667085">{topic.toUpperCase()}</text>
+
+    <line x1="40" y1="300" x2="130" y2="300" stroke="#E5E7EB" stroke-width="2"/>
+
+    <text x="40" y="335" font-family="Inter, sans-serif" font-size="15" fill="#374151">Syed Ahmed Ali Shah</text>
+    <text x="40" y="358" font-family="JetBrains Mono, monospace" font-size="11.5" letter-spacing="0.1em" fill="#667085">SOFTWARE ENGINEERING NOTES</text>
+  </svg>
+</div>
+
+<style>
+  .art{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:1px solid var(--line);}
+  .art svg{display:block;width:100%;height:100%;}
+</style>

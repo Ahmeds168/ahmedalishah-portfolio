@@ -7,6 +7,8 @@ import SkillGroup from '../components/SkillGroup.astro';
 import BlogPreview from '../components/BlogPreview.astro';
 import CertificateCard from '../components/CertificateCard.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import FeaturedEpisode from '../components/FeaturedEpisode.astro';
+import EpisodeRow from '../components/EpisodeRow.astro';
 import resume from '../data/resume.json';
 import { getCollection } from 'astro:content';
 
@@ -35,6 +37,10 @@ function splitMeta(meta: string) {
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 ).slice(0, 3);
+
+const episodes = (await getCollection('podcast')).sort((a, b) => b.data.episodeNumber - a.data.episodeNumber);
+const featuredEpisode = episodes.find(e => e.data.featured) ?? episodes[0];
+const recentEpisodes = episodes.filter(e => e.id !== featuredEpisode.id).slice(0, 3);
 
 function readTime(body: string) {
   return Math.max(1, Math.round(body.trim().split(/\s+/).length / 200));
@@ -190,6 +196,50 @@ const certs = resume.certificates;
 
 <hr class="rule" />
 
+<!-- ================= PODCAST ================= -->
+<section class="section" id="podcast">
+  <div class="shell">
+    <SectionHeader
+      kicker="Podcast"
+      title="Ideas worth talking about."
+      intro="Conversations and short episodes about software engineering, AI, blockchain, web development, and lessons from building real systems."
+    />
+
+    <div class="podcast-featured reveal">
+      <FeaturedEpisode
+        slug={featuredEpisode.id}
+        episodeNumber={featuredEpisode.data.episodeNumber}
+        title={featuredEpisode.data.title}
+        shortDescription={featuredEpisode.data.shortDescription}
+        duration={featuredEpisode.data.duration}
+        date={featuredEpisode.data.date}
+        topics={featuredEpisode.data.topics}
+        hasAudio={!!featuredEpisode.data.audioUrl}
+      />
+    </div>
+
+    <div class="podcast-recent reveal">
+      {recentEpisodes.map(e => (
+        <EpisodeRow
+          slug={e.id}
+          episodeNumber={e.data.episodeNumber}
+          title={e.data.title}
+          shortDescription={e.data.shortDescription}
+          duration={e.data.duration}
+          topics={e.data.topics}
+          hasAudio={!!e.data.audioUrl}
+        />
+      ))}
+    </div>
+
+    <div class="work-more reveal">
+      <a class="arrow-link" href="/podcasts">View all episodes <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule" />
+
 <!-- ================= EDUCATION ================= -->
 <section class="section" id="education">
   <div class="shell">
@@ -288,6 +338,10 @@ const certs = resume.certificates;
 
   /* ---------- Writing ---------- */
   .writing-list{margin-top:40px;border-bottom:1px solid var(--line);}
+
+  /* ---------- Podcast ---------- */
+  .podcast-featured{margin-top:48px;}
+  .podcast-recent{margin-top:48px;border-bottom:1px solid var(--line);}
 
   /* ---------- Education ---------- */
   .edu-list{

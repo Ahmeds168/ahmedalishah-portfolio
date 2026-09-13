@@ -1,0 +1,55 @@
+---
+interface Props { audioUrl: string | null; title: string; id: string }
+const { audioUrl, title, id } = Astro.props;
+---
+{audioUrl ? (
+  <div class="player">
+    <audio id={id} controls preload="none" aria-label={`Audio player for ${title}`}>
+      <source src={audioUrl} type="audio/mpeg" />
+      Your browser doesn't support embedded audio. Use the transcript below instead.
+    </audio>
+    <div class="player-speed">
+      <label for={`${id}-speed`}>Speed</label>
+      <select id={`${id}-speed`} class="speed-select" data-audio-target={id}>
+        <option value="0.75">0.75×</option>
+        <option value="1" selected>1×</option>
+        <option value="1.25">1.25×</option>
+        <option value="1.5">1.5×</option>
+        <option value="2">2×</option>
+      </select>
+    </div>
+  </div>
+) : (
+  <div class="player player-placeholder" role="status">
+    <span class="placeholder-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z"/></svg>
+    </span>
+    <span>Audio recording coming soon — read the full transcript below.</span>
+  </div>
+)}
+
+<style>
+  .player{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    background:var(--subtle);border:1px solid var(--line);border-radius:12px;padding:16px 20px;
+  }
+  audio{flex:1;min-width:240px;height:38px;accent-color:var(--accent);}
+  .player-speed{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .speed-select{
+    font-family:var(--font-mono);font-size:13px;color:var(--ink);
+    background:var(--card);border:1px solid var(--line-strong);border-radius:7px;padding:5px 8px;
+  }
+  .player-placeholder{color:var(--muted);font-size:14.5px;}
+  .placeholder-icon{color:var(--accent);flex-shrink:0;}
+</style>
+
+<script>
+  document.querySelectorAll('.speed-select').forEach((select) => {
+    select.addEventListener('change', (e) => {
+      const target = (e.target as HTMLSelectElement);
+      const audioId = target.getAttribute('data-audio-target');
+      const audio = audioId ? document.getElementById(audioId) as HTMLAudioElement | null : null;
+      if (audio) audio.playbackRate = parseFloat(target.value);
+    });
+  });
+</script>

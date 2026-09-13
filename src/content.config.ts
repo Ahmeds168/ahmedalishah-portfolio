@@ -22,4 +22,27 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { blog };
+const podcast = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/podcast' }),
+  schema: z.object({
+    title: z.string(),
+    shortDescription: z.string(),
+    description: z.string(),
+    episodeNumber: z.number(),
+    date: z.coerce.date(),
+    duration: z.string(),          // e.g. "18 min" — display string
+    durationSeconds: z.number().optional(), // for schema.org ISO 8601 duration
+    audioUrl: z.string().nullable().default(null),
+    topics: z.array(z.string()),
+    featured: z.boolean().default(false),
+    inThisEpisode: z.array(z.string()),
+    timestamps: z.array(z.object({ time: z.string(), label: z.string() })),
+    resources: z.array(z.object({ label: z.string(), url: z.string() })).optional(),
+    relatedArticles: z.array(z.string()).optional(), // blog post slugs
+    relatedEpisodes: z.array(z.string()).optional(), // podcast slugs
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, podcast };
