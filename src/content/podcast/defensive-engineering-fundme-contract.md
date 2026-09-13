@@ -6,7 +6,7 @@ episodeNumber: 6
 date: 2026-09-13
 duration: "16 min"
 featured: false
-audioPath: null
+audioPath: "/podcasts/006-defensive-engineering-fundme/episode.m4a"
 topics: ["Blockchain", "Solidity", "Security", "Foundry"]
 inThisEpisode:
   - "What FundMe is and why it's a common Solidity teaching contract"

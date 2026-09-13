@@ -1,11 +1,24 @@
 ---
 interface Props { audioUrl: string | null; title: string; id: string }
 const { audioUrl, title, id } = Astro.props;
+
+// Infer MIME type from the actual file extension rather than assuming MP3 —
+// episodes may be .mp3, .m4a, .wav, etc. Browsers use this hint to decide
+// whether to attempt decoding the source at all.
+const MIME_BY_EXT: Record<string, string> = {
+  mp3: 'audio/mpeg',
+  m4a: 'audio/mp4',
+  wav: 'audio/wav',
+  ogg: 'audio/ogg',
+  aac: 'audio/aac',
+};
+const ext = audioUrl?.split('.').pop()?.toLowerCase().split('?')[0] ?? '';
+const mimeType = MIME_BY_EXT[ext] ?? 'audio/mpeg';
 ---
 {audioUrl ? (
   <div class="player">
     <audio id={id} controls preload="metadata" aria-label={`Audio player for ${title}`}>
-      <source src={audioUrl} type="audio/mpeg" />
+      <source src={audioUrl} type={mimeType} />
       Your browser doesn't support embedded audio. Use the transcript below instead.
     </audio>
     <div class="player-speed">
