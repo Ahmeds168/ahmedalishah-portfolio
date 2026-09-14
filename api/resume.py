@@ -55,9 +55,12 @@ def build_pdf() -> bytes:
 
     contact = resume["contact"]
     contact_line = (
-        f'{contact["email"]} &nbsp;&middot;&nbsp; {contact["phone"]} &nbsp;&middot;&nbsp; '
-        f'{contact["location"]} &nbsp;&middot;&nbsp; {contact["githubLabel"]} &nbsp;&middot;&nbsp; '
-        f'{contact["linkedinLabel"]}'
+        f'<link href="mailto:{contact["email"]}" color="#000000">{contact["email"]}</link> &nbsp;&middot;&nbsp; '
+        f'{contact["phone"]} &nbsp;&middot;&nbsp; '
+        f'{contact["location"]} &nbsp;&middot;&nbsp; '
+        f'<link href="{contact["website"]}" color="#000000">{contact["websiteLabel"]}</link> &nbsp;&middot;&nbsp; '
+        f'<link href="{contact["github"]}" color="#000000">{contact["githubLabel"]}</link> &nbsp;&middot;&nbsp; '
+        f'<link href="{contact["linkedin"]}" color="#000000">{contact["linkedinLabel"]}</link>'
     )
 
     flow = []
