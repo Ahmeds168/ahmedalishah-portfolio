@@ -144,8 +144,8 @@
       ],
       "relatedArticles": [
         "why-i-built-a-blockchain-notary",
-        "foundry-forge-test-mt",
-        "anvil-metamask-balance-not-showing"
+        "solidity-view-vs-pure-function-mutability-variable-types",
+        "foundry-forge-test-mt"
       ],
       "relatedPodcasts": [
         "foundry-vs-hardhat",
