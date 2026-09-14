@@ -238,6 +238,16 @@ img{max-width:100%;height:auto;display:block;}
   font-size:14px;line-height:1.65;
 }
 .prose pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit;}
+/* Syntax-highlighted blocks (Shiki) set their own inline background/color on
+   <pre> and per-token colors on individual <span> elements - those always
+   win over anything below, so highlighted code is unaffected by this rule.
+   Plain/unhighlighted blocks (e.g. ```text fences) have NO inline span
+   colors at all and were relying on a four-level CSS inheritance chain
+   (span -> span.line -> code -> pre's own inline style) to reach a readable
+   color - fragile, and not resolving correctly in at least one real browser.
+   Force an explicit, concrete color directly on the line wrapper so it never
+   depends on that chain. */
+.prose pre.astro-code .line{color:#E2E8F0 !important;}
 
 /* ---------- Accessibility ---------- */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
