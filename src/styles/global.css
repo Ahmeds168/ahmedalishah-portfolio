@@ -2,6 +2,8 @@
 @import "@fontsource-variable/manrope";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/newsreader";
+@import "@fontsource-variable/newsreader/wght-italic.css";
 
 @theme {
   --color-canvas: #FAFAF8;
@@ -19,6 +21,7 @@
   --font-display: 'Manrope Variable', system-ui, sans-serif;
   --font-body: 'Inter Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --font-serif: 'Newsreader Variable', serif;
 }
 
 :root{
@@ -142,8 +145,8 @@ img{max-width:100%;height:auto;display:block;}
 /* ---------- Navigation ---------- */
 .nav{
   position:sticky;top:0;z-index:60;
-  background:var(--accent);
-  border-bottom:1px solid var(--accent-hover);
+  background:var(--ink);
+  border-bottom:1px solid rgba(255,255,255,0.08);
 }
 .nav-inner{
   max-width:var(--shell);margin:0 auto;padding:0 28px;
@@ -151,7 +154,7 @@ img{max-width:100%;height:auto;display:block;}
 }
 @media (max-width:640px){ .nav-inner{padding:0 20px;} }
 .nav-brand{font-family:var(--font-display);font-size:19px;font-weight:700;color:#fff;letter-spacing:-0.02em;}
-.nav-brand span{color:#EFF6FF;}
+.nav-brand span{color:var(--accent);}
 .nav-links{display:flex;align-items:center;gap:30px;}
 .nav-links a{position:relative;font-size:15px;font-weight:500;color:rgba(255,255,255,0.92);padding:4px 0;transition:color .18s ease;}
 .nav-links a::after{

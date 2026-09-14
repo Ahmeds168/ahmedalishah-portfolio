@@ -57,7 +57,7 @@ const certs = resume.certificates;
   <div class="shell">
     <span class="badge"><span class="badge-dot"></span>Available for freelance opportunities</span>
 
-    <h1 class="hero-title">Software developer building useful things for the web.</h1>
+    <h1 class="hero-title">Software developer building <span class="hero-title-accent">useful things for the web.</span></h1>
 
     <p class="hero-sub">
       I'm {resume.name} — a full-stack software developer working across React,
@@ -331,6 +331,12 @@ const certs = resume.certificates;
     line-height:1.04;
     letter-spacing:-0.035em;
     max-width:17ch;
+  }
+  .hero-title-accent{
+    font-family:var(--font-serif);
+    font-style:italic;
+    font-weight:500;
+    letter-spacing:-0.01em;
   }
   .hero-sub{
     margin:26px 0 0;
