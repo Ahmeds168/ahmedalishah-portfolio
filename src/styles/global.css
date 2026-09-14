@@ -190,6 +190,7 @@ img{max-width:100%;height:auto;display:block;}
   background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);border-radius:999px;cursor:pointer;color:#fff;
 }
 @media (max-width:860px){
+  .nav-inner{justify-content:space-between;}
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
   .nav-cta{display:none;}
