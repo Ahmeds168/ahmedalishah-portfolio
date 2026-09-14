@@ -149,7 +149,7 @@ img{max-width:100%;height:auto;display:block;}
 }
 .nav-inner{
   max-width:var(--shell);margin:0 auto;padding:0 28px;
-  height:66px;display:flex;align-items:center;justify-content:flex-start;gap:6px;
+  height:66px;display:flex;align-items:center;justify-content:center;gap:6px;
 }
 @media (max-width:640px){ .nav-inner{padding:0 20px;gap:6px;} }
 .nav-brand{
