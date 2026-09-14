@@ -145,12 +145,12 @@ img{max-width:100%;height:auto;display:block;}
 /* ---------- Navigation ---------- */
 .nav{
   position:sticky;top:12px;z-index:60;
-  margin:0 20px;
+  margin:0 clamp(20px, 7vw, 160px);
   border-radius:14px;
   background:rgba(10,10,10,0.94);
   border:1px solid rgba(255,255,255,0.08);
 }
-@media (max-width:640px){ .nav{margin:0 12px;} }
+@media (max-width:640px){ .nav{margin:0 16px;} }
 .nav-inner{
   max-width:var(--shell);margin:0 auto;padding:0 28px;
   height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px;
