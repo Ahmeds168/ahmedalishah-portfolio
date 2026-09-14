@@ -151,7 +151,6 @@ img{max-width:100%;height:auto;display:block;}
   max-width:var(--shell);margin:0 auto;padding:0 28px;
   height:66px;display:flex;align-items:center;justify-content:center;gap:6px;
 }
-@media (max-width:640px){ .nav-inner{padding:0 20px;gap:6px;} }
 .nav-brand{
   display:inline-flex;align-items:center;justify-content:center;
   height:52px;
@@ -190,7 +189,8 @@ img{max-width:100%;height:auto;display:block;}
   background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);border-radius:999px;cursor:pointer;color:#fff;
 }
 @media (max-width:860px){
-  .nav-inner{justify-content:space-between;}
+  .nav{margin:0 10px;}
+  .nav-inner{padding:0 4px;justify-content:space-between;}
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
   .nav-cta{display:none;}
