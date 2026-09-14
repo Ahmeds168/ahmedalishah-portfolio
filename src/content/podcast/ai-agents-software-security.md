@@ -4,7 +4,8 @@ shortDescription: "What autonomous AI systems mean for developers building appli
 description: "AI agents that can call tools, browse the web, and execute code are showing up in more products every month. This episode walks through what actually changes for developers once a model can take actions on its own — the security model you're implicitly signing up for, the permission questions most teams skip, and practical steps for building agent-facing systems that fail safely instead of silently."
 episodeNumber: 1
 date: 2026-09-20
-duration: "18 min"
+duration: "41 min"
+audioPath: "/podcasts/001-ai-agents-software-security/episode.m4a"
 featured: true
 topics: ["AI", "Security", "Software Engineering"]
 inThisEpisode:
