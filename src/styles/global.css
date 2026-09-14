@@ -161,7 +161,7 @@ img{max-width:100%;height:auto;display:block;}
 .nav-brand span{color:var(--accent);}
 .nav-links{
   display:flex;align-items:center;gap:56px;
-  padding:16px 64px;border-radius:999px;
+  padding:16px 64px;border-radius:14px;
   background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);
 }
 .nav-links a{position:relative;font-size:15px;font-weight:400;color:rgba(255,255,255,0.85);padding:4px 0;transition:color .18s ease;}
