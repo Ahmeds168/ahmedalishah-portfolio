@@ -238,16 +238,23 @@ img{max-width:100%;height:auto;display:block;}
   font-size:14px;line-height:1.65;
 }
 .prose pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit;}
-/* Syntax-highlighted blocks (Shiki) set their own inline background/color on
-   <pre> and per-token colors on individual <span> elements - those always
-   win over anything below, so highlighted code is unaffected by this rule.
-   Plain/unhighlighted blocks (e.g. ```text fences) have NO inline span
-   colors at all and were relying on a four-level CSS inheritance chain
-   (span -> span.line -> code -> pre's own inline style) to reach a readable
-   color - fragile, and not resolving correctly in at least one real browser.
-   Force an explicit, concrete color directly on the line wrapper so it never
-   depends on that chain. */
-.prose pre.astro-code .line{color:#E2E8F0 !important;}
+/* Plain error/terminal-output blocks (```text fences, e.g. compiler error
+   messages) aren't code - they don't need syntax highlighting, and forcing
+   them into the same dark "astro-code" terminal theme as real code caused a
+   real readability problem for at least one reader (low-contrast/near-dark
+   text that a fragile 4-level CSS inheritance chain, and then a forced
+   !important color, both failed to reliably fix). Give them their own
+   simple, light treatment instead, reusing the same ink-on-card colors
+   already proven readable everywhere else on the site, rather than fighting
+   Shiki's dark theme for content that was never really "code" to begin
+   with. Shiki still sets its own background/color inline on the <pre> tag,
+   so this needs !important to override it. */
+.prose pre.astro-code[data-language="text"]{
+  background:var(--card) !important;
+  color:var(--ink) !important;
+  border:1px solid var(--line);
+}
+.prose pre.astro-code[data-language="text"] .line{color:var(--ink) !important;}
 
 /* ---------- Accessibility ---------- */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
