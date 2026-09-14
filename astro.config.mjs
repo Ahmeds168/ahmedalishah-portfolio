@@ -15,6 +15,12 @@ export default defineConfig({
   adapter: vercel(),
   integrations: [react(), sitemap()],
 
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light',
+    },
+  },
+
   build: {
     inlineStylesheets: 'always',
   },

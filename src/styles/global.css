@@ -227,34 +227,51 @@ img{max-width:100%;height:auto;display:block;}
   border-left:3px solid var(--accent);
   font-size:19px;color:var(--ink);font-style:italic;
 }
-.prose code{
-  font-family:var(--font-mono);font-size:14.5px;
-  background:var(--subtle);border:1px solid var(--line);
+/* Inline code (single backticks, e.g. `view`) - visually distinct from
+   fenced code blocks below. Only matches <code> that is NOT inside a <pre>,
+   so block code never accidentally inherits this styling. */
+.prose :not(pre) > code{
+  font-family:var(--font-mono);font-size:0.9em;
+  background:#F1F5F9;color:#0F172A;
+  border:1px solid #E2E8F0;
   padding:2px 6px;border-radius:5px;
 }
-.prose pre{
-  background:#0F172A;color:#E2E8F0;
+/* Fenced code blocks. Astro/Shiki is configured with the github-light theme
+   (astro.config.mjs -> markdown.shikiConfig.theme), so every code block -
+   including plain-text ```text fences with no syntax tokens - gets correct
+   light background/foreground colors natively from Shiki itself. This CSS
+   only controls block-level presentation (background, border, spacing,
+   shape, overflow) and deliberately does NOT force color/background with
+   !important onto individual tokens, so Shiki's real syntax highlighting
+   (keywords, strings, comments etc.) still shows through correctly instead
+   of being flattened to one color. */
+.prose pre,
+.prose pre.astro-code{
+  background:#F8FAFC;color:#1E293B;
+  border:1px solid #E2E8F0;
   padding:20px;border-radius:12px;overflow-x:auto;margin:0 0 24px;
   font-size:14px;line-height:1.65;
 }
-.prose pre code{background:none;border:0;padding:0;color:inherit;font-size:inherit;}
-/* Plain error/terminal-output blocks (```text fences, e.g. compiler error
-   messages) aren't code - they don't need syntax highlighting, and forcing
-   them into the same dark "astro-code" terminal theme as real code caused a
-   real readability problem for at least one reader (low-contrast/near-dark
-   text that a fragile 4-level CSS inheritance chain, and then a forced
-   !important color, both failed to reliably fix). Give them their own
-   simple, light treatment instead, reusing the same ink-on-card colors
-   already proven readable everywhere else on the site, rather than fighting
-   Shiki's dark theme for content that was never really "code" to begin
-   with. Shiki still sets its own background/color inline on the <pre> tag,
-   so this needs !important to override it. */
-.prose pre.astro-code[data-language="text"]{
-  background:var(--card) !important;
-  color:var(--ink) !important;
-  border:1px solid var(--line);
+.prose pre code{background:transparent;border:0;padding:0;font-size:inherit;}
+/* github-light's token color for parameter/variable names (#E36209) is
+   below WCAG AA contrast (3.49:1) against the white code background.
+   Override just that one token color with a darker shade of the same
+   orange hue (5.08:1) - every other Shiki token color already passes AA
+   and is left untouched. */
+.prose pre code span[style*="color:#E36209"]{color:#B84E0A !important;}
+.prose table{
+  width:100%;margin:0 0 24px;border-collapse:collapse;
+  font-size:15.5px;display:block;overflow-x:auto;
 }
-.prose pre.astro-code[data-language="text"] .line{color:var(--ink) !important;}
+.prose th,.prose td{
+  padding:10px 14px;border:1px solid var(--line);text-align:left;
+}
+.prose th{background:var(--subtle);color:var(--ink);font-weight:600;white-space:nowrap;}
+.prose tr:nth-child(even) td{background:var(--subtle);}
+@media (max-width:640px){
+  .prose pre{padding:14px;font-size:13px;}
+  .prose th,.prose td{padding:8px 10px;font-size:14px;}
+}
 
 /* ---------- Accessibility ---------- */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
