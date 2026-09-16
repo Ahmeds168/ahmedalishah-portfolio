@@ -104,7 +104,8 @@
       ],
       "relatedProjects": [],
       "relatedArticles": [
-        "modernizing-a-university-journal-system"
+        "modernizing-a-university-journal-system",
+        "upgrade-ojs-3504-to-3505-safely"
       ],
       "relatedPodcasts": [
         "running-ojs-in-production"

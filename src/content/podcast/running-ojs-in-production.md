@@ -23,7 +23,7 @@ timestamps:
 resources:
   - { label: "My full write-up on this topic", url: "/blog/modernizing-a-university-journal-system" }
   - { label: "Open Journal Systems (official project)", url: "https://pkp.sfu.ca/ojs/" }
-relatedArticles: ["modernizing-a-university-journal-system"]
+relatedArticles: ["modernizing-a-university-journal-system", "upgrade-ojs-3504-to-3505-safely"]
 relatedEpisodes: ["ai-agents-software-security"]
 seoTitle: "Running Open Journal Systems in Production — Real Administration Lessons"
 seoDescription: "Practical lessons from administering a production OJS installation: upgrade risk, plugin compatibility, rollback planning, and office automation."
