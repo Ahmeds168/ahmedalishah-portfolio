@@ -212,6 +212,20 @@
   ],
   "certificates": [
     {
+      "title": "Solidity Smart Contract Development",
+      "issuer": "Cyfrin",
+      "date": "Aug 2026",
+      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity",
+      "image": "/certs/cyfrin-solidity-101.webp"
+    },
+    {
+      "title": "Blockchain Basics",
+      "issuer": "Cyfrin",
+      "date": "Mar 2026",
+      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics",
+      "image": "/certs/cyfrin-blockchain-basics.webp"
+    },
+    {
       "title": "AI Agents and Agentic AI with Python & Generative AI",
       "issuer": "Vanderbilt University, Coursera",
       "date": "Aug 2026",
@@ -252,20 +266,6 @@
       "date": "Jul 2026",
       "url": null,
       "image": "/certs/intro-to-sql.webp"
-    },
-    {
-      "title": "Blockchain Basics",
-      "issuer": "Cyfrin",
-      "date": "Mar 2026",
-      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/certificates/blockchain-basics",
-      "image": "/certs/cyfrin-blockchain-basics.webp"
-    },
-    {
-      "title": "Solidity Smart Contract Development",
-      "issuer": "Cyfrin",
-      "date": "Aug 2026",
-      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/solidity",
-      "image": "/certs/cyfrin-solidity-101.webp"
     },
     {
       "title": "Internship Certificate",
