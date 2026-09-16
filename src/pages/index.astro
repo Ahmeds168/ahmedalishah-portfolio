@@ -408,11 +408,13 @@ const certs = resume.certificates;
   .edu-item span{display:block;margin-top:5px;font-family:var(--font-mono);font-size:12.5px;color:var(--muted);}
 
   /* ---------- Certifications ---------- */
-  .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px;}
+  .certs-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px;align-items:stretch;}
+  .certs-grid > div:not(.cert-hidden){display:flex;}
+  .certs-grid > div > :global(*){width:100%;}
   @media (min-width:900px){ .certs-grid{grid-template-columns:repeat(4,1fr);} }
   @media (max-width:560px){ .certs-grid{grid-template-columns:1fr;} }
   .cert-hidden{display:none;}
-  .certs-grid.expanded .cert-hidden{display:block;}
+  .certs-grid.expanded .cert-hidden{display:flex;}
   .certs-toggle{margin-top:28px;}
 </style>
 
