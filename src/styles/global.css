@@ -185,15 +185,19 @@ img{max-width:100%;height:auto;display:block;}
 }
 .nav-cta:hover{background:#1a1a1a;border-color:rgba(255,255,255,0.25);}
 .nav-toggle{
-  display:none;width:44px;height:44px;align-items:center;justify-content:center;
-  background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);border-radius:999px;cursor:pointer;color:#fff;
+  display:none;width:52px;height:52px;align-items:center;justify-content:center;
+  background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;color:#fff;
 }
 @media (max-width:860px){
-  .nav{margin:0 10px;}
-  .nav-inner{padding:0 4px;justify-content:space-between;}
+  .nav{margin:0 20px;transition:transform .28s ease;}
+  .nav.nav-hidden{transform:translateY(calc(-100% - 20px));}
+  .nav-inner{padding:0;justify-content:space-between;}
   .nav-links{display:none;}
   .nav-toggle{display:flex;}
   .nav-cta{display:none;}
+}
+@media (max-width:860px) and (prefers-reduced-motion:reduce){
+  .nav{transition:none;}
 }
 .mobile-menu{display:none;border-bottom:1px solid var(--line);background:var(--card);}
 .mobile-menu.open{display:block;}

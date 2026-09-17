@@ -104,5 +104,43 @@ const ogImageURL = new URL(ogImage, Astro.site);
   });
 </script>
 
+<script>
+  // Mobile-only: hide the nav when scrolling down, bring it back on any upward
+  // scroll. Uses a passive listener + rAF throttle so it costs nothing on the
+  // scroll path. Desktop keeps the nav pinned.
+  (() => {
+    const nav = document.querySelector('.nav') as HTMLElement | null;
+    if (!nav) return;
+
+    const HIDE_AFTER = 120;   // don't hide until past this, avoids flicker at the top
+    const DELTA = 6;          // ignore jitter smaller than this
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const isMobile = () => window.matchMedia('(max-width: 860px)').matches;
+
+    const update = () => {
+      ticking = false;
+      const y = window.scrollY;
+
+      if (!isMobile()) { nav.classList.remove('nav-hidden'); lastY = y; return; }
+      // never hide while the mobile menu is open
+      if (document.querySelector('.mobile-menu.open')) { nav.classList.remove('nav-hidden'); lastY = y; return; }
+
+      const diff = y - lastY;
+      if (Math.abs(diff) < DELTA) return;
+
+      if (diff > 0 && y > HIDE_AFTER) nav.classList.add('nav-hidden');
+      else if (diff < 0) nav.classList.remove('nav-hidden');
+
+      lastY = y;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+  })();
+</script>
+
 </body>
 </html>
