@@ -199,9 +199,15 @@ img{max-width:100%;height:auto;display:block;}
 @media (max-width:860px) and (prefers-reduced-motion:reduce){
   .nav{transition:none;}
 }
-.mobile-menu{display:none;border-bottom:1px solid var(--line);background:var(--card);}
+.mobile-menu{
+  display:none;
+  position:fixed;left:20px;right:20px;top:calc(12px + 52px + 8px);z-index:59;
+  max-height:calc(100vh - 100px);overflow-y:auto;
+  border:1px solid var(--line);border-radius:12px;background:var(--card);
+  box-shadow:0 12px 32px rgba(0,0,0,0.14);
+}
 .mobile-menu.open{display:block;}
-.mobile-menu nav{max-width:var(--shell);margin:0 auto;padding:10px 20px 22px;display:flex;flex-direction:column;}
+.mobile-menu nav{padding:6px 16px 12px;display:flex;flex-direction:column;}
 .mobile-menu a{padding:13px 2px;font-size:16px;font-weight:500;color:var(--body);border-bottom:1px solid var(--line);}
 .mobile-menu a:last-child{border-bottom:0;}
 

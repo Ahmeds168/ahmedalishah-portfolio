@@ -53,5 +53,24 @@ const links = [
   menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     menu.classList.remove('open');
     toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open menu');
   }));
+
+  // The menu is a floating panel, so close it on an outside tap or Escape.
+  document.addEventListener('click', (e) => {
+    if (!menu?.classList.contains('open')) return;
+    const t = e.target as Node;
+    if (menu.contains(t) || toggle?.contains(t)) return;
+    menu.classList.remove('open');
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open menu');
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('open')) {
+      menu.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'Open menu');
+      (toggle as HTMLElement)?.focus();
+    }
+  });
 </script>
