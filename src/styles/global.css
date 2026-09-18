@@ -189,11 +189,22 @@ img{max-width:100%;height:auto;display:block;}
   background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;color:#fff;
 }
 @media (max-width:860px){
+  /* On mobile only two segments survive, so a shared bar joins them —
+     otherwise they float with page background between and read as two
+     unrelated buttons rather than one nav. */
   .nav{margin:0 20px;transition:transform .28s ease;}
   .nav.nav-hidden{transform:translateY(calc(-100% - 20px));}
-  .nav-inner{padding:0;justify-content:space-between;}
+  .nav-inner{
+    padding:0 8px;justify-content:space-between;height:60px;
+    background:rgba(10,10,10,0.94);border:1px solid rgba(255,255,255,0.1);
+    border-radius:14px;
+  }
+  /* The segments sit inside the bar now, so drop their own chrome. */
+  .nav-brand,.nav-toggle{
+    background:transparent;border-color:transparent;height:44px;
+  }
   .nav-links{display:none;}
-  .nav-toggle{display:flex;}
+  .nav-toggle{display:flex;width:44px;}
   .nav-cta{display:none;}
 }
 @media (max-width:860px) and (prefers-reduced-motion:reduce){
@@ -201,7 +212,7 @@ img{max-width:100%;height:auto;display:block;}
 }
 .mobile-menu{
   display:none;
-  position:fixed;left:20px;right:20px;top:calc(12px + 52px + 8px);z-index:59;
+  position:fixed;left:20px;right:20px;top:calc(12px + 60px + 8px);z-index:59;
   max-height:calc(100vh - 100px);overflow-y:auto;
   border:1px solid var(--line);border-radius:12px;background:var(--card);
   box-shadow:0 12px 32px rgba(0,0,0,0.14);
