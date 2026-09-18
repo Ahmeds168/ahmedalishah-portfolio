@@ -2,5 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://ahmedalishah.vercel.app/sitemap-index.xml
-
-<!-- deploy sync: 20260918T205317Z -->
