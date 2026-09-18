@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import { categoryLabel, categoryColor } from '../../data/categories';
 import ServiceCTA from '../../components/ServiceCTA.astro';
+import resumeData from '../../data/resume.json';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -52,6 +53,17 @@ const SERVICE_BY_CATEGORY: Record<string, string> = {
   'web-development': 'full-stack-development',
 };
 const articleService = SERVICE_BY_CATEGORY[post.data.category];
+
+// Related project case studies by topic — only genuine matches.
+const PROJECTS_BY_CATEGORY: Record<string, string[]> = {
+  foundry: ['decentralized-document-notary', 'on-chain-voting-dapp'],
+  solidity: ['decentralized-document-notary', 'on-chain-voting-dapp'],
+  blockchain: ['decentralized-document-notary', 'on-chain-voting-dapp'],
+  ai: ['groq-ai-chat'],
+};
+const relatedProjects = (PROJECTS_BY_CATEGORY[post.data.category] ?? [])
+  .map(slug => resumeData.projects.find((pr: any) => pr.caseStudy?.slug === slug))
+  .filter(Boolean) as any[];
 
 const catLabel = post.data.categoryLabel ?? categoryLabel(post.data.category);
 const catColorStyle = post.data.categoryColor ?? categoryColor(post.data.category);
@@ -208,6 +220,23 @@ const encodedTitle = encodeURIComponent(post.data.title);
       </div>
     </footer>
   </article>
+
+  {relatedProjects.length > 0 && (
+    <aside class="max-w-[1120px] mx-auto px-5 lg:px-8 pt-12" aria-label="Related projects">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
+        <span class="font-mono text-[11px] text-muted uppercase tracking-wider">Related work</span>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-4">
+        {relatedProjects.map((pr: any) => (
+          <a href={`/projects/${pr.caseStudy.slug}`} class="block bg-card border border-line hover:border-accent rounded-xl p-5 transition-colors no-underline">
+            <h3 class="font-display text-[17px] text-ink mb-1.5">{pr.name}</h3>
+            <p class="text-muted text-[14px] leading-relaxed">{pr.shortDesc}</p>
+          </a>
+        ))}
+      </div>
+    </aside>
+  )}
 
   {articleService && (
     <div class="max-w-[1120px] mx-auto px-5 lg:px-8">

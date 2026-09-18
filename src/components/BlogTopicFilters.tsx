@@ -11,15 +11,20 @@ interface Props {
   posts: Post[];
 }
 
-const categoryOrder = ['blockchain', 'systems', 'ai'];
-
 export default function BlogTopicFilters({ posts }: Props) {
   const [activeTag, setActiveTag] = useState('all');
 
-  const counts = useMemo(() => {
+  // Derive chips from the posts actually present, so adding a category to
+  // src/data/categories.ts (or recategorising a post) needs no edit here.
+  const { counts, categoryOrder, labels } = useMemo(() => {
     const c: Record<string, number> = { all: posts.length };
-    for (const p of posts) c[p.category] = (c[p.category] || 0) + 1;
-    return c;
+    const l: Record<string, string> = {};
+    for (const p of posts) {
+      c[p.category] = (c[p.category] || 0) + 1;
+      l[p.category] = p.categoryLabel;
+    }
+    const order = Object.keys(l).sort((a, b) => (c[b] - c[a]) || a.localeCompare(b));
+    return { counts: c, categoryOrder: order, labels: l };
   }, [posts]);
 
   function select(tag: string) {
@@ -53,7 +58,7 @@ export default function BlogTopicFilters({ posts }: Props) {
               activeTag === cat ? 'bg-accent text-white font-medium' : 'bg-subtle border border-line text-ink hover:border-accent'
             }`}
           >
-            <span className="capitalize">{cat}</span>
+            <span>{labels[cat] ?? cat}</span>
             <span className="opacity-70">{String(counts[cat] ?? 0).padStart(2, '0')}</span>
           </button>
         ))}

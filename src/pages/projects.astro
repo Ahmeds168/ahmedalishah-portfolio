@@ -31,12 +31,22 @@ function linkLabel(url: string) {
   if (url.includes('github.com')) return url.includes('blob') ? 'View notebook' : 'View source';
   return 'View live demo';
 }
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).toString() },
+    { "@type": "ListItem", "position": 2, "name": "Projects", "item": new URL('/projects', Astro.site).toString() },
+  ],
+};
 ---
 <Layout
   title="Projects — Syed Ahmed Ali Shah"
   description="Production web apps, smart contracts, and data-driven tools built by Syed Ahmed Ali Shah."
   activePage="projects"
 >
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
 
 <section class="page-head">
   <div class="shell">

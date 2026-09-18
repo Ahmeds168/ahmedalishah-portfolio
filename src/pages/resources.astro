@@ -1,11 +1,21 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).toString() },
+    { "@type": "ListItem", "position": 2, "name": "Resources", "item": new URL('/resources', Astro.site).toString() },
+  ],
+};
 ---
 <Layout
   title="Resources — Syed Ahmed Ali Shah"
   description="Guides, checklists, and templates from real project and OJS/Solidity/Foundry work — coming soon."
 >
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
 
 <section class="page-head">
   <div class="shell">

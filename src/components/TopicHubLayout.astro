@@ -8,15 +8,22 @@ interface Props {
   seoTitle: string;
   description: string;
   intro: string;
-  articleSlugs: string[];
+  /** Explicit article slugs, in order. Omit to auto-derive from `categories`. */
+  articleSlugs?: string[];
+  /** Category slugs whose articles populate this hub, newest first. */
+  categories?: string[];
   podcastSlugs: string[];
   serviceSlug?: string;
   moreNote: string;
 }
-const { title, seoTitle, description, intro, articleSlugs, podcastSlugs, serviceSlug, moreNote } = Astro.props;
+const { title, seoTitle, description, intro, articleSlugs, categories, podcastSlugs, serviceSlug, moreNote } = Astro.props;
 
 const allPosts = await getCollection('blog');
-const articles = articleSlugs.map(slug => allPosts.find(p => p.id === slug)).filter((p): p is NonNullable<typeof p> => !!p);
+const articles = articleSlugs
+  ? articleSlugs.map(slug => allPosts.find(p => p.id === slug)).filter((p): p is NonNullable<typeof p> => !!p)
+  : allPosts
+      .filter(p => (categories ?? []).includes(p.data.category))
+      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 const allEpisodes = await getCollection('podcast');
 const episodes = podcastSlugs.map(slug => allEpisodes.find(e => e.id === slug)).filter((e): e is NonNullable<typeof e> => !!e);

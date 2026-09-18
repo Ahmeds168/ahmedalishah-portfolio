@@ -2,12 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import ContactCTA from '../components/ContactCTA.astro';
 import resume from '../data/resume.json';
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).toString() },
+    { "@type": "ListItem", "position": 2, "name": "About", "item": new URL('/about', Astro.site).toString() },
+  ],
+};
 ---
 <Layout
   title="About — Syed Ahmed Ali Shah"
   description="Software developer based in Sukkur, Pakistan — full-stack web, Python, applied AI and blockchain development."
   activePage="about"
 >
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
 
 <section class="page-head">
   <div class="shell">

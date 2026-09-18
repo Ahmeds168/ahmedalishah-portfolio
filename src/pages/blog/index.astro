@@ -17,8 +17,18 @@ function tagStyle(color: string) {
   const c = color === 'signal' ? 'var(--color-signal)' : color;
   return `background:${c}1A;color:${c};`;
 }
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": new URL('/', Astro.site).toString() },
+    { "@type": "ListItem", "position": 2, "name": "Writing", "item": new URL('/blog', Astro.site).toString() },
+  ],
+};
 ---
 <Layout title="Blog — Syed Ahmed Ali Shah" description="Notes on the decisions behind Ahmed's projects — blockchain, systems administration, and applied AI." activePage="blog">
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} slot="head" />
 
 <div class="max-w-[1120px] mx-auto px-5 lg:px-8 bg-canvas text-ink font-body">
 
