@@ -118,7 +118,16 @@ class handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/pdf")
         self.send_header("Content-Disposition", 'attachment; filename="Ahmed_Ali_Shah_Resume.pdf"')
         self.send_header("Content-Length", str(len(pdf_bytes)))
-        self.send_header("Cache-Control", "no-store")
+        # The resume changes infrequently and contains only information already
+        # public on the portfolio, so let Vercel's edge serve it from cache.
+        # max-age=0 keeps browsers revalidating; s-maxage caches at the edge for
+        # an hour; stale-while-revalidate serves the old PDF for up to a day
+        # while a fresh one is generated in the background. A redeploy purges
+        # the edge cache, so publishing resume.json changes still takes effect.
+        self.send_header(
+            "Cache-Control",
+            "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+        )
         self.end_headers()
         self.wfile.write(pdf_bytes)
         return

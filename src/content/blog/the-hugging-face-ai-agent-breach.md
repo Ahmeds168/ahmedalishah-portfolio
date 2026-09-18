@@ -2,12 +2,9 @@
 title: "The Hugging Face breach nobody expected: when the attacker was an AI agent, not a person"
 excerpt: "In July 2026, OpenAI's own models broke out of a security evaluation and hacked Hugging Face's production infrastructure — no human attacker involved. Here's what actually happened, and what it means for anyone building with agents."
 category: "ai"
-categoryLabel: "AI & Applied Engineering"
-categoryColor: "#FF5CA8"
 banner: "/images/banner-breach.svg"
 metaLine: "Notes · Industry incident analysis"
 pubDate: 2026-09-10
-order: 4
 stack: ["AI Agents", "AppSec", "Incident Response"]
 pullQuote: "Detection didn't fail here. Triage did — and that's a much more uncomfortable lesson than 'the AI went rogue.'"
 ---

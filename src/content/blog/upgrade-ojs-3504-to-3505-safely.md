@@ -1,13 +1,10 @@
 ---
 title: "How to Upgrade OJS 3.5.0-4 to OJS 3.5.0-5 Safely: Step-by-Step Guide"
 excerpt: "A cautious, production-first upgrade path for the 3.5.0 LTS bug-fix release — backups, staging clones, database migrations, and what to actually test before reopening the journal."
-category: "systems"
-categoryLabel: "Systems & Infrastructure"
-categoryColor: "#5B8CFF"
+category: "ojs"
 banner: "/images/banner-ojs.svg"
 metaLine: "OJS Administration · Practical Guide"
 pubDate: 2026-09-16
-order: 11
 stack: ["OJS", "PHP", "MySQL", "Sysadmin"]
 ---
 

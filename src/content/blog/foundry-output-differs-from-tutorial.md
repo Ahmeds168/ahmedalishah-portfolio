@@ -1,13 +1,10 @@
 ---
 title: "Why Your Foundry Test Output Looks Different From a Course Video"
 excerpt: "A passing test with different-looking terminal output isn't a sign something's wrong — what actually causes the formatting to shift."
-category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
+category: "foundry"
 banner: "/images/banner-foundry-debug.svg"
 metaLine: "Foundry Debugging Series · 5 of 5"
 pubDate: 2026-09-13
-order: 9
 stack: ["Foundry", "Forge"]
 ---
 

@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import { categoryLabel, categoryColor } from '../../data/categories';
+import ServiceCTA from '../../components/ServiceCTA.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -13,7 +15,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 
-const allPosts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+const allPosts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const related = allPosts
   .filter(p => p.id !== post.id)
   .sort((a, b) => {
@@ -33,7 +35,26 @@ function readTime(body: string) {
 const rt = readTime(post.body || '');
 const wordCount = (post.body || '').trim().split(/\s+/).length;
 
-const catColorStyle = post.data.categoryColor === 'signal' ? 'var(--color-signal)' : post.data.categoryColor;
+// Map an article's topic to the one genuinely relevant service. Categories with
+// no clear service match are deliberately absent — no CTA is shown for those.
+const SERVICE_BY_CATEGORY: Record<string, string> = {
+  foundry: 'solidity-foundry-development',
+  solidity: 'solidity-foundry-development',
+  blockchain: 'solidity-foundry-development',
+  ojs: 'ojs-support',
+  systems: 'ojs-support',
+  ai: 'ai-integration',
+  python: 'python-automation',
+  databases: 'python-automation',
+  react: 'full-stack-development',
+  nodejs: 'full-stack-development',
+  javascript: 'full-stack-development',
+  'web-development': 'full-stack-development',
+};
+const articleService = SERVICE_BY_CATEGORY[post.data.category];
+
+const catLabel = post.data.categoryLabel ?? categoryLabel(post.data.category);
+const catColorStyle = post.data.categoryColor ?? categoryColor(post.data.category);
 const pageUrl = new URL(`/blog/${post.id}`, Astro.site).toString();
 const ogImage = `/images/og/${post.id}.png`;
 const ogImageAbs = new URL(ogImage, Astro.site).toString();
@@ -50,8 +71,8 @@ const jsonLd = {
   "datePublished": dateISO,
   "dateModified": dateISO,
   "wordCount": wordCount,
-  "keywords": [post.data.categoryLabel, ...(post.data.stack || [])].join(', '),
-  "articleSection": post.data.categoryLabel,
+  "keywords": [catLabel, ...(post.data.stack || [])].join(', '),
+  "articleSection": catLabel,
   "inLanguage": "en",
   "url": pageUrl,
   "mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl },
@@ -83,9 +104,9 @@ const encodedTitle = encodeURIComponent(post.data.title);
     <meta property="article:published_time" content={dateISO} />
     <meta property="article:modified_time" content={dateISO} />
     <meta property="article:author" content="Syed Ahmed Ali Shah" />
-    <meta property="article:section" content={post.data.categoryLabel} />
+    <meta property="article:section" content={catLabel} />
     {(post.data.stack || []).map(tag => <meta property="article:tag" content={tag} />)}
-    <meta name="keywords" content={[post.data.categoryLabel, ...(post.data.stack || [])].join(', ')} />
+    <meta name="keywords" content={[catLabel, ...(post.data.stack || [])].join(', ')} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </Fragment>
 
@@ -99,7 +120,7 @@ const encodedTitle = encodeURIComponent(post.data.title);
       <div class="flex flex-wrap items-center gap-3 mt-6">
         <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={`background:${catColorStyle}1A;color:${catColorStyle};`}>
           <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
-          {post.data.categoryLabel}
+          {catLabel}
         </span>
       </div>
 
@@ -188,6 +209,12 @@ const encodedTitle = encodeURIComponent(post.data.title);
     </footer>
   </article>
 
+  {articleService && (
+    <div class="max-w-[1120px] mx-auto px-5 lg:px-8">
+      <ServiceCTA serviceSlug={articleService} />
+    </div>
+  )}
+
   {related.length > 0 && (
     <aside class="max-w-[1120px] mx-auto px-5 lg:px-8 pt-16 pb-20 bg-canvas text-ink font-body" aria-label="Related articles">
       <div class="flex items-center gap-2 mb-6">
@@ -196,12 +223,12 @@ const encodedTitle = encodeURIComponent(post.data.title);
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         {related.map(r => {
-          const rColor = r.data.categoryColor === 'signal' ? 'var(--color-signal)' : r.data.categoryColor;
+          const rColor = r.data.categoryColor ?? categoryColor(r.data.category);
           return (
             <a href={`/blog/${r.id}`} class="group bg-card border border-line hover:border-accent rounded-xl overflow-hidden transition-colors no-underline flex flex-col">
               <img src={r.data.banner} alt="" width="1200" height="400" class="w-full aspect-[3/1] object-cover" loading="lazy" />
               <div class="p-5 flex flex-col gap-2 flex-1">
-                <span class="font-mono text-[10.5px]" style={`color:${rColor}`}>{r.data.categoryLabel}</span>
+                <span class="font-mono text-[10.5px]" style={`color:${rColor}`}>{r.data.categoryLabel ?? categoryLabel(r.data.category)}</span>
                 <h3 class="font-display text-[17px] text-ink leading-snug group-hover:text-accent transition-colors">{r.data.title}</h3>
                 <span class="font-mono text-[11px] text-muted mt-auto pt-2">{readTime(r.body || '')} min read</span>
               </div>

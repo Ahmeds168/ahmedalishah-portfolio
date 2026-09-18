@@ -1,13 +1,10 @@
 ---
 title: "Foundry \"forge-std/Test.sol\" Not Found in VS Code: How to Troubleshoot It"
 excerpt: "A red underline in VS Code doesn't always mean forge build actually fails — how to tell the difference and work through the real causes."
-category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
+category: "foundry"
 banner: "/images/banner-foundry-debug.svg"
 metaLine: "Foundry Debugging Series · 2 of 5"
 pubDate: 2026-09-13
-order: 6
 stack: ["Foundry", "VS Code", "Solidity"]
 ---
 

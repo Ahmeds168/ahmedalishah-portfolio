@@ -1,13 +1,10 @@
 ---
 title: "Imported an Anvil Account Into MetaMask but Can't See the 10,000 ETH?"
 excerpt: "The private key imports fine. The balance is real. MetaMask is just pointed at the wrong network — here's the actual fix."
-category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
+category: "foundry"
 banner: "/images/banner-foundry-debug.svg"
 metaLine: "Foundry Debugging Series · 4 of 5"
 pubDate: 2026-09-13
-order: 8
 stack: ["Foundry", "Anvil", "MetaMask"]
 ---
 

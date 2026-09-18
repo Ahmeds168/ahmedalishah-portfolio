@@ -1,13 +1,10 @@
 ---
 title: "Modernizing a university's journal system: lessons from running OJS in production"
 excerpt: "What two years of administering Open Journal Systems for a real department actually looks like day to day."
-category: "systems"
-categoryLabel: "Systems & Infrastructure"
-categoryColor: "#5B8CFF"
+category: "ojs"
 banner: "/images/banner-ojs.svg"
 metaLine: "Notes · Software Development Intern, Sukkur IBA University"
 pubDate: 2026-08-29
-order: 2
 stack: ["OJS", "Sysadmin"]
 ---
 

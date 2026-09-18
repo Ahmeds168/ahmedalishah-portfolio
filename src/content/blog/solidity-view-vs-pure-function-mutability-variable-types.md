@@ -2,12 +2,9 @@
 title: "Solidity view vs pure: Function Mutability, Variable Types, and Data Locations Explained"
 excerpt: "What pure, view, payable, and nonpayable actually restrict a function from doing, plus storage, memory, and calldata — grounded in a real Foundry compiler error from a FundMe project."
 category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
 banner: "/images/banner-foundry-debug.svg"
 metaLine: "Solidity Fundamentals"
 pubDate: 2026-09-15
-order: 10
 stack: ["Solidity", "Foundry"]
 ---
 

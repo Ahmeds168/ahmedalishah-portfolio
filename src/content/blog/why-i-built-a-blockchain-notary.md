@@ -2,12 +2,9 @@
 title: "Why I built a blockchain notary instead of another CRUD app"
 excerpt: "On choosing Solidity over a database when the whole point is that nobody — including me — should be able to quietly edit the record."
 category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
 banner: "/images/banner-notary.svg"
 metaLine: "Notes · Decentralized Document Notary"
 pubDate: 2026-08-29
-order: 1
 stack: ["Solidity", "React", "Supabase"]
 codeSnippet:
   filename: "concept.sol"

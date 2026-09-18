@@ -95,7 +95,11 @@
         ],
         "challenges": "The interesting engineering problem wasn't the smart contract itself \u2014 verifying a hash match is genuinely simple Solidity. The real work was everything around it: keeping the actual file, the hash, and the on-chain record correctly linked across three different platforms without any single point where the record could be quietly altered.",
         "whatILearned": "A public blockchain isn't free \u2014 gas costs money (even fake testnet money has real friction) and a public chain means the hash is technically visible to anyone, even though the document isn't. For most use cases a signed database record with an audit log is genuinely fine. This project exists for the narrower slice of cases where that isn't good enough, and building it was a good way to actually feel that trade-off rather than just read about it."
-      }
+      },
+      "accent": "#2563EB",
+      "screenshot": "/images/projects/notary.webp",
+      "featured": true,
+      "homepageOrder": 1
     },
     {
       "name": "On-Chain Voting dApp",
@@ -120,7 +124,11 @@
         ],
         "challenges": "Making a wallet-connected, on-chain transaction feel as unremarkable as clicking a checkbox on a government form \u2014 hiding the genuinely awkward parts of Web3 UX (wallet connection, transaction confirmation) behind an interface that doesn't ask the user to think about any of it.",
         "whatILearned": "This project is the direct descendant of my university final-year project \u2014 same core idea, votes as immutable on-chain records \u2014 with a much cleaner execution once I wasn't also learning Solidity for the first time while building it."
-      }
+      },
+      "accent": "#7C3AED",
+      "screenshot": "/images/projects/voting.webp",
+      "featured": true,
+      "homepageOrder": 2
     },
     {
       "name": "Groq Chat App",
@@ -145,7 +153,11 @@
         ],
         "challenges": "The real lesson wasn't about the UI \u2014 it was that prompt engineering is closer to ordinary software engineering than the phrase suggests: the biggest quality gains came from being explicit about output format, scope, and failure modes, not from clever wording.",
         "whatILearned": "Temperature and message-history length are load-bearing settings that get less attention than the prompt text itself, but matter just as much for response quality and cost."
-      }
+      },
+      "accent": "#0891B2",
+      "screenshot": "/images/projects/groq-chat.webp",
+      "featured": true,
+      "homepageOrder": 3
     },
     {
       "name": "Election System Using Blockchain (SISC)",
@@ -157,7 +169,8 @@
         "Hyperledger Fabric",
         "IBM Blockchain VS Code Extension"
       ],
-      "url": null
+      "url": null,
+      "featured": false
     },
     {
       "name": "Analyzing Students' Mental Health",
@@ -169,7 +182,8 @@
         "PostgreSQL",
         "Data analysis"
       ],
-      "url": "https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb"
+      "url": "https://github.com/Ahmeds168/Project-Analyzing-Students-Mental-Health/blob/main/workspace/notebook.ipynb",
+      "featured": false
     },
     {
       "name": "Pet Recognition (CNN)",
@@ -181,7 +195,8 @@
         "CNN",
         "Machine Learning"
       ],
-      "url": null
+      "url": null,
+      "featured": false
     },
     {
       "name": "Campus Management Solution",
@@ -193,7 +208,8 @@
         "Java",
         "Oracle SQL"
       ],
-      "url": "https://github.com/Ahmeds168/Campus-Management-Solution-Using-Oracle-Database-in-Java"
+      "url": "https://github.com/Ahmeds168/Campus-Management-Solution-Using-Oracle-Database-in-Java",
+      "featured": false
     }
   ],
   "education": [

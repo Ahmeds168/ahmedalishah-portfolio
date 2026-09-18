@@ -1,13 +1,10 @@
 ---
 title: "Foundry \"forge test --m\" Not Working? Use --mt to Filter Tests by Name"
 excerpt: "The exact error, why --m isn't a real flag, and the difference between --mt, --mc, and --mp when filtering Foundry tests."
-category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
+category: "foundry"
 banner: "/images/banner-foundry-debug.svg"
 metaLine: "Foundry Debugging Series · 1 of 5"
 pubDate: 2026-09-13
-order: 5
 stack: ["Foundry", "Forge", "Solidity"]
 ---
 

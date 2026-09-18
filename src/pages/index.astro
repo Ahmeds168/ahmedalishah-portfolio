@@ -7,6 +7,7 @@ import SkillGroup from '../components/SkillGroup.astro';
 import BlogPreview from '../components/BlogPreview.astro';
 import CertificateCard from '../components/CertificateCard.astro';
 import ContactCTA from '../components/ContactCTA.astro';
+import { categoryLabel } from '../data/categories';
 import FeaturedEpisode from '../components/FeaturedEpisode.astro';
 import EpisodeRow from '../components/EpisodeRow.astro';
 import resume from '../data/resume.json';
@@ -15,20 +16,15 @@ import { getCollection } from 'astro:content';
 import { getPodcastAudioUrl } from '../lib/podcast';
 
 const projects = resume.projects;
-const topTwo = projects.slice(1, 3);        // Voting dApp, Groq Chat
-const featured = projects[0];                // Decentralized Document Notary
 
-const accents: Record<string, string> = {
-  'Decentralized Document Notary': '#2563EB',
-  'On-Chain Voting dApp': '#7C3AED',
-  'Groq Chat App': '#0891B2',
-};
+// Homepage selection is driven by `featured` / `homepageOrder` in resume.json,
+// not by array position — reordering the file no longer changes what's shown.
+const homepageProjects = projects
+  .filter(p => p.featured)
+  .sort((a, b) => (a.homepageOrder ?? 99) - (b.homepageOrder ?? 99));
 
-const screenshots: Record<string, string> = {
-  'Decentralized Document Notary': '/images/projects/notary.webp',
-  'On-Chain Voting dApp': '/images/projects/voting.webp',
-  'Groq Chat App': '/images/projects/groq-chat.webp',
-};
+const featured = homepageProjects[0];
+const topTwo = homepageProjects.slice(1, 3);
 
 // Experience: split the combined "meta" string into period + location
 function splitMeta(meta: string) {
@@ -49,8 +45,32 @@ function readTime(body: string) {
 }
 
 const certs = resume.certificates;
+
+// Person + WebSite structured data for the homepage. Values come from
+// resume.json so they stay in sync with the rest of the site.
+const siteUrl = Astro.site!.toString().replace(/\/$/, '');
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": resume.name,
+  "jobTitle": resume.role,
+  "url": siteUrl,
+  "email": `mailto:${resume.contact.email}`,
+  "address": { "@type": "PostalAddress", "addressLocality": resume.contact.location },
+  "sameAs": [resume.contact.github, resume.contact.linkedin],
+  "knowsAbout": resume.projects.flatMap((p: any) => p.stack).filter((v: string, i: number, a: string[]) => a.indexOf(v) === i),
+};
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": `${resume.name} — Portfolio`,
+  "url": siteUrl,
+  "author": { "@type": "Person", "name": resume.name },
+};
 ---
 <Layout title="Syed Ahmed Ali Shah — Software Developer" activePage="home">
+<script type="application/ld+json" set:html={JSON.stringify(personLd)} slot="head" />
+<script type="application/ld+json" set:html={JSON.stringify(websiteLd)} slot="head" />
 
 <!-- ================= HERO ================= -->
 <section class="hero">
@@ -98,8 +118,8 @@ const certs = resume.certificates;
           stack={p.stack.slice(0, 5)}
           url={p.url}
           tag={p.tag}
-          accent={accents[p.name] ?? '#2563EB'}
-          screenshot={screenshots[p.name] ?? null}
+          accent={p.accent ?? '#2563EB'}
+          screenshot={p.screenshot ?? null}
         />
       ))}
     </div>
@@ -112,8 +132,8 @@ const certs = resume.certificates;
         url={featured.url}
         tag={featured.tag}
         featured={true}
-        accent={accents[featured.name] ?? '#2563EB'}
-        screenshot={screenshots[featured.name] ?? null}
+        accent={featured.accent ?? '#2563EB'}
+        screenshot={featured.screenshot ?? null}
       />
     </div>
 
@@ -211,7 +231,7 @@ const certs = resume.certificates;
           excerpt={post.data.excerpt}
           date={post.data.pubDate}
           readTime={readTime(post.body || '')}
-          category={post.data.categoryLabel}
+          category={post.data.categoryLabel ?? categoryLabel(post.data.category)}
         />
       ))}
     </div>

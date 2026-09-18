@@ -1,13 +1,10 @@
 ---
 title: "Foundry Installed but \"forge\" Command Not Found on macOS"
 excerpt: "Foundry's installer and the actual forge/cast/anvil binaries are two separate steps — what to check when the command still isn't found."
-category: "blockchain"
-categoryLabel: "Blockchain & Cryptography"
-categoryColor: "signal"
+category: "foundry"
 banner: "/images/banner-foundry-debug.svg"
 metaLine: "Foundry Debugging Series · 3 of 5"
 pubDate: 2026-09-13
-order: 7
 stack: ["Foundry", "macOS", "PATH"]
 ---
 

@@ -1,18 +1,19 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { CATEGORY_SLUGS } from './data/categories';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
-    category: z.enum(['blockchain', 'systems', 'ai']),
-    categoryLabel: z.string(),
-    categoryColor: z.string(),
+    category: z.enum(CATEGORY_SLUGS),
+    // Optional overrides — normally derived from src/data/categories.ts.
+    categoryLabel: z.string().optional(),
+    categoryColor: z.string().optional(),
     banner: z.string(),
     metaLine: z.string(),
     pubDate: z.coerce.date(),
-    order: z.number(),
     stack: z.array(z.string()).optional(),
     pullQuote: z.string().optional(),
     codeSnippet: z.object({

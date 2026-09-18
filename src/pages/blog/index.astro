@@ -1,10 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { categoryLabel, categoryColor } from '../../data/categories';
 import BlogSearch from '../../components/BlogSearch.tsx';
 import BlogTopicFilters from '../../components/BlogTopicFilters.tsx';
 
-const posts = (await getCollection('blog')).sort((a, b) => a.data.order - b.data.order);
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 const topics = new Set(posts.map(p => p.data.category)).size;
 
 function readTime(body: string) {
@@ -58,9 +59,9 @@ function tagStyle(color: string) {
           )}
 
           <div class="relative flex flex-wrap items-center justify-between gap-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={tagStyle(post.data.categoryColor)}>
-              <span class="w-1.5 h-1.5 rounded-full" style={`background:${post.data.categoryColor === 'signal' ? 'var(--color-signal)' : post.data.categoryColor}`}></span>
-              {post.data.categoryLabel}
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={tagStyle(post.data.categoryColor ?? categoryColor(post.data.category))}>
+              <span class="w-1.5 h-1.5 rounded-full" style={`background:${post.data.categoryColor ?? categoryColor(post.data.category)}`}></span>
+              {post.data.categoryLabel ?? categoryLabel(post.data.category)}
             </span>
             <span class="flex items-center gap-3 font-mono text-[11px] text-muted">
               <span class="flex items-center gap-1">
@@ -144,7 +145,7 @@ function tagStyle(color: string) {
         </a>
       </div>
 
-      <BlogTopicFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel }))} />
+      <BlogTopicFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel ?? categoryLabel(p.data.category) }))} />
 
       <div class="bg-card p-6 rounded-xl border border-line flex flex-col gap-2">
         <span class="font-mono text-[11px] text-accent uppercase tracking-widest">Direct</span>
