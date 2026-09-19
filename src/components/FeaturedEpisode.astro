@@ -11,7 +11,7 @@ const dateLabel = date.toLocaleDateString('en-US', { month: 'short', year: 'nume
   </div>
   <div class="featured-body">
     <div class="featured-meta">EPISODE {num} · {duration.toUpperCase()} · {dateLabel}</div>
-    <h3>{title}</h3>
+    <h2>{title}</h2>
     <p>{shortDescription}</p>
     <div class="tag-row">
       {topics.map(t => <span class="tag">{t}</span>)}
@@ -33,7 +33,7 @@ const dateLabel = date.toLocaleDateString('en-US', { month: 'short', year: 'nume
   }
   @media (max-width:760px){ .featured{grid-template-columns:1fr;gap:28px;} }
   .featured-meta{font-family:var(--font-mono);font-size:12.5px;color:var(--accent);letter-spacing:.04em;}
-  .featured-body h3{margin-top:14px;font-size:clamp(24px,3.2vw,34px);letter-spacing:-0.025em;line-height:1.2;}
+  .featured-body h2{margin-top:14px;font-size:clamp(24px,3.2vw,34px);letter-spacing:-0.025em;line-height:1.2;}
   .featured-body p{margin:16px 0 0;font-size:16.5px;color:var(--muted);line-height:1.7;max-width:60ch;}
   .featured-body .tag-row{margin-top:20px;}
   .featured-actions{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:26px;}

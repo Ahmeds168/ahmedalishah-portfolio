@@ -57,7 +57,7 @@ Let's examine them together.
 
 ---
 
-### What Does Function Mutability Mean in Solidity?
+## What Does Function Mutability Mean in Solidity?
 
 Solidity functions can declare restrictions describing what they are allowed to do with blockchain state.
 
