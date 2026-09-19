@@ -4,15 +4,12 @@ import SectionHeader from '../components/SectionHeader.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
 import SkillGroup from '../components/SkillGroup.astro';
-import BlogPreview from '../components/BlogPreview.astro';
 import CertificateCard from '../components/CertificateCard.astro';
 import ContactCTA from '../components/ContactCTA.astro';
-import { categoryLabel } from '../data/categories';
 import FeaturedEpisode from '../components/FeaturedEpisode.astro';
 import EpisodeRow from '../components/EpisodeRow.astro';
 import resume from '../data/resume.json';
 import servicesData from '../data/services.json';
-import { getCollection } from 'astro:content';
 import { getPodcastAudioUrl } from '../lib/podcast';
 
 const projects = resume.projects;
@@ -31,14 +28,6 @@ function splitMeta(meta: string) {
   const [period, ...rest] = meta.split('·').map(s => s.trim());
   return { period, location: rest.join(' · ') };
 }
-
-const posts = (await getCollection('blog')).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 3);
-
-const episodes = (await getCollection('podcast')).sort((a, b) => b.data.episodeNumber - a.data.episodeNumber);
-const featuredEpisode = episodes.find(e => e.data.featured) ?? episodes[0];
-const recentEpisodes = episodes.filter(e => e.id !== featuredEpisode.id).slice(0, 3);
 
 function readTime(body: string) {
   return Math.max(1, Math.round(body.trim().split(/\s+/).length / 200));
@@ -208,80 +197,6 @@ const websiteLd = {
 
     <div class="work-more reveal">
       <a class="arrow-link" href="/services">View all services <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-  </div>
-</section>
-
-<hr class="rule" />
-
-<!-- ================= WRITING ================= -->
-<section class="section" id="writing">
-  <div class="shell">
-    <SectionHeader
-      kicker="Writing"
-      title="Notes on software, security, and the occasional deep dive"
-      intro="Short write-ups on the decisions behind the projects, plus analysis of things happening elsewhere in software and security."
-    />
-
-    <div class="writing-list reveal">
-      {posts.map(post => (
-        <BlogPreview
-          href={`/blog/${post.id}`}
-          title={post.data.title}
-          excerpt={post.data.excerpt}
-          date={post.data.pubDate}
-          readTime={readTime(post.body || '')}
-          category={post.data.categoryLabel ?? categoryLabel(post.data.category)}
-        />
-      ))}
-    </div>
-
-    <div class="work-more reveal">
-      <a class="arrow-link" href="/blog">All writing <span class="arrow" aria-hidden="true">→</span></a>
-    </div>
-  </div>
-</section>
-
-<hr class="rule" />
-
-<!-- ================= PODCAST ================= -->
-<section class="section" id="podcast">
-  <div class="shell">
-    <SectionHeader
-      kicker="Podcast"
-      title="Ideas worth talking about."
-      intro="Conversations and short episodes about software engineering, AI, blockchain, web development, and lessons from building real systems."
-    />
-
-    <div class="podcast-featured reveal">
-      <FeaturedEpisode
-        slug={featuredEpisode.id}
-        episodeNumber={featuredEpisode.data.episodeNumber}
-        title={featuredEpisode.data.title}
-        shortDescription={featuredEpisode.data.shortDescription}
-        duration={featuredEpisode.data.duration}
-        date={featuredEpisode.data.date}
-        topics={featuredEpisode.data.topics}
-        hasAudio={!!getPodcastAudioUrl(featuredEpisode.data.audioPath)}
-      />
-    </div>
-
-    <div class="podcast-recent reveal">
-      {recentEpisodes.map(e => (
-        <EpisodeRow
-          slug={e.id}
-          episodeNumber={e.data.episodeNumber}
-          title={e.data.title}
-          shortDescription={e.data.shortDescription}
-          duration={e.data.duration}
-          topics={e.data.topics}
-          hasAudio={!!getPodcastAudioUrl(e.data.audioPath)}
-        />
-      ))}
-    </div>
-
-    <div class="work-more reveal">
-      <a class="arrow-link" href="/podcasts">View all episodes <span class="arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
