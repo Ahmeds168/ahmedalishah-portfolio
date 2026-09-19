@@ -4,7 +4,8 @@ shortDescription: "A clear, practical walkthrough of the four main SQL join type
 description: "Joins are the part of SQL that trip up even experienced developers once tables get more complex than a tutorial example. This episode covers INNER, LEFT, RIGHT, and FULL joins with concrete examples, plus the mental model that makes the difference between them click permanently instead of needing to be re-looked-up every time."
 episodeNumber: 5
 date: 2026-08-23
-duration: "11 min"
+duration: "45 min"
+durationSeconds: 2716
 featured: false
 audioPath: "/podcasts/005-sql-joins-explained/episode.m4a"
 topics: ["SQL", "Databases", "Backend Development"]
@@ -16,11 +17,6 @@ inThisEpisode:
   - "How to pick the right join without memorizing a chart"
 timestamps:
   - { time: "00:00", label: "Introduction" }
-  - { time: "01:10", label: "The mental model for joins" }
-  - { time: "03:00", label: "INNER JOIN" }
-  - { time: "05:20", label: "LEFT and RIGHT JOIN" }
-  - { time: "08:00", label: "FULL JOIN" }
-  - { time: "09:45", label: "Picking the right join in practice" }
 resources:
   - { label: "My Campus Management project (Java + Oracle SQL)", url: "/projects" }
 relatedArticles: []
