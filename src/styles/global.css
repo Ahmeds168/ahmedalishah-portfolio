@@ -233,6 +233,7 @@ img{max-width:100%;height:auto;display:block;}
 .footer-links{display:flex;gap:22px;}
 .footer-links a{font-size:14px;color:var(--muted);font-weight:500;transition:color .18s ease;}
 .footer-links a:hover{color:var(--accent);}
+.rss-link{display:inline-flex;align-items:center;gap:6px;}
 
 /* ---------- Prose (article body) ---------- */
 .prose{font-size:18px;line-height:1.8;color:var(--body);}
