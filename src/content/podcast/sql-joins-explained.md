@@ -6,6 +6,7 @@ episodeNumber: 5
 date: 2026-08-23
 duration: "11 min"
 featured: false
+audioPath: "/podcasts/005-sql-joins-explained/episode.m4a"
 topics: ["SQL", "Databases", "Backend Development"]
 inThisEpisode:
   - "The mental model: joins as combining rows, not tables"
