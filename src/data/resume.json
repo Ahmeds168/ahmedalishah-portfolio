@@ -136,8 +136,8 @@
       "name": "Groq Chat App",
       "tag": "live",
       "shortDesc": "Full-stack chat app \u2014 Node.js/Express backend calling the Groq API, React (Vite) frontend.",
-      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference \u2014 Groq's API serves responses fast enough that the usual 'typing indicator' UX patterns barely matter. The Express backend handles the API calls and keeps the key server-side; the Vite/React frontend is deliberately simple, just a textbox and a response stream, so the focus stays on the model interaction rather than UI chrome.",
-      "extra": "This project doubled as a testbed for prompt engineering technique \u2014 testing how system prompts, temperature, and message history structure change response quality in a low-latency setting.",
+      "longDesc": "A full-stack chat interface built to get hands-on with fast LLM inference. The Express backend handles the API calls and keeps the key server-side; the Vite/React frontend is deliberately simple so the focus stays on the model interaction rather than UI chrome. Responses are returned complete rather than streamed, with a progress bar covering the wait \u2014 including Render's cold-start window on the backend.",
+      "extra": "A deliberate scope limitation worth naming: each submission is stateless \u2014 one system prompt plus one user prompt, with no memory of prior turns. That removes any accumulating-context cost, but also means there is no multi-turn conversation capability.",
       "stack": [
         "Node.js",
         "Express",
@@ -147,14 +147,16 @@
       "url": "https://groq-chat-frontend-ahmed-ali-shahs-projects-c142f759.vercel.app/",
       "caseStudy": {
         "slug": "groq-ai-chat",
-        "problem": "Getting genuinely hands-on with fast LLM inference, and using a real chat interface as a testbed for prompt engineering technique rather than just reading about it.",
-        "architecture": "A Node.js/Express backend calls the Groq API and keeps the API key server-side; a React (Vite) frontend handles the chat interface. Groq's low latency is fast enough that the usual 'typing indicator, then a wall of text appears' UX pattern barely matters.",
+        "problem": "Getting hands-on with fast LLM inference by building something real against it, rather than reading about it \u2014 and finding out what actually breaks when you put a third-party inference API behind a public endpoint.",
+        "architecture": "A Node.js/Express backend calls the Groq API and keeps the key server-side; a React (Vite) frontend handles the chat interface. Each request is stateless: one system prompt, one user prompt, no conversation history. The backend is deployed on Render, the frontend on Vercel.",
         "technicalDecisions": [
-          "Keeping the API key strictly server-side in the Express backend rather than calling Groq directly from the frontend.",
-          "Using the app as a deliberate testbed for testing how system prompts, temperature, and message history structure change response quality in a low-latency setting."
+          "Keeping the API key strictly server-side in the Express backend rather than calling Groq directly from the browser, where any key would be trivially extractable.",
+          "Making the model name an environment variable (GROQ_MODEL) instead of hardcoding it \u2014 a direct response to being burned by a deprecation mid-project.",
+          "Adding our own rate limiting as a precaution on a public endpoint: 10 requests per minute on /api/chat and 100 per 15 minutes overall. These are self-imposed guards, not limits hit in practice.",
+          "Waiting for the complete response rather than streaming tokens, with a progress bar to fill the silence. A pragmatic choice, though streaming would meaningfully improve perceived latency."
         ],
-        "challenges": "The real lesson wasn't about the UI \u2014 it was that prompt engineering is closer to ordinary software engineering than the phrase suggests: the biggest quality gains came from being explicit about output format, scope, and failure modes, not from clever wording.",
-        "whatILearned": "Temperature and message-history length are load-bearing settings that get less attention than the prompt text itself, but matter just as much for response quality and cost."
+        "challenges": "The concrete problem was one I did not anticipate: Groq deprecated llama-3.3-70b-versatile mid-project. The model the backend had been calling started returning a \"does not exist\" error in production \u2014 a working app broken by a change on someone else's platform, with no code change on my side.\n\nThe fix was migrating to openai/gpt-oss-120b, Groq's current general-purpose recommendation. The more useful fix was structural: moving the model name into a GROQ_MODEL environment variable so the next deprecation is a config change rather than a redeploy.",
+        "whatILearned": "Model availability on fast-moving inference platforms is not stable. Hardcoding a model name without a config layer is a real maintenance risk, not a theoretical one \u2014 the deprecation took the app down in production and there was nothing in my code that caused it.\n\nWorth being straight about the limits of what this project tested. Groq's own rate limits were never reached, context-window behaviour was never exercised (every prompt was short and single-turn), and because the app is stateless there is no multi-turn cost curve to report. Those are untested areas rather than findings."
       },
       "accent": "#0891B2",
       "screenshot": "/images/projects/groq-chat.webp",
