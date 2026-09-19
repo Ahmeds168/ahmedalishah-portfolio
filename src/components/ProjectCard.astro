@@ -6,10 +6,11 @@ interface Props {
   url?: string | null;
   tag?: string | null;
   featured?: boolean;
+  caseStudySlug?: string | null;
   accent?: string;
   screenshot?: string | null;
 }
-const { name, desc, stack, url, tag, featured = false, accent = '#2563EB', screenshot = null } = Astro.props;
+const { name, desc, stack, url, tag, featured = false, accent = '#2563EB', screenshot = null, caseStudySlug = null } = Astro.props;
 
 const initials = name
   .replace(/[^A-Za-z ]/g, '')
@@ -50,13 +51,20 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
       {stack.map(s => <span class="tag">{s}</span>)}
     </div>
 
-    {url ? (
-      <a class="arrow-link pcard-link" href={url} target="_blank" rel="noopener" data-track="project_demo_click" data-track-project={name}>
-        {linkLabel} <span class="arrow" aria-hidden="true">→</span>
-      </a>
-    ) : (
-      <span class="pcard-nolink">Academic / not publicly deployed</span>
-    )}
+    <div class="pcard-links">
+      {caseStudySlug && (
+        <a class="arrow-link pcard-link" href={`/projects/${caseStudySlug}`}>
+          Read case study <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      )}
+      {url ? (
+        <a class="arrow-link pcard-link pcard-link-muted" href={url} target="_blank" rel="noopener" data-track="project_demo_click" data-track-project={name}>
+          {linkLabel} <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      ) : (
+        <span class="pcard-nolink">Academic / not publicly deployed</span>
+      )}
+    </div>
   </div>
 </article>
 
@@ -118,7 +126,10 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
   .pcard-live-dot{width:6px;height:6px;border-radius:50%;background:#16A34A;}
   .pcard-desc{margin:0;font-size:15.5px;line-height:1.65;color:var(--muted);flex:1;}
   .pcard-stack{margin-top:2px;}
-  .pcard-link{margin-top:6px;}
+  .pcard-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:6px;}
+  .pcard-link{margin-top:0;}
+  .pcard-link-muted{color:var(--muted);}
+  .pcard-link-muted:hover{color:var(--accent);}
   .pcard-nolink{margin-top:6px;font-size:14px;color:var(--muted);}
 
   /* Featured: side-by-side on desktop */

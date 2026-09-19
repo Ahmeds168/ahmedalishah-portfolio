@@ -103,12 +103,13 @@ const websiteLd = {
       {topTwo.map(p => (
         <ProjectCard
           name={p.name}
-          desc={p.shortDesc}
+          desc={p.longDesc ?? p.shortDesc}
           stack={p.stack.slice(0, 5)}
           url={p.url}
           tag={p.tag}
           accent={p.accent ?? '#2563EB'}
           screenshot={p.screenshot ?? null}
+          caseStudySlug={p.caseStudy?.slug ?? null}
         />
       ))}
     </div>
@@ -123,6 +124,7 @@ const websiteLd = {
         featured={true}
         accent={featured.accent ?? '#2563EB'}
         screenshot={featured.screenshot ?? null}
+        caseStudySlug={featured.caseStudy?.slug ?? null}
       />
     </div>
 
