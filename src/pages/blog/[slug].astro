@@ -160,7 +160,7 @@ const encodedTitle = encodeURIComponent(post.data.title);
           <a class="share-btn" href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`} target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
           </a>
-          <button class="share-btn" id="copyLinkBtn" type="button" aria-label="Copy link" title="Copy link">
+          <button class="share-btn copy-link-btn" id="copyLinkBtn" type="button" aria-label="Copy link" title="Copy link">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
           </button>
           <button class="share-btn hidden" id="nativeShareBtn" type="button" aria-label="Share" title="Share">
@@ -202,11 +202,17 @@ const encodedTitle = encodeURIComponent(post.data.title);
           <a class="share-btn" href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener" aria-label="Share on X">
             <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M18.9 2H22l-7.2 8.2L23 22h-6.6l-5.2-6.8L5.3 22H2.2l7.7-8.8L1 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L6.4 3.9H4.5L17.7 20z"/></svg>
           </a>
+          <a class="share-btn" href={`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`} target="_blank" rel="noopener" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          </a>
+          <button class="share-btn copy-link-btn" type="button" aria-label="Copy link" title="Copy link">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>
+          </button>
         </div>
       </div>
 
       <div class="mt-10 bg-card p-6 rounded-xl border border-line flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-        <div class="flex items-center gap-4">
+        <div class="flex flex-col sm:flex-row items-start gap-4">
           <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" width="56" height="56" class="w-14 h-14 rounded-full object-cover shrink-0" />
           <div>
             <div class="font-mono text-[10.5px] text-muted uppercase tracking-widest mb-1">Written by</div>
@@ -214,8 +220,8 @@ const encodedTitle = encodeURIComponent(post.data.title);
             <div class="text-muted text-sm mt-0.5">Software developer — full-stack, blockchain &amp; applied AI. I write about my own projects, and about things worth understanding elsewhere in software and security.</div>
           </div>
         </div>
-        <a href="/contact" class="inline-flex items-center gap-2 bg-accent text-white hover:opacity-90 font-mono text-[12px] font-semibold px-4 py-2.5 rounded-lg transition-opacity whitespace-nowrap shrink-0">
-          Get in touch →
+        <a href="/contact" class="btn btn-primary shrink-0" data-track="contact_click" data-track-source="article_author_card">
+          Get in touch <span class="arrow" aria-hidden="true">→</span>
         </a>
       </div>
     </footer>
@@ -304,14 +310,15 @@ const encodedTitle = encodeURIComponent(post.data.title);
     window.addEventListener('resize', updateProgress);
     updateProgress();
 
-    const copyBtn = document.getElementById('copyLinkBtn');
-    copyBtn?.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        copyBtn.setAttribute('title', 'Copied!');
-        copyBtn.classList.add('!border-accent', '!text-accent');
-        setTimeout(() => { copyBtn.setAttribute('title', 'Copy link'); copyBtn.classList.remove('!border-accent', '!text-accent'); }, 1600);
-      } catch {}
+    document.querySelectorAll('.copy-link-btn').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          btn.setAttribute('title', 'Copied!');
+          btn.classList.add('!border-accent', '!text-accent');
+          setTimeout(() => { btn.setAttribute('title', 'Copy link'); btn.classList.remove('!border-accent', '!text-accent'); }, 1600);
+        } catch {}
+      });
     });
 
     const nativeBtn = document.getElementById('nativeShareBtn');

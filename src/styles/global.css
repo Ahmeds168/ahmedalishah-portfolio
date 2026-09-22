@@ -144,8 +144,17 @@ img{max-width:100%;height:auto;display:block;}
 
 /* ---------- Navigation ---------- */
 .nav{
+  --nav-gutter:clamp(20px, 7vw, 160px);
   position:sticky;top:12px;z-index:60;
-  margin:0 clamp(20px, 7vw, 160px);
+  margin:0 var(--nav-gutter);
+}
+/* The bar floats 12px below the viewport top. Without a cover, page content
+   scrolling underneath flashes through that strip and reads as a glitch.
+   Sized from the same gutter as the margin, so it spans exactly the page width. */
+.nav::before{
+  content:"";position:absolute;bottom:100%;height:12px;
+  left:calc(-1 * var(--nav-gutter));right:calc(-1 * var(--nav-gutter));
+  background:var(--canvas);pointer-events:none;
 }
 .nav-inner{
   max-width:var(--shell);margin:0 auto;padding:0 28px;
@@ -192,7 +201,7 @@ img{max-width:100%;height:auto;display:block;}
   /* On mobile only two segments survive, so a shared bar joins them —
      otherwise they float with page background between and read as two
      unrelated buttons rather than one nav. */
-  .nav{margin:0 20px;transition:transform .28s ease;}
+  .nav{--nav-gutter:20px;transition:transform .28s ease;}
   .nav.nav-hidden{transform:translateY(calc(-100% - 20px));}
   .nav-inner{
     padding:0 8px;justify-content:space-between;height:60px;
