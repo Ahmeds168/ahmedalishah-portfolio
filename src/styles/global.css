@@ -41,7 +41,7 @@
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip;}
 
 body{
   margin:0;
@@ -144,21 +144,20 @@ img{max-width:100%;height:auto;display:block;}
 
 /* ---------- Navigation ---------- */
 .nav{
-  --nav-gutter:clamp(20px, 7vw, 160px);
   position:sticky;top:12px;z-index:60;
-  margin:0 var(--nav-gutter);
+  max-width:var(--shell);margin:0 auto;padding:0 28px;
 }
 /* The bar floats 12px below the viewport top. Without a cover, page content
    scrolling underneath flashes through that strip and reads as a glitch.
-   Sized from the same gutter as the margin, so it spans exactly the page width. */
+   Spans the full viewport; html has overflow-x:clip so 100vw cannot scroll. */
 .nav::before{
   content:"";position:absolute;bottom:100%;height:12px;
-  left:calc(-1 * var(--nav-gutter));right:calc(-1 * var(--nav-gutter));
+  left:calc(50% - 50vw);right:calc(50% - 50vw);
   background:var(--canvas);pointer-events:none;
 }
 .nav-inner{
-  max-width:var(--shell);margin:0 auto;padding:0 28px;
-  height:66px;display:flex;align-items:center;justify-content:center;gap:6px;
+  /* .nav supplies the container and padding, matching .shell exactly. */
+  padding:0;height:66px;display:flex;align-items:center;justify-content:flex-start;gap:6px;
 }
 .nav-brand{
   display:inline-flex;align-items:center;justify-content:center;
@@ -201,7 +200,7 @@ img{max-width:100%;height:auto;display:block;}
   /* On mobile only two segments survive, so a shared bar joins them —
      otherwise they float with page background between and read as two
      unrelated buttons rather than one nav. */
-  .nav{--nav-gutter:20px;transition:transform .28s ease;}
+  .nav{padding:0 20px;transition:transform .28s ease;}
   .nav.nav-hidden{transform:translateY(calc(-100% - 20px));}
   .nav-inner{
     padding:0 8px;justify-content:space-between;height:60px;
