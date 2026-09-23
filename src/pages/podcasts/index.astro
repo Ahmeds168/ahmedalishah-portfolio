@@ -1,4 +1,5 @@
 ---
+import { PODCAST_ENABLED } from '../../data/site';
 import Layout from '../../layouts/Layout.astro';
 import FeaturedEpisode from '../../components/FeaturedEpisode.astro';
 import EpisodeRow from '../../components/EpisodeRow.astro';
@@ -24,6 +25,8 @@ const jsonLd = {
   "author": { "@type": "Person", "name": "Syed Ahmed Ali Shah", "url": new URL('/about', Astro.site).toString() },
   "webFeed": new URL('/podcasts', Astro.site).toString(),
 };
+
+if (!PODCAST_ENABLED) return Astro.redirect('/');
 ---
 <Layout
   title="Podcast — Syed Ahmed Ali Shah"

@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ContactCTA from '../../components/ContactCTA.astro';
+import { PODCAST_ENABLED } from '../../data/site';
 import servicesData from '../../data/services.json';
 import resume from '../../data/resume.json';
 import { getCollection } from 'astro:content';
@@ -22,7 +23,7 @@ const relatedArticles = service.relatedArticles
   .filter((p): p is NonNullable<typeof p> => !!p);
 
 const allEpisodes = await getCollection('podcast');
-const relatedEpisodes = service.relatedPodcasts
+const relatedEpisodes = !PODCAST_ENABLED ? [] : service.relatedPodcasts
   .map(slug => allEpisodes.find(e => e.id === slug))
   .filter((e): e is NonNullable<typeof e> => !!e);
 

@@ -1,16 +1,19 @@
 ---
+import { PODCAST_ENABLED } from '../data/site';
+
 interface Props { activePage?: string }
 const { activePage } = Astro.props;
 
-const links = [
+const allLinks = [
   { href: '/projects', label: 'Work', key: 'projects' },
   { href: '/#experience', label: 'Experience', key: 'experience' },
   { href: '/blog', label: 'Writing', key: 'blog' },
-  { href: '/podcasts', label: 'Podcast', key: 'podcasts' },
   { href: '/services', label: 'Services', key: 'services' },
   { href: '/about', label: 'About', key: 'about' },
   { href: '/contact', label: 'Contact', key: 'contact' },
 ];
+if (PODCAST_ENABLED) allLinks.splice(3, 0, { href: '/podcasts', label: 'Podcast', key: 'podcasts' });
+const links = allLinks;
 ---
 <header class="nav">
   <div class="nav-inner">

@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
 import { categoryLabel, categoryColor } from '../../data/categories';
+import { PODCAST_ENABLED } from '../../data/site';
 import ServiceCTA from '../../components/ServiceCTA.astro';
 import resumeData from '../../data/resume.json';
 
@@ -27,7 +28,7 @@ const related = allPosts
   .slice(0, 3);
 
 const allEpisodes = await getCollection('podcast');
-const relatedEpisode = allEpisodes.find(e => (e.data.relatedArticles ?? []).includes(post.id));
+const relatedEpisode = !PODCAST_ENABLED ? undefined : allEpisodes.find(e => (e.data.relatedArticles ?? []).includes(post.id));
 
 function readTime(body: string) {
   const words = body.trim().split(/\s+/).length;
