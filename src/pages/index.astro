@@ -211,27 +211,18 @@ const websiteLd = {
     <SectionHeader kicker="Education" title="Background." />
 
     <div class="edu-list reveal">
-      {resume.education.map(e => {
-        const Tag = e.url ? 'a' : 'div';
-        const linkProps = e.url
-          ? { href: e.url, target: '_blank', rel: 'noopener', 'aria-label': `${e.school} website (opens in a new tab)` }
-          : {};
-        return (
-          <Tag class:list={['edu-item', e.url && 'edu-item-link']} {...linkProps}>
-            <span class="edu-logo-wrap">
-              <img src={e.logo} alt={`${e.school} logo`} width="44" height="44" loading="lazy" decoding="async" />
-            </span>
-            <div>
-              <h3>{e.degree}</h3>
-              <p>
-                {e.school}
-                {e.url && <span class="edu-ext" aria-hidden="true">&#8599;</span>}
-              </p>
-              <span>{e.date}</span>
-            </div>
-          </Tag>
-        );
-      })}
+      {resume.education.map(e => (
+        <div class="edu-item">
+          <span class="edu-logo-wrap">
+            <img src={e.logo} alt={`${e.school} logo`} width="44" height="44" loading="lazy" decoding="async" />
+          </span>
+          <div>
+            <h3>{e.degree}</h3>
+            <p>{e.school}</p>
+            <span>{e.date}</span>
+          </div>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -344,11 +335,6 @@ const websiteLd = {
     display:flex;gap:16px;align-items:flex-start;
     background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;
   }
-  .edu-item-link{transition:border-color .2s ease, transform .2s ease;}
-  .edu-item-link:hover{border-color:var(--accent);transform:translateY(-2px);}
-  .edu-item-link:hover h3{color:var(--accent);}
-  .edu-ext{margin-left:5px;font-size:12px;color:var(--muted);}
-  .edu-item-link:hover .edu-ext{color:var(--accent);}
   .edu-logo-wrap{
     flex-shrink:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;
     background:#FFFFFF;border:1px solid var(--line);border-radius:10px;padding:5px;
