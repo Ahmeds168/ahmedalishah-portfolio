@@ -9,7 +9,7 @@ export async function GET(context) {
   );
 
   return rss({
-    title: `${resume.name} — Writing`,
+    title: `${resume.name} — Blog`,
     description:
       'Notes on software, security, and the occasional deep dive — blockchain, Foundry, OJS administration, Python and applied AI.',
     site: context.site,
