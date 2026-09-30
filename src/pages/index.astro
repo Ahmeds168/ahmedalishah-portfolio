@@ -44,7 +44,6 @@ const personLd = {
   "name": resume.name,
   "jobTitle": resume.role,
   "url": siteUrl,
-  "email": `mailto:${resume.contact.email}`,
   "address": { "@type": "PostalAddress", "addressLocality": resume.contact.location },
   "sameAs": [resume.contact.github, resume.contact.linkedin],
   "knowsAbout": resume.projects.flatMap((p: any) => p.stack).filter((v: string, i: number, a: string[]) => a.indexOf(v) === i),

@@ -20,7 +20,6 @@ export async function GET(context) {
       pubDate: post.data.pubDate,
       link: `/blog/${post.id}`,
       categories: [post.data.categoryLabel ?? categoryLabel(post.data.category)],
-      author: resume.contact.email,
     })),
     customData: '<language>en-us</language>',
   });
