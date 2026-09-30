@@ -57,7 +57,6 @@ def build_pdf() -> bytes:
     contact = resume["contact"]
     contact_line1 = (
         f'<link href="mailto:{contact["email"]}" color="#000000">{contact["email"]}</link> &nbsp;&middot;&nbsp; '
-        f'{contact["phone"]} &nbsp;&middot;&nbsp; '
         f'{contact["location"]}'
     )
     contact_line2 = (
@@ -118,6 +117,8 @@ class handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/pdf")
         self.send_header("Content-Disposition", 'attachment; filename="Ahmed_Ali_Shah_Resume.pdf"')
         self.send_header("Content-Length", str(len(pdf_bytes)))
+        # Downloadable by anyone, but not listed in search results.
+        self.send_header("X-Robots-Tag", "noindex, nofollow")
         # The resume changes infrequently and contains only information already
         # public on the portfolio, so let Vercel's edge serve it from cache.
         # max-age=0 keeps browsers revalidating; s-maxage caches at the edge for
