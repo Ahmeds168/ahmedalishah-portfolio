@@ -16,6 +16,9 @@ export async function getStaticPaths() {
 const { service } = Astro.props;
 
 const relatedProjects = resume.projects.filter(p => service.relatedProjects.includes(p.name));
+const relatedCertificates = (service.relatedCertificates ?? [])
+  .map((t: string) => resume.certificates.find((c: any) => c.title === t))
+  .filter(Boolean) as any[];
 
 const allPosts = await getCollection('blog');
 const relatedArticles = service.relatedArticles
@@ -90,6 +93,17 @@ const breadcrumbLd = {
         <ul class="resource-list">
           {relatedProjects.map(p => (
             <li><a class="link" href="/projects">{p.name} — {p.shortDesc}</a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {relatedCertificates.length > 0 && (
+      <section class="svc-section">
+        <h2>Certificates</h2>
+        <ul class="resource-list">
+          {relatedCertificates.map(c => (
+            <li><a class="link" href={c.url} target="_blank" rel="noopener">{c.title} — {c.issuer}, {c.date} &#8599;</a></li>
           ))}
         </ul>
       </section>

@@ -154,7 +154,12 @@
         "defensive-engineering-fundme-contract"
       ],
       "ctaText": "Building or debugging a Solidity project?",
-      "ctaSub": "Tell me about the contract or the problem you're running into."
+      "ctaSub": "Tell me about the contract or the problem you're running into.",
+      "relatedCertificates": [
+        "Foundry Fundamentals",
+        "Solidity Smart Contract Development",
+        "Blockchain Basics"
+      ]
     },
     {
       "slug": "ai-integration",

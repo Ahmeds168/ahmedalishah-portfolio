@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { PODCAST_ENABLED } from '../data/site';
+import resume from '../data/resume.json';
 import ServiceCTA from '../components/ServiceCTA.astro';
 import { getCollection } from 'astro:content';
 
@@ -14,10 +15,12 @@ interface Props {
   /** Category slugs whose articles populate this hub, newest first. */
   categories?: string[];
   podcastSlugs: string[];
+  /** Certificate titles, looked up in resume.json. */
+  certificateTitles?: string[];
   serviceSlug?: string;
   moreNote: string;
 }
-const { title, seoTitle, description, intro, articleSlugs, categories, podcastSlugs, serviceSlug, moreNote } = Astro.props;
+const { title, seoTitle, description, intro, articleSlugs, categories, podcastSlugs, certificateTitles = [], serviceSlug, moreNote } = Astro.props;
 
 const allPosts = await getCollection('blog');
 const articles = articleSlugs
@@ -28,6 +31,10 @@ const articles = articleSlugs
 
 const allEpisodes = await getCollection('podcast');
 const episodes = !PODCAST_ENABLED ? [] : podcastSlugs.map(slug => allEpisodes.find(e => e.id === slug)).filter((e): e is NonNullable<typeof e> => !!e);
+
+const certificates = certificateTitles
+  .map(t => resume.certificates.find((c: any) => c.title === t))
+  .filter(Boolean) as any[];
 
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const breadcrumbLd = {
@@ -68,6 +75,15 @@ const breadcrumbLd = {
         <h2>Podcast episodes</h2>
         <ul class="resource-list">
           {episodes.map(e => <li><a class="link" href={`/podcasts/${e.id}`}>{e.data.title} →</a></li>)}
+        </ul>
+      </section>
+    )}
+
+    {certificates.length > 0 && (
+      <section class="hub-section">
+        <h2>Certificates</h2>
+        <ul class="resource-list">
+          {certificates.map(c => <li><a class="link" href={c.url} target="_blank" rel="noopener">{c.title} — {c.issuer}, {c.date} &#8599;</a></li>)}
         </ul>
       </section>
     )}
