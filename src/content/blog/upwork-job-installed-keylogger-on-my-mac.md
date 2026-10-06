@@ -28,6 +28,10 @@ I cloned the repository and ran it locally. I was careful in the ways I thought 
 
 The app started at `localhost:3000`. It was a polished front end for something called UltraX, a "decentralized perpetual exchange". The client asked me to send a screenshot of it running, so I did.
 
+![The UltraX front end running at localhost:3000: a dark trading interface with German navigation labels, a "Wallet verbinden" button, and statistics reading 2,323,323,000 total volume and 1,000,000 users](/images/blog/ultrax-scam-app.webp)
+
+*The screenshot I sent the "client", taken at 7:20 PM on 28 August, one minute after the malware installed itself. Browser bar cropped for privacy; the app was running at `localhost:3000`.*
+
 That request is the detail I now think about most. A genuine client reviewing your work does not need proof that the app launched on your machine. An attacker does, because it confirms the payload executed.
 
 The screenshot is timestamped 7:20 PM on 28 August. The malware installed itself at 7:19 PM.
