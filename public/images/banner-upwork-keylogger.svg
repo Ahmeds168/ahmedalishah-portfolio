@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#FFF7F7"/>
+    </linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <circle cx="1070" cy="70" r="170" fill="#F85149" opacity="0.10" filter="url(#blur)"/>
+  <circle cx="120" cy="350" r="150" fill="#2563EB" opacity="0.07" filter="url(#blur)"/>
+
+  <rect x="230" y="62" width="740" height="276" rx="12" fill="#0F172A"/>
+  <circle cx="256" cy="86" r="6" fill="#EF4444"/>
+  <circle cx="276" cy="86" r="6" fill="#F59E0B"/>
+  <circle cx="296" cy="86" r="6" fill="#22C55E"/>
+  <g font-family="JetBrains Mono, Menlo, monospace" font-size="15">
+    <text x="256" y="130" fill="#94A3B8">$ ls ~/Library/LaunchAgents</text>
+    <text x="256" y="166" fill="#64748B">com.adobe.ccxprocess.plist</text>
+    <text x="256" y="192" fill="#64748B">com.google.GoogleUpdater.wake.plist</text>
+    <rect x="248" y="204" width="560" height="30" rx="5" fill="#F85149" opacity="0.16"/>
+    <text x="256" y="225" fill="#FCA5A5">com.AppleAccountSync.plist</text>
+    <text x="580" y="225" fill="#F87171">  Aug 28 19:19</text>
+    <text x="256" y="251" fill="#64748B">com.google.keystone.agent.plist</text>
+    <text x="256" y="296" fill="#94A3B8">trojan.keylogger/python</text>
+    <text x="256" y="320" fill="#475569">macOS · Mach-O 64-bit · self-signed</text>
+  </g>
+</svg>
