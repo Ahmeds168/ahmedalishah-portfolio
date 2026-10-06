@@ -231,6 +231,13 @@
   ],
   "certificates": [
     {
+      "title": "Foundry Fundamentals",
+      "issuer": "Cyfrin",
+      "date": "Oct 2026",
+      "url": "https://profiles.cyfrin.io/u/ahmedalishah96/achievements/foundry",
+      "image": "/certs/cyfrin-foundry-101.webp"
+    },
+    {
       "title": "Solidity Smart Contract Development",
       "issuer": "Cyfrin",
       "date": "Aug 2026",
