@@ -349,6 +349,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 /* ---------- Resume access dialog ---------- */
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 .resume-dialog{
+  /* The global reset zeroes every margin, which removes the browser's own
+     margin:auto centring for modal dialogs — restore it. */
+  margin:auto;
   width:min(420px, calc(100vw - 40px));padding:28px;border:1px solid var(--line);
   border-radius:var(--radius);background:var(--card);color:var(--body);
   box-shadow:0 24px 60px rgba(0,0,0,0.18);
