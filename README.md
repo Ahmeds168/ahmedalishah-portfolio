@@ -14,7 +14,7 @@ auto-deploy from `main`.
 - **Services** — service pages for full-stack development, Python automation,
   OJS support, Solidity/Foundry development and AI integration
 - **Topic hubs** — `/foundry`, `/solidity`, `/ojs`, `/ai` group related articles
-- **Resume** — a downloadable PDF generated from the same data as the site
+- **Resume** — a PDF generated from the same data as the site, downloadable with an access key
 - **RSS** — feed of all articles at `/rss.xml`
 
 ## Structure
@@ -74,6 +74,7 @@ Requires Node 22.12 or later.
 | Variable | Purpose |
 |---|---|
 | `PUBLIC_PODCAST_MEDIA_URL` | Base URL for podcast audio on Cloudflare R2. See `.env.example`. |
+| `RESUME_ACCESS_KEY` | Key required to download the resume PDF. Without a valid key, `/api/resume` redirects to the contact page. If unset, nobody can download — it fails closed. Change it in Vercel to revoke old keys. |
 
 Set in Vercel for production and preview. Never commit a real `.env`.
 

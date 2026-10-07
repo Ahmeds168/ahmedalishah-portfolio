@@ -6,8 +6,10 @@ Single source of truth: reads src/data/resume.json — the SAME file the
 Astro site's pages render from. Update content there once; both the
 website and this PDF stay in sync automatically.
 """
+import hmac
 import json
 import os
+from urllib.parse import urlparse, parse_qs
 from http.server import BaseHTTPRequestHandler
 from io import BytesIO
 
@@ -110,25 +112,39 @@ def build_pdf() -> bytes:
     return buf.getvalue()
 
 
+def key_is_valid(supplied: str) -> bool:
+    """Check the access key against RESUME_ACCESS_KEY.
+
+    Fails closed: if the variable is not set, nobody can download. The
+    comparison is constant-time so response timing reveals nothing about the key.
+    """
+    expected = os.environ.get("RESUME_ACCESS_KEY", "")
+    if not expected or not supplied:
+        return False
+    return hmac.compare_digest(supplied.strip().encode(), expected.encode())
+
+
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        query = parse_qs(urlparse(self.path).query)
+        supplied = (query.get("key") or [""])[0]
+
+        if not key_is_valid(supplied):
+            # No key or a wrong key: send them to the contact page to ask for access.
+            self.send_response(302)
+            self.send_header("Location", "/contact?resume=denied")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("X-Robots-Tag", "noindex, nofollow")
+            self.end_headers()
+            return
+
         pdf_bytes = build_pdf()
         self.send_response(200)
         self.send_header("Content-Type", "application/pdf")
         self.send_header("Content-Disposition", 'attachment; filename="Ahmed_Ali_Shah_Resume.pdf"')
         self.send_header("Content-Length", str(len(pdf_bytes)))
-        # Downloadable by anyone, but not listed in search results.
         self.send_header("X-Robots-Tag", "noindex, nofollow")
-        # The resume changes infrequently and contains only information already
-        # public on the portfolio, so let Vercel's edge serve it from cache.
-        # max-age=0 keeps browsers revalidating; s-maxage caches at the edge for
-        # an hour; stale-while-revalidate serves the old PDF for up to a day
-        # while a fresh one is generated in the background. A redeploy purges
-        # the edge cache, so publishing resume.json changes still takes effect.
-        self.send_header(
-            "Cache-Control",
-            "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
-        )
+        # Gated now, so never cache it anywhere shared.
+        self.send_header("Cache-Control", "private, no-store")
         self.end_headers()
         self.wfile.write(pdf_bytes)
-        return

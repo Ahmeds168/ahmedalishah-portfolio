@@ -26,7 +26,7 @@ const links = allLinks;
     </nav>
 
     <div class="nav-right">
-      <a class="nav-cta" href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">Resume ↗</a>
+      <a class="nav-cta" href="/api/resume" data-resume-link>Resume ↗</a>
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <line x1="3" y1="7" x2="21" y2="7"></line>
@@ -41,7 +41,7 @@ const links = allLinks;
 <div class="mobile-menu" id="mobileMenu">
   <nav aria-label="Mobile">
     {links.map(l => <a href={l.href}>{l.label}</a>)}
-    <a href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">Resume ↗</a>
+    <a href="/api/resume" data-resume-link>Resume ↗</a>
   </nav>
 </div>
 

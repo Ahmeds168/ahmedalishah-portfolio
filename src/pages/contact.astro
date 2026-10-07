@@ -34,6 +34,10 @@ const breadcrumbLd = {
 <section class="section-tight">
   <div class="shell">
     <div class="contact-grid">
+      <div id="resumeNotice" class="resume-notice" role="status" hidden>
+        <strong>Want my resume?</strong> It's shared on request. Tell me your name, company and
+        the role, and I'll send it over.
+      </div>
       <form class="contact-form card" action="https://formspree.io/f/mzebpedg" method="POST">
         <div class="field">
           <label for="name">Name</label>
@@ -47,6 +51,7 @@ const breadcrumbLd = {
           <label for="service">Service</label>
           <select id="service" name="service">
             <option value="">Not sure / other</option>
+            <option value="Resume request">Resume request</option>
             <option value="Full-Stack Development">Full-Stack Development</option>
             <option value="Python Automation">Python Automation</option>
             <option value="OJS Support">OJS Support</option>
@@ -87,7 +92,7 @@ const breadcrumbLd = {
 
         <div class="contact-resume">
           <p>Prefer the short version?</p>
-          <a class="btn btn-secondary" href="/api/resume" download="Ahmed_Ali_Shah_Resume.pdf">
+          <a class="btn btn-secondary" href="/api/resume" data-resume-link>
             Download Resume (PDF)
           </a>
         </div>
@@ -123,12 +128,24 @@ const breadcrumbLd = {
     margin-top:34px;padding-top:26px;border-top:1px solid var(--line);
   }
   .contact-resume p{margin:0 0 14px;font-size:15px;color:var(--muted);}
+  .resume-notice{
+    margin-bottom:18px;padding:14px 16px;border-radius:12px;font-size:15px;line-height:1.6;
+    background:var(--accent-soft);border:1px solid #DBEAFE;color:var(--body);
+  }
+  .resume-notice strong{color:var(--ink);}
 </style>
 
 <script>
   // Preselect the Service dropdown based on ?service=... in the URL, so a
   // visitor arriving from a service page or CTA doesn't have to re-select it.
   const params = new URLSearchParams(window.location.search);
+  // Arriving from the resume gate: explain, and preselect a resume request.
+  if (params.has('resume')) {
+    const notice = document.getElementById('resumeNotice');
+    if (notice) notice.hidden = false;
+    const sel = document.getElementById('service') as HTMLSelectElement | null;
+    if (sel) sel.value = 'Resume request';
+  }
   const requested = params.get('service');
   if (requested) {
     const select = document.getElementById('service') as HTMLSelectElement | null;
