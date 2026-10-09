@@ -132,7 +132,7 @@ const encodedTitle = encodeURIComponent(post.data.title);
       <a class="font-mono text-[12px] text-accent hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
 
       <div class="flex flex-wrap items-center gap-3 mt-6">
-        <a href={`/blog?topic=${post.data.category}`} title={`More posts in ${catLabel}`} class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] hover:underline underline-offset-2" style={`background:${catColorStyle}1A;color:${catTextStyle};`}>
+        <a href={`/blog?topic=${post.data.category}`} title={`More posts in ${catLabel}`} class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-body font-medium text-[12.5px] hover:underline underline-offset-2" style={`background:${catColorStyle}1A;color:${catTextStyle};`}>
           <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
           {catLabel}
         </a>
@@ -146,8 +146,8 @@ const encodedTitle = encodeURIComponent(post.data.title);
           <img src="/images/ahmed-photo.jpg" alt="Syed Ahmed Ali Shah" width="44" height="44" class="w-11 h-11 rounded-full object-cover" />
           <div class="flex flex-col">
             <a href="/about" class="font-display font-semibold text-ink text-[15px] hover:text-accent transition-colors">Syed Ahmed Ali Shah</a>
-            <span class="font-mono text-[11.5px] text-muted">
-              <time datetime={dateISO}>{dateHuman}</time> · {rt} min read
+            <span class="font-body text-[14px] text-muted">
+              <time datetime={dateISO}>{dateHuman}</time><span aria-hidden="true" class="mx-1.5 text-[#98A2B3]">·</span><span class="sr-only">, </span>{rt} min read
             </span>
           </div>
         </div>
@@ -265,9 +265,9 @@ const encodedTitle = encodeURIComponent(post.data.title);
             <a href={`/blog/${r.id}`} class="group bg-card border border-line hover:border-accent rounded-xl overflow-hidden transition-colors no-underline flex flex-col">
               <img src={r.data.banner} alt="" width="1200" height="400" class="w-full aspect-[3/1] object-cover" loading="lazy" />
               <div class="p-5 flex flex-col gap-2 flex-1">
-                <span class="font-mono text-[10.5px]" style={`color:${rColor}`}>{r.data.categoryLabel ?? categoryLabel(r.data.category)}</span>
+                <span class="font-body font-medium text-[12.5px]" style={`color:${rColor}`}>{r.data.categoryLabel ?? categoryLabel(r.data.category)}</span>
                 <h3 class="font-display text-[17px] text-ink leading-snug group-hover:text-accent transition-colors">{r.data.title}</h3>
-                <span class="font-mono text-[11px] text-muted mt-auto pt-2">{readTime(r.body || '')} min read</span>
+                <span class="font-body text-[13px] text-muted mt-auto pt-2">{readTime(r.body || '')} min read</span>
               </div>
             </a>
           );
