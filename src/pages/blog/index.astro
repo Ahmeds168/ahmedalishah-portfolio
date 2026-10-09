@@ -55,6 +55,8 @@ const breadcrumbLd = {
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pt-4 pb-16">
 
     <div class="lg:col-span-8 flex flex-col gap-10">
+      <BlogTopicFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel ?? categoryLabel(p.data.category), categoryColor: p.data.categoryColor ?? categoryColor(p.data.category) }))} />
+
       {posts.map((post, i) => (
         <a
           href={`/blog/${post.id}`}
@@ -155,7 +157,6 @@ const breadcrumbLd = {
         </a>
       </div>
 
-      <BlogTopicFilters client:load posts={posts.map(p => ({ slug: p.id, title: p.data.title, category: p.data.category, categoryLabel: p.data.categoryLabel ?? categoryLabel(p.data.category) }))} />
 
       <div class="bg-card p-6 rounded-xl border border-line flex flex-col gap-2">
         <span class="font-mono text-[11px] text-accent uppercase tracking-widest">Direct</span>
@@ -181,6 +182,13 @@ const breadcrumbLd = {
       });
     }
     window.addEventListener('blogfilter:change', applyFilters);
+    // Apply a topic passed in the address (e.g. /blog?topic=security) straight
+    // away, without waiting for the filter chips to hydrate.
+    const urlTopic = new URLSearchParams(location.search).get('topic');
+    if (urlTopic && document.querySelector(`[data-post-card][data-category="${CSS.escape(urlTopic)}"]`)) {
+      document.documentElement.dataset.blogTag = urlTopic;
+      applyFilters();
+    }
   </script>
 </div>
 

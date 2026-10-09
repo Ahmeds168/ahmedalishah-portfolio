@@ -132,10 +132,10 @@ const encodedTitle = encodeURIComponent(post.data.title);
       <a class="font-mono text-[12px] text-accent hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
 
       <div class="flex flex-wrap items-center gap-3 mt-6">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={`background:${catColorStyle}1A;color:${catTextStyle};`}>
+        <a href={`/blog?topic=${post.data.category}`} title={`More posts in ${catLabel}`} class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px] hover:underline underline-offset-2" style={`background:${catColorStyle}1A;color:${catTextStyle};`}>
           <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
           {catLabel}
-        </span>
+        </a>
       </div>
 
       <h1 class="font-display text-4xl md:text-[46px] tracking-tight mt-4 leading-[1.12]">{post.data.title}</h1>
