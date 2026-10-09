@@ -118,11 +118,11 @@ Done:
 1. Removed the startup entry, the fake app, and both hidden folders, and confirmed nothing was still running.
 2. Submitted the file to VirusTotal, so security vendors can start detecting it.
 3. Reported the account to Upwork with the file hash, the repository addresses, and the timeline.
+4. Changed my email, Upwork and GitHub passwords after removing the malware, email first since it can reset everything else, and replaced my GitHub access token. I made these changes on the Mac itself, so I will change them once more after the reinstall.
 
 In progress:
 
-4. Changing my passwords from my phone, not the Mac, so the new ones cannot be recorded. Email first, since it can reset everything else.
-5. Revoking GitHub tokens and SSH keys, and regenerating API keys.
+5. Revoking old SSH keys and regenerating the API keys for the services I deploy to.
 6. Erasing and reinstalling macOS. After a month of a keylogger that could fetch new stages, a manual clean-up is not something I am willing to trust.
 
 ## What I would do differently
