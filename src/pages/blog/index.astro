@@ -112,7 +112,7 @@ const breadcrumbLd = {
             </blockquote>
           )}
 
-          <div class="relative pt-1 flex items-center justify-between">
+          <div class="relative pt-1 flex flex-wrap items-center justify-between gap-4">
             {post.data.stack && (
               <div class="flex flex-wrap gap-2">
                 {post.data.stack.map(s => (
@@ -121,12 +121,12 @@ const breadcrumbLd = {
               </div>
             )}
             {i === 0 ? (
-              <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-subtle border border-line text-accent group-hover:border-accent group-hover:bg-accent group-hover:text-white font-mono text-[12px] transition-all">
-                Read the full post <span aria-hidden="true">→</span>
+              <span class="shrink-0 inline-flex items-center gap-1.5 px-[18px] py-2.5 rounded-[10px] bg-accent text-white font-body font-semibold text-[14.5px] group-hover:bg-accent-hover transition-colors">
+                Read the full post <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             ) : (
-              <span class="font-mono text-[12px] text-accent inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                Read the full post <span aria-hidden="true">→</span>
+              <span class="shrink-0 font-body font-semibold text-[15px] text-accent group-hover:text-accent-hover inline-flex items-center gap-1.5 transition-colors">
+                Read the full post <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">→</span>
               </span>
             )}
           </div>
