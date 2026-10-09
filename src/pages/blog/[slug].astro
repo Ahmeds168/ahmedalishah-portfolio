@@ -193,7 +193,7 @@ const encodedTitle = encodeURIComponent(post.data.title);
       <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex flex-wrap gap-2">
           {(post.data.stack || []).map(tag => (
-            <span class="font-mono text-[11px] text-muted bg-subtle border border-line px-2.5 py-1 rounded-full">{tag}</span>
+            <span class="font-body font-medium text-[13px] leading-5 text-[#475569] bg-[#F1F5F9] px-[11px] py-1 rounded-full">{tag}</span>
           ))}
         </div>
         <div class="flex items-center gap-2">
