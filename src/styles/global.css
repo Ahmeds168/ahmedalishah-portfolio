@@ -4,6 +4,8 @@
 @import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource-variable/newsreader";
 @import "@fontsource-variable/newsreader/wght-italic.css";
+@import "@fontsource-variable/source-serif-4/opsz.css";
+@import "@fontsource-variable/source-serif-4/opsz-italic.css";
 
 @theme {
   --color-canvas: #FAFAF8;
@@ -11,6 +13,7 @@
   --color-subtle: #F5F5F3;
   --color-accent-soft: #EFF6FF;
   --color-ink: #111827;
+  --color-article: #1F2937; /* article reading text: 14.7:1 on white */
   --color-body: #374151;
   --color-muted: #667085;
   --color-line: #E5E7EB;
@@ -22,6 +25,8 @@
   --font-body: 'Inter Variable', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
   --font-serif: 'Newsreader Variable', serif;
+  /* Article body text: a screen-reading serif, close to Medium's article style. */
+  --font-article: 'Source Serif 4 Variable', Georgia, serif;
 }
 
 :root{
