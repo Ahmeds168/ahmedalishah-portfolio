@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
-import { categoryLabel, categoryColor } from '../../data/categories';
+import { categoryLabel, categoryColor, categoryTextColor } from '../../data/categories';
 import BlogSearch from '../../components/BlogSearch.tsx';
 import BlogTopicFilters from '../../components/BlogTopicFilters.tsx';
 
@@ -13,9 +13,9 @@ function readTime(body: string) {
   return Math.max(1, Math.round(words / 200));
 }
 
-function tagStyle(color: string) {
+function tagStyle(color: string, text: string) {
   const c = color === 'signal' ? 'var(--color-signal)' : color;
-  return `background:${c}1A;color:${c};`;
+  return `background:${c}1A;color:${text};`;
 }
 
 const breadcrumbLd = {
@@ -69,7 +69,7 @@ const breadcrumbLd = {
           )}
 
           <div class="relative flex flex-wrap items-center justify-between gap-2">
-            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={tagStyle(post.data.categoryColor ?? categoryColor(post.data.category))}>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={tagStyle(post.data.categoryColor ?? categoryColor(post.data.category), categoryTextColor(post.data.category))}>
               <span class="w-1.5 h-1.5 rounded-full" style={`background:${post.data.categoryColor ?? categoryColor(post.data.category)}`}></span>
               {post.data.categoryLabel ?? categoryLabel(post.data.category)}
             </span>

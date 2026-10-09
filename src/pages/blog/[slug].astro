@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
-import { categoryLabel, categoryColor } from '../../data/categories';
+import { categoryLabel, categoryColor, categoryTextColor } from '../../data/categories';
 import { PODCAST_ENABLED } from '../../data/site';
 import ServiceCTA from '../../components/ServiceCTA.astro';
 import resumeData from '../../data/resume.json';
@@ -68,6 +68,7 @@ const relatedProjects = (PROJECTS_BY_CATEGORY[post.data.category] ?? [])
 
 const catLabel = post.data.categoryLabel ?? categoryLabel(post.data.category);
 const catColorStyle = post.data.categoryColor ?? categoryColor(post.data.category);
+const catTextStyle = categoryTextColor(post.data.category);
 const pageUrl = new URL(`/blog/${post.id}`, Astro.site).toString();
 const ogImage = `/images/og/${post.id}.png`;
 const ogImageAbs = new URL(ogImage, Astro.site).toString();
@@ -131,7 +132,7 @@ const encodedTitle = encodeURIComponent(post.data.title);
       <a class="font-mono text-[12px] text-accent hover:underline inline-flex items-center gap-1" href="/blog">← back to blog</a>
 
       <div class="flex flex-wrap items-center gap-3 mt-6">
-        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={`background:${catColorStyle}1A;color:${catColorStyle};`}>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-mono text-[11px]" style={`background:${catColorStyle}1A;color:${catTextStyle};`}>
           <span class="w-1.5 h-1.5 rounded-full" style={`background:${catColorStyle}`}></span>
           {catLabel}
         </span>
@@ -259,7 +260,7 @@ const encodedTitle = encodeURIComponent(post.data.title);
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
         {related.map(r => {
-          const rColor = r.data.categoryColor ?? categoryColor(r.data.category);
+          const rColor = categoryTextColor(r.data.category);
           return (
             <a href={`/blog/${r.id}`} class="group bg-card border border-line hover:border-accent rounded-xl overflow-hidden transition-colors no-underline flex flex-col">
               <img src={r.data.banner} alt="" width="1200" height="400" class="w-full aspect-[3/1] object-cover" loading="lazy" />
