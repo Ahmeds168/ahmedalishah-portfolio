@@ -85,7 +85,7 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
 
   .pcard-preview{
     position:relative;
-    aspect-ratio:16/9;
+    aspect-ratio:5/2;
     background:
       linear-gradient(135deg, color-mix(in srgb, var(--tint) 10%, #fff) 0%, color-mix(in srgb, var(--tint) 4%, #fff) 100%);
     border-bottom:1px solid var(--line);
@@ -114,9 +114,9 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
   }
   .pcard:hover .pcard-monogram{transform:scale(1.06);}
 
-  .pcard-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex:1;}
+  .pcard-body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1;}
   .pcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
-  .pcard-head h3{font-size:20px;letter-spacing:-0.02em;}
+  .pcard-head h3{font-size:19px;letter-spacing:-0.02em;}
   .pcard-live{
     display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
     font-size:12px;font-weight:600;color:#15803D;
@@ -124,7 +124,7 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
     padding:3px 9px;border-radius:9999px;
   }
   .pcard-live-dot{width:6px;height:6px;border-radius:50%;background:#16A34A;}
-  .pcard-desc{margin:0;font-size:15.5px;line-height:1.65;color:var(--muted);flex:1;}
+  .pcard-desc{margin:0;font-size:15px;line-height:1.6;color:var(--body);flex:1;}
   .pcard-stack{margin-top:2px;}
   .pcard-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;margin-top:6px;}
   .pcard-link{margin-top:0;}
@@ -137,12 +137,13 @@ const linkLabel = isRepo ? 'View source' : 'View live demo';
     .pcard-featured{flex-direction:row;}
     .pcard-featured .pcard-preview{
       aspect-ratio:auto;
-      flex:0 0 46%;
+      flex:0 0 50%;
       border-bottom:0;border-right:1px solid var(--line);
     }
     .pcard-featured .pcard-monogram{font-size:60px;}
-    .pcard-featured .pcard-body{padding:36px;justify-content:center;}
+    .pcard-featured .pcard-body{padding:32px 36px;justify-content:center;gap:14px;}
     .pcard-featured .pcard-head h3{font-size:26px;}
-    .pcard-featured .pcard-desc{font-size:16.5px;}
+    .pcard-featured .pcard-desc{font-size:16.5px;flex:0;}
+    .pcard-featured .pcard-preview{min-height:280px;}
   }
 </style>

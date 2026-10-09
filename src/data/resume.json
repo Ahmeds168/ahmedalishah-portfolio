@@ -98,7 +98,8 @@
       "accent": "#2563EB",
       "screenshot": "/images/projects/notary.webp",
       "featured": true,
-      "homepageOrder": 1
+      "homepageOrder": 1,
+      "summary": "Proves a file existed, unchanged, at a given moment: the file is hashed in the browser and the hash is recorded on Ethereum's Sepolia testnet."
     },
     {
       "name": "On-Chain Voting dApp",
@@ -129,7 +130,8 @@
       "accent": "#7C3AED",
       "screenshot": "/images/projects/voting.webp",
       "featured": true,
-      "homepageOrder": 2
+      "homepageOrder": 2,
+      "summary": "A Solidity voting contract with a front end styled as a paper ballot, so voting on-chain feels familiar to people who have never used a wallet."
     },
     {
       "name": "Groq Chat App",
@@ -160,7 +162,8 @@
       "accent": "#0891B2",
       "screenshot": "/images/projects/groq-chat.webp",
       "featured": true,
-      "homepageOrder": 3
+      "homepageOrder": 3,
+      "summary": "A full-stack chat app on Groq's fast LLM API, with an Express back end that keeps the API key off the browser."
     },
     {
       "name": "Election System Using Blockchain (SISC)",
