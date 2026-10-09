@@ -29,12 +29,19 @@ const breadcrumbLd = {
           class="about-photo"
           src="/images/ahmed-photo.jpg"
           alt="Portrait of Syed Ahmed Ali Shah"
-          width="140" height="140" loading="lazy" decoding="async"
+          width="140" height="140" loading="eager" fetchpriority="high" decoding="async"
         />
         <div class="about-facts">
           <div><span>Based in</span><strong>{resume.contact.location}</strong></div>
           <div><span>Languages</span><strong>English · Urdu · Sindhi</strong></div>
           <div><span>Focus</span><strong>Full-stack · AI · Blockchain</strong></div>
+          <div><span>Education</span><strong>BS Computer Science, Sukkur IBA</strong></div>
+          <div><span>Open to</span><strong>Freelance projects and full-time roles</strong></div>
+        </div>
+        <div class="about-links">
+          <a href={resume.contact.github} target="_blank" rel="noopener">GitHub</a>
+          <a href={resume.contact.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a href="/api/resume" data-resume-link>Resume</a>
         </div>
       </div>
 
@@ -46,8 +53,7 @@ const breadcrumbLd = {
 
         <p>
           I grew up and studied in Sukkur, Sindh — did my BS in Computer Science at
-          Sukkur IBA University, where my final-year project was a blockchain-based
-          voting system. That project is basically the reason the rest of my career
+          Sukkur IBA University, where my final-year project was a <a href="/blog/why-my-voting-dapp-counts-wallets-not-people">blockchain-based voting system</a>. That project is basically the reason the rest of my career
           has bent toward blockchain: I got curious about what it actually takes to
           make a system where "nobody can quietly change the record" isn't a policy,
           it's a property of the code.
@@ -65,37 +71,38 @@ const breadcrumbLd = {
         <p>
           After that I came back to Sukkur IBA, this time on the other side of the
           desk — as a Software Development Intern in the Department of Electrical
-          Engineering, running their OJS (Open Journal Systems) installation, the
+          Engineering, running their <a href="/ojs">OJS (Open Journal Systems)</a> installation, the
           department website, and a pile of office automation nobody else wanted to
           touch. It's unglamorous work, but it taught me a lot about maintaining
           systems other people depend on daily, not just shipping new ones.
         </p>
 
         <p>
-          Somewhere in the middle of all that I got pulled into prompt engineering and
-          applied AI — partly through coursework (DataCamp, Hugging Face), partly by
-          just building things: a Groq-powered chat app, some small ML models, a
-          notarization app that leans on an LLM-adjacent workflow for document
-          handling. I don't think of AI and blockchain as separate lanes from "normal"
+          Somewhere in the middle of all that I got pulled into prompt engineering and <a href="/ai">applied AI</a> — partly through coursework (DataCamp, Hugging Face), partly by
+          just building things: a <a href="/projects/groq-ai-chat">Groq-powered chat app</a> and some small ML models. I don't think of AI and blockchain as separate lanes from "normal"
           web development — they're just more tools for the same underlying job, which
           is turning a real problem into something that works reliably.
         </p>
 
         <p>
           These days I'm freelancing full-time — React and Node.js on the
-          frontend/backend side, Python where data or ML is involved, Solidity when
+          frontend/backend side, Python where data or ML is involved, <a href="/solidity">Solidity</a> when
           the problem genuinely calls for a blockchain (which, to be clear, is rarer
           than blockchain Twitter would have you believe). I'd rather ship a smaller
           thing that's actually deployed than a bigger thing that only exists in a repo.
         </p>
 
         <h2 class="about-sub">How I work</h2>
+        <p>Three things I try to hold myself to on every project:</p>
+        <ol class="about-principles">
+          <li><strong>Ship something a real user can touch</strong> as early as possible.</li>
+          <li><strong>Don't reach for a heavier tool</strong> (blockchain, a new microservice, a new framework) than the problem actually needs.</li>
+          <li><strong>Leave the boring parts</strong> (docs, deploys, admin) in better shape than I found them.</li>
+        </ol>
         <p>
-          Three things I try to hold myself to on every project: ship something a real
-          user can touch as early as possible, don't reach for a heavier tool
-          (blockchain, a new microservice, a new framework) than the problem actually
-          needs, and leave the boring parts — docs, deploys, admin — in better shape
-          than I found them.
+          I write about what I build on my <a href="/blog">blog</a>, and I recently
+          completed Cyfrin's <a href="/foundry">Foundry Fundamentals</a> course on
+          testing and deploying smart contracts.
         </p>
 
         <p class="about-outro">
@@ -119,21 +126,29 @@ const breadcrumbLd = {
 
   .about-left h1{margin-top:14px;font-size:clamp(30px,3.6vw,42px);letter-spacing:-0.03em;line-height:1.12;}
   .about-photo{
-    margin-top:32px;width:140px;height:140px;border-radius:16px;
+    margin-top:26px;width:128px;height:128px;border-radius:16px;
     object-fit:cover;border:1px solid var(--line);
   }
-  .about-facts{margin-top:32px;display:flex;flex-direction:column;gap:16px;}
+  .about-facts{margin-top:26px;display:flex;flex-direction:column;gap:12px;}
   .about-facts div{display:flex;flex-direction:column;gap:2px;}
-  .about-facts span{
-    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--muted);
-  }
+  .about-facts span{font-size:13px;color:var(--muted);}
   .about-facts strong{font-size:15px;color:var(--ink);font-weight:600;}
 
   .about-right p{margin:0 0 22px;font-size:17px;line-height:1.78;color:var(--body);max-width:68ch;}
   .about-lead{font-size:20px !important;color:var(--ink) !important;line-height:1.6 !important;}
   .about-sub{margin:38px 0 14px;font-size:22px;letter-spacing:-0.02em;}
   .about-outro{color:var(--muted) !important;}
+  .about-right a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;}
+  .about-right a:hover{color:var(--accent-hover);}
+  .about-principles{list-style:decimal;margin:0 0 22px;padding-left:22px;display:flex;flex-direction:column;gap:10px;max-width:68ch;}
+  .about-principles li{font-size:17px;line-height:1.7;color:var(--body);padding-left:4px;}
+  .about-principles li::marker{color:var(--muted);font-weight:600;}
+  .about-principles strong{color:var(--ink);font-weight:600;}
+  .about-links{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px;}
+  .about-links a{font-size:14px;font-weight:600;color:var(--ink);border:1px solid var(--line);border-radius:9999px;padding:7px 14px;background:var(--card);transition:border-color .2s ease,color .2s ease;}
+  .about-links a:hover{border-color:var(--accent);color:var(--accent);}
+  /* Keep the photo and facts in view beside the story on wide screens. */
+  @media (min-width:901px) and (min-height:830px){ .about-left{position:sticky;top:96px;align-self:start;} }
 </style>
 
 </Layout>
