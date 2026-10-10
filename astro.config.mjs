@@ -13,6 +13,9 @@ import { PODCAST_ENABLED } from './src/data/site';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ahmedalishah.vercel.app',
+  // Internal links use /about, not /about/. Make canonicals, the sitemap and
+  // Vercel's routing agree on that one form so Google sees no duplicate URLs.
+  trailingSlash: 'never',
   adapter: vercel(),
   integrations: [
     react(),
