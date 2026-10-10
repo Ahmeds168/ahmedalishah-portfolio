@@ -5,6 +5,8 @@ import { categoryLabel, categoryColor, categoryTextColor } from '../../data/cate
 import { PODCAST_ENABLED } from '../../data/site';
 import ServiceCTA from '../../components/ServiceCTA.astro';
 import resumeData from '../../data/resume.json';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -70,7 +72,12 @@ const catLabel = post.data.categoryLabel ?? categoryLabel(post.data.category);
 const catColorStyle = post.data.categoryColor ?? categoryColor(post.data.category);
 const catTextStyle = categoryTextColor(post.data.category);
 const pageUrl = new URL(`/blog/${post.id}`, Astro.site).toString();
-const ogImage = `/images/og/${post.id}.png`;
+// Each post should have its own 1200x630 preview (scripts/gen-og.py). If one is
+// missing, fall back to the site default so shares never show a blank card.
+const ownOg = `/images/og/${post.id}.png`;
+const hasOwnOg = existsSync(join(process.cwd(), 'public', ownOg));
+if (!hasOwnOg) console.warn(`[og] missing ${ownOg}; using the default image. Generate it with scripts/gen-og.py`);
+const ogImage = hasOwnOg ? ownOg : '/images/og-image.png';
 const ogImageAbs = new URL(ogImage, Astro.site).toString();
 
 const dateISO = post.data.pubDate.toISOString();

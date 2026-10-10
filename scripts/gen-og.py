@@ -46,7 +46,7 @@ def build(slug, kicker, title, accent=DEFAULT_ACCENT):
   <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#F6F8FE"/>
   </linearGradient>
-  <filter id="b"><feGaussianBlur stdDeviation="90"/></filter>
+  <filter id="b" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="90"/></filter>
 </defs>
 <rect width="1200" height="630" fill="url(#g)"/>
 <circle cx="1090" cy="80" r="230" fill="{accent}" opacity="0.10" filter="url(#b)"/>
