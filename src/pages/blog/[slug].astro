@@ -5,7 +5,8 @@ import { categoryLabel, categoryColor, categoryTextColor } from '../../data/cate
 import { PODCAST_ENABLED } from '../../data/site';
 import ServiceCTA from '../../components/ServiceCTA.astro';
 import resumeData from '../../data/resume.json';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 
 export async function getStaticPaths() {
@@ -77,7 +78,11 @@ const pageUrl = new URL(`/blog/${post.id}`, Astro.site).toString();
 const ownOg = `/images/og/${post.id}.png`;
 const hasOwnOg = existsSync(join(process.cwd(), 'public', ownOg));
 if (!hasOwnOg) console.warn(`[og] missing ${ownOg}; using the default image. Generate it with scripts/gen-og.py`);
-const ogImage = hasOwnOg ? ownOg : '/images/og-image.png';
+// Add a short fingerprint of the file so the image URL changes whenever the
+// image does; LinkedIn and X cache previews (and failed fetches) per image URL.
+const ogFile = hasOwnOg ? ownOg : '/images/og-image.png';
+const ogHash = createHash('sha1').update(readFileSync(join(process.cwd(), 'public', ogFile))).digest('hex').slice(0, 8);
+const ogImage = `${ogFile}?v=${ogHash}`;
 const ogImageAbs = new URL(ogImage, Astro.site).toString();
 
 const dateISO = post.data.pubDate.toISOString();
