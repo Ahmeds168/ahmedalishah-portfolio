@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#FBF7F2"/>
+    </linearGradient>
+    <filter id="b"><feGaussianBlur stdDeviation="60"/></filter>
+  </defs>
+  <rect width="1200" height="400" fill="url(#bg)"/>
+  <circle cx="160" cy="70" r="170" fill="#F0883E" opacity="0.10" filter="url(#b)"/>
+  <circle cx="1060" cy="340" r="170" fill="#EAB308" opacity="0.09" filter="url(#b)"/>
+
+  <!-- Foundry: a Solidity test -->
+  <text x="90" y="62" font-family="Inter, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#9A3412" letter-spacing="1.5">FOUNDRY · SOLIDITY TEST</text>
+  <rect x="90" y="78" width="470" height="236" rx="12" fill="#0F172A"/>
+  <circle cx="114" cy="100" r="6" fill="#EF4444"/><circle cx="134" cy="100" r="6" fill="#F59E0B"/><circle cx="154" cy="100" r="6" fill="#22C55E"/>
+  <text x="184" y="105" font-family="JetBrains Mono, Menlo, monospace" font-size="12" fill="#64748B">Voting.t.sol</text>
+  <g font-family="JetBrains Mono, Menlo, monospace" font-size="15">
+    <text x="114" y="146" xml:space="preserve"><tspan fill="#C4B5FD">function</tspan><tspan fill="#E2E8F0"> test_CannotVoteTwice() </tspan><tspan fill="#C4B5FD">public</tspan><tspan fill="#E2E8F0"> {</tspan></text>
+    <text x="134" y="174" xml:space="preserve"><tspan fill="#FDBA74">vm</tspan><tspan fill="#E2E8F0">.prank(alice);</tspan></text>
+    <text x="134" y="198" fill="#E2E8F0">voting.vote(1);</text>
+    <text x="134" y="222" xml:space="preserve"><tspan fill="#FDBA74">vm</tspan><tspan fill="#E2E8F0">.expectRevert();</tspan></text>
+    <text x="134" y="246" fill="#E2E8F0">voting.vote(1);</text>
+    <text x="114" y="270" fill="#E2E8F0">}</text>
+    <text x="114" y="300" fill="#86EFAC">$ forge test</text>
+  </g>
+
+  <!-- vs -->
+  <circle cx="600" cy="196" r="26" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+  <text x="600" y="203" text-anchor="middle" font-family="Manrope, Inter, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#111827">vs</text>
+
+  <!-- Hardhat: a TypeScript test -->
+  <text x="640" y="62" font-family="Inter, Helvetica, sans-serif" font-size="15" font-weight="600" fill="#854D0E" letter-spacing="1.5">HARDHAT · TYPESCRIPT TEST</text>
+  <rect x="640" y="78" width="470" height="236" rx="12" fill="#0F172A"/>
+  <circle cx="664" cy="100" r="6" fill="#EF4444"/><circle cx="684" cy="100" r="6" fill="#F59E0B"/><circle cx="704" cy="100" r="6" fill="#22C55E"/>
+  <text x="734" y="105" font-family="JetBrains Mono, Menlo, monospace" font-size="12" fill="#64748B">Voting.ts</text>
+  <g font-family="JetBrains Mono, Menlo, monospace" font-size="15">
+    <text x="664" y="146" xml:space="preserve"><tspan fill="#E2E8F0">it(</tspan><tspan fill="#86EFAC">"rejects a second vote"</tspan><tspan fill="#E2E8F0">, </tspan><tspan fill="#C4B5FD">async</tspan><tspan fill="#E2E8F0"> () =&gt; {</tspan></text>
+    <text x="684" y="174" xml:space="preserve"><tspan fill="#C4B5FD">await</tspan><tspan fill="#E2E8F0"> voting.vote(1);</tspan></text>
+    <text x="684" y="198" xml:space="preserve"><tspan fill="#C4B5FD">await</tspan><tspan fill="#E2E8F0"> expect(voting.vote(1))</tspan></text>
+    <text x="704" y="222" fill="#E2E8F0">.to.be.reverted;</text>
+    <text x="664" y="246" fill="#E2E8F0">});</text>
+    <text x="664" y="300" fill="#86EFAC">$ npx hardhat test</text>
+  </g>
+
+  <text x="600" y="362" text-anchor="middle" font-family="Inter, Helvetica, sans-serif" font-size="16" fill="#475569">same contract, same check, two toolchains</text>
+</svg>
