@@ -53,6 +53,23 @@ Everything else ships as static HTML with no client-side JavaScript.
 
 Changes to `resume.json` update both the site and the downloadable PDF.
 
+### Publishing a blog post
+
+Every post needs its own share image, or LinkedIn and X show a blank card or
+fall back to the profile photo (and then cache that).
+
+1. Write `src/content/blog/<slug>.md` and its banner in `public/images/`.
+2. Generate the share image **before the first push**:
+   `python3 scripts/gen-og.py <slug> "<KICKER>" "<title>" "<accent-hex>"`
+   (writes `public/images/og/<slug>.png`, 1200×630).
+3. Build and check there is no `[og] missing` warning, then push.
+4. Before sharing, paste the URL into LinkedIn's Post Inspector to confirm the
+   preview shows the share image.
+
+If a share image is missing, the page falls back to `/images/og-image.png`.
+Share image URLs carry a content fingerprint (`?v=…`), so a regenerated image
+is fetched fresh by LinkedIn and X.
+
 ## Feature flags
 
 `src/data/site.ts` controls sections that can be hidden without deleting them.
